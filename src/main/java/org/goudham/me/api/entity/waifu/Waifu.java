@@ -20,34 +20,37 @@ import org.goudham.me.api.entity.series.Series;
  * <p>Contains most common attributes for {@link Waifu}'s based on various source material</p>
  *
  * <p> Fields included are: </p>
- * <li>{@link Integer id}</li>
- * <li>{@link String slug}</li>
- * <li>{@link Integer creatorId}</li>
- * <li>{@link String name}</li>
- * <li>{@link String originalName}</li>
- * <li>{@link String displayPicture}</li>
- * <li>{@link String description}</li>
- * <li>{@link Double weight}</li>
- * <li>{@link Double height}</li>
- * <li>{@link Double bust}</li>
- * <li>{@link Double hip}</li>
- * <li>{@link Double waist}</li>
- * <li>{@link Waifu.BloodType bloodType}</li>
- * <li>{@link String origin}</li>
- * <li>{@link Integer age}</li>
- * <li>{@link String birthdayMonth}</li>
- * <li>{@link Integer birthdayDay}</li>
- * <li>{@link Integer birthdayYear}</li>
- * <li>{@link Integer likes}</li>
- * <li>{@link Integer trash}</li>
- * <li>{@link String url}</li>
- * <li>{@link Boolean husbando}</li>
- * <li>{@link Boolean nsfw}</li>
- * <li>{@link Integer popularityRank}</li>
- * <li>{@link Integer likeRank}</li>
- * <li>{@link Integer trashRank}</li>
- * <li>{@link List<Appearance> appearances}</li>
- * <li>{@link Series series}</li>
+ * <ul>
+ *  <li>{@link Integer id}</li>
+ *  <li>{@link String slug}</li>
+ *  <li>{@link Integer creatorId}</li>
+ *  <li>{@link String name}</li>
+ *  <li>{@link String originalName}</li>
+ *  <li>{@link String displayPicture}</li>
+ *  <li>{@link String description}</li>
+ *  <li>{@link Double weight}</li>
+ *  <li>{@link Double height}</li>
+ *  <li>{@link Double bust}</li>
+ *  <li>{@link Double hip}</li>
+ *  <li>{@link Double waist}</li>
+ *  <li>{@link Waifu.BloodType bloodType}</li>
+ *  <li>{@link String origin}</li>
+ *  <li>{@link Integer age}</li>
+ *  <li>{@link String birthdayMonth}</li>
+ *  <li>{@link Integer birthdayDay}</li>
+ *  <li>{@link Integer birthdayYear}</li>
+ *  <li>{@link Integer likes}</li>
+ *  <li>{@link Integer trash}</li>
+ *  <li>{@link String url}</li>
+ *  <li>{@link Boolean husbando}</li>
+ *  <li>{@link Boolean nsfw}</li>
+ *  <li>{@link Integer popularityRank}</li>
+ *  <li>{@link Integer likeRank}</li>
+ *  <li>{@link Integer trashRank}</li>
+ *  <li>{@link List<Appearance> appearances}</li>
+ *  <li>{@link Series series}</li>
+ * </ul>
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

@@ -16,14 +16,17 @@ import java.util.Objects;
  * <p>Standard user information and counts of waifus created, liked, trashed. Also contains true love</p>
  *
  * <p> Fields included are: </p>
- * <li>{@link Integer id}</li>
- * <li>{@link String name}</li>
- * <li>{@link String twitter}</li>
- * <li>{@link String joined}</li>
- * <li>{@link Integer waifusCreated}</li>
- * <li>{@link Integer waifusLiked}</li>
- * <li>{@link Integer waifusTrashed}</li>
- * <li>{@link TrueLove trueLove}</li>
+ * <ul>
+ *  <li>{@link Integer id}</li>
+ *  <li>{@link String name}</li>
+ *  <li>{@link String twitter}</li>
+ *  <li>{@link String joined}</li>
+ *  <li>{@link Integer waifusCreated}</li>
+ *  <li>{@link Integer waifusLiked}</li>
+ *  <li>{@link Integer waifusTrashed}</li>
+ *  <li>{@link TrueLove trueLove}</li>
+ * </ul>
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

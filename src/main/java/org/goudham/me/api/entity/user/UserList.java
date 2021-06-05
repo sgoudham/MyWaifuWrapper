@@ -14,10 +14,14 @@ import org.goudham.me.api.entity.waifu.Waifu;
  * {@link UserList}
  * <p>Get an array of all user lists on their profile</p>
  *
- * <li>{@link Integer id}</li>
- * <li>{@link String name}</li>
- * <li>{@link String order}</li>
- * <li>{@link List< Waifu > waifus}</li>
+ * <p> Fields included are: </p>
+ * <ul>
+ *  <li>{@link Integer id}</li>
+ *  <li>{@link String name}</li>
+ *  <li>{@link String order}</li>
+ *  <li>{@link List< Waifu > waifus}</li>
+ * </ul>
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

@@ -12,10 +12,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * {@link PaginationData}
  * <p>Contains standard Pagination data from the API</p>
  *
- * <li>{@link Integer currentPage}</li>
- * <li>{@link Integer lastPage}</li>
- * <li>{@link Integer perPage}</li>
- * <li>{@link Integer total}</li>
+ * <p> Fields included are: </p>
+ * <ul>
+ *  <li>{@link Integer currentPage}</li>
+ *  <li>{@link Integer lastPage}</li>
+ *  <li>{@link Integer perPage}</li>
+ *  <li>{@link Integer total}</li>
+ * </ul>
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

@@ -16,18 +16,21 @@ import java.util.Objects;
  * <p>Represents a grouping of various {@link Waifu}'s. This can be an anime, mobile game, video game, manga, or LN</p>
  *
  * <p> Fields included are: </p>
- * <li>{@link String name}</li>
- * <li>{@link String originalName}</li>
- * <li>{@link String romajiName}</li>
- * <li>{@link String slug}</li>
- * <li>{@link String releaseDate}</li>
- * <li>{@link String airingStart}</li>
- * <li>{@link String airingEnd}</li>
- * <li>{@link Integer episodeCount}</li>
- * <li>{@link String image}</li>
- * <li>{@link String url}</li>
- * <li>{@link Studio}</li>
- * <li>{@link Integer id}</li>
+ * <ul>
+ *  <li>{@link String name}</li>
+ *  <li>{@link String originalName}</li>
+ *  <li>{@link String romajiName}</li>
+ *  <li>{@link String slug}</li>
+ *  <li>{@link String releaseDate}</li>
+ *  <li>{@link String airingStart}</li>
+ *  <li>{@link String airingEnd}</li>
+ *  <li>{@link Integer episodeCount}</li>
+ *  <li>{@link String image}</li>
+ *  <li>{@link String url}</li>
+ *  <li>{@link Studio}</li>
+ *  <li>{@link Integer id}</li>
+ * </ul>
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

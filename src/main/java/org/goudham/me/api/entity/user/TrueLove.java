@@ -14,9 +14,13 @@ import java.util.Objects;
  * {@link TrueLove}
  * <p>Represents a {@link User}'s True Love</p>
  *
- * <li>{@link String name}</li>
- * <li>{@link String slug}</li>
- * <li>{@link String series}</li>
+ * <p> Fields included are: </p>
+ * <ul>
+ *  <li>{@link String name}</li>
+ *  <li>{@link String slug}</li>
+ *  <li>{@link String series}</li>
+ * </ul>
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

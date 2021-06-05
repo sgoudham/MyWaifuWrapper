@@ -10,12 +10,15 @@ import java.util.Objects;
 
 /**
  * {@link WaifuImage}
- * <p>Contains a thumbnail & full res image link for an image in a given Waifu’s gallery</p>
+ * <p>Contains a thumbnail and full res image link for an image in a given Waifu’s gallery</p>
  *
  * <p>Fields included are:</p>
- * <li>{@link Integer id}</li>
- * <li>{@link String thumbnail}</li>
- * <li>{@link String path}</li>
+ * <ul>
+ *  <li>{@link Integer id}</li>
+ *  <li>{@link String thumbnail}</li>
+ *  <li>{@link String path}</li>
+ * </ul>
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
