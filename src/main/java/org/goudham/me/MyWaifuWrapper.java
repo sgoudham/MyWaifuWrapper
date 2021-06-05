@@ -1,11 +1,9 @@
-package org.goudham.me.api;
-
-import org.goudham.me.MyWaifuClient;
+package org.goudham.me;
 
 /**
  * Returns API information to {@link MyWaifuClient}
  */
-public class MyWaifuWrapper {
+class MyWaifuWrapper {
     private final String version = "1.0";
     private final String host = "https://mywaifulist.moe/api/v1/";
     private final String apiKey;

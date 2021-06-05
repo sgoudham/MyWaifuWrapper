@@ -1,6 +1,5 @@
 package org.goudham.me;
 
-import org.goudham.me.api.MyWaifuWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.net.ssl.SSLParameters;
