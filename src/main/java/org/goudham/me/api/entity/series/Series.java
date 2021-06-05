@@ -2,10 +2,7 @@ package org.goudham.me.api.entity.series;
 
 import javax.annotation.processing.Generated;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import org.goudham.me.api.entity.Studio;
 import org.goudham.me.api.entity.waifu.Waifu;
 
@@ -20,12 +17,13 @@ import java.util.Objects;
  *  <li>{@link String name}</li>
  *  <li>{@link String originalName}</li>
  *  <li>{@link String romajiName}</li>
+ *  <li>{@link String description}</li>
  *  <li>{@link String slug}</li>
  *  <li>{@link String releaseDate}</li>
  *  <li>{@link String airingStart}</li>
  *  <li>{@link String airingEnd}</li>
  *  <li>{@link Integer episodeCount}</li>
- *  <li>{@link String image}</li>
+ *  <li>{@link String displayPicture}</li>
  *  <li>{@link String url}</li>
  *  <li>{@link Studio}</li>
  *  <li>{@link Integer id}</li>
@@ -43,7 +41,7 @@ import java.util.Objects;
         "airing_start",
         "airing_end",
         "episode_count",
-        "image",
+        "display_picture",
         "url",
         "studio",
         "id"
@@ -95,6 +93,7 @@ public class Series {
      *
      */
     @JsonProperty("release_date")
+    @JsonAlias("release")
     @JsonPropertyDescription("Original works release date (")
     private String releaseDate;
 
@@ -126,9 +125,10 @@ public class Series {
      * URL of the display picture
      *
      */
-    @JsonProperty("image")
+    @JsonProperty("display_picture")
+    @JsonAlias("image")
     @JsonPropertyDescription("URL of the display picture")
-    private String image;
+    private String displayPicture;
 
     /**
      * URL of the {@link Series}
@@ -243,13 +243,13 @@ public class Series {
     }
 
     @JsonProperty("image")
-    public String getImage() {
-        return image;
+    public String getDisplayPicture() {
+        return displayPicture;
     }
 
     @JsonProperty("image")
-    public void setImage(String image) {
-        this.image = image;
+    public void setDisplayPicture(String displayPicture) {
+        this.displayPicture = displayPicture;
     }
 
     @JsonProperty("url")
@@ -287,12 +287,12 @@ public class Series {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Series series = (Series) o;
-        return Objects.equals(name, series.name) && Objects.equals(originalName, series.originalName) && Objects.equals(romajiName, series.romajiName) && Objects.equals(description, series.description) && Objects.equals(slug, series.slug) && Objects.equals(releaseDate, series.releaseDate) && Objects.equals(airingStart, series.airingStart) && Objects.equals(airingEnd, series.airingEnd) && Objects.equals(episodeCount, series.episodeCount) && Objects.equals(image, series.image) && Objects.equals(url, series.url) && Objects.equals(studio, series.studio) && Objects.equals(id, series.id);
+        return Objects.equals(name, series.name) && Objects.equals(originalName, series.originalName) && Objects.equals(romajiName, series.romajiName) && Objects.equals(description, series.description) && Objects.equals(slug, series.slug) && Objects.equals(releaseDate, series.releaseDate) && Objects.equals(airingStart, series.airingStart) && Objects.equals(airingEnd, series.airingEnd) && Objects.equals(episodeCount, series.episodeCount) && Objects.equals(displayPicture, series.displayPicture) && Objects.equals(url, series.url) && Objects.equals(studio, series.studio) && Objects.equals(id, series.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, originalName, romajiName, description, slug, releaseDate, airingStart, airingEnd, episodeCount, image, url, studio, id);
+        return Objects.hash(name, originalName, romajiName, description, slug, releaseDate, airingStart, airingEnd, episodeCount, displayPicture, url, studio, id);
     }
 
     @Override
@@ -307,7 +307,7 @@ public class Series {
                 ", airingStart='" + airingStart + '\'' +
                 ", airingEnd='" + airingEnd + '\'' +
                 ", episodeCount=" + episodeCount +
-                ", image='" + image + '\'' +
+                ", image='" + displayPicture + '\'' +
                 ", url='" + url + '\'' +
                 ", studio=" + studio +
                 ", id=" + id +

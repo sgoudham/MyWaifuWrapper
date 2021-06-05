@@ -6,13 +6,9 @@ import java.util.Map;
 import java.util.Objects;
 import javax.annotation.processing.Generated;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.*;
 import org.goudham.me.api.entity.series.Series;
+import org.goudham.me.api.entity.user.Creator;
 
 
 /**
@@ -23,9 +19,10 @@ import org.goudham.me.api.entity.series.Series;
  * <ul>
  *  <li>{@link Integer id}</li>
  *  <li>{@link String slug}</li>
- *  <li>{@link Integer creatorId}</li>
+ *  <li>{@link Creator creatorId}</li>
  *  <li>{@link String name}</li>
  *  <li>{@link String originalName}</li>
+ *  <li>{@link String romaji_name}</li>
  *  <li>{@link String displayPicture}</li>
  *  <li>{@link String description}</li>
  *  <li>{@link Double weight}</li>
@@ -47,7 +44,7 @@ import org.goudham.me.api.entity.series.Series;
  *  <li>{@link Integer popularityRank}</li>
  *  <li>{@link Integer likeRank}</li>
  *  <li>{@link Integer trashRank}</li>
- *  <li>{@link List} of {@link Appearance}'s</li>
+ *  <li>{@link List} of {@link Series}'s</li>
  *  <li>{@link Series series}</li>
  * </ul>
  *
@@ -56,9 +53,10 @@ import org.goudham.me.api.entity.series.Series;
 @JsonPropertyOrder({
         "id",
         "slug",
-        "creator_id",
+        "creator",
         "name",
         "original_name",
+        "romaji_name",
         "display_picture",
         "description",
         "weight",
@@ -84,6 +82,7 @@ import org.goudham.me.api.entity.series.Series;
         "series"
 })
 @Generated("jsonschema2pojo")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Waifu {
     /**
      * {@link Waifu} ID
@@ -105,9 +104,9 @@ public class Waifu {
      * ID of the user who created this {@link Waifu}
      *
      */
-    @JsonProperty("creator_id")
-    @JsonPropertyDescription("ID of the user who created this Waifu")
-    private Integer creatorId;
+    @JsonProperty("creator")
+    @JsonPropertyDescription("User who created this Waifu")
+    private Creator creator;
 
     /**
      * Full name, in English.
@@ -124,6 +123,14 @@ public class Waifu {
     @JsonProperty("original_name")
     @JsonPropertyDescription("Name in the original language (\u65e5\u672c\u8a9e)")
     private String originalName;
+
+    /**
+     * If this character has a romaji name, we'll put it here.
+     *
+     */
+    @JsonProperty("romaji_name")
+    @JsonPropertyDescription("if this character has a romaji name, we'll put it here. ")
+    private String romajiName;
 
     /**
      * URL of the display picture
@@ -299,7 +306,7 @@ public class Waifu {
      */
     @JsonProperty("appearances")
     @JsonPropertyDescription("An array of series or works that this character appears in")
-    private List<Appearance> appearances = null;
+    private List<Series> appearances;
 
     /**
      * {@link Series}
@@ -330,14 +337,14 @@ public class Waifu {
         this.slug = slug;
     }
 
-    @JsonProperty("creator_id")
-    public Integer getCreatorId() {
-        return creatorId;
+    @JsonProperty("creator")
+    public Creator getCreator() {
+        return creator;
     }
 
-    @JsonProperty("creator_id")
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
+    @JsonProperty("creator")
+    public void setCreator(Creator creator) {
+        this.creator = creator;
     }
 
     @JsonProperty("name")
@@ -358,6 +365,16 @@ public class Waifu {
     @JsonProperty("original_name")
     public void setOriginalName(String originalName) {
         this.originalName = originalName;
+    }
+
+    @JsonProperty("romaji_name")
+    public String getRomajiName() {
+        return romajiName;
+    }
+
+    @JsonProperty("romaji_name")
+    public void setRomajiName(String romajiName) {
+        this.romajiName = romajiName;
     }
 
     @JsonProperty("display_picture")
@@ -571,12 +588,12 @@ public class Waifu {
     }
 
     @JsonProperty("appearances")
-    public List<Appearance> getAppearances() {
+    public List<Series> getAppearances() {
         return appearances;
     }
 
     @JsonProperty("appearances")
-    public void setAppearances(List<Appearance> appearances) {
+    public void setAppearances(List<Series> appearances) {
         this.appearances = appearances;
     }
 
@@ -595,12 +612,12 @@ public class Waifu {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Waifu waifu = (Waifu) o;
-        return Objects.equals(id, waifu.id) && Objects.equals(slug, waifu.slug) && Objects.equals(creatorId, waifu.creatorId) && Objects.equals(name, waifu.name) && Objects.equals(originalName, waifu.originalName) && Objects.equals(displayPicture, waifu.displayPicture) && Objects.equals(description, waifu.description) && Objects.equals(weight, waifu.weight) && Objects.equals(height, waifu.height) && Objects.equals(bust, waifu.bust) && Objects.equals(hip, waifu.hip) && Objects.equals(waist, waifu.waist) && bloodType == waifu.bloodType && Objects.equals(origin, waifu.origin) && Objects.equals(age, waifu.age) && Objects.equals(birthdayMonth, waifu.birthdayMonth) && Objects.equals(birthdayDay, waifu.birthdayDay) && Objects.equals(birthdayYear, waifu.birthdayYear) && Objects.equals(likes, waifu.likes) && Objects.equals(trash, waifu.trash) && Objects.equals(url, waifu.url) && Objects.equals(husbando, waifu.husbando) && Objects.equals(nsfw, waifu.nsfw) && Objects.equals(popularityRank, waifu.popularityRank) && Objects.equals(likeRank, waifu.likeRank) && Objects.equals(trashRank, waifu.trashRank) && Objects.equals(appearances, waifu.appearances) && Objects.equals(series, waifu.series);
+        return Objects.equals(id, waifu.id) && Objects.equals(slug, waifu.slug) && Objects.equals(creator, waifu.creator) && Objects.equals(name, waifu.name) && Objects.equals(originalName, waifu.originalName) && Objects.equals(displayPicture, waifu.displayPicture) && Objects.equals(description, waifu.description) && Objects.equals(weight, waifu.weight) && Objects.equals(height, waifu.height) && Objects.equals(bust, waifu.bust) && Objects.equals(hip, waifu.hip) && Objects.equals(waist, waifu.waist) && bloodType == waifu.bloodType && Objects.equals(origin, waifu.origin) && Objects.equals(age, waifu.age) && Objects.equals(birthdayMonth, waifu.birthdayMonth) && Objects.equals(birthdayDay, waifu.birthdayDay) && Objects.equals(birthdayYear, waifu.birthdayYear) && Objects.equals(likes, waifu.likes) && Objects.equals(trash, waifu.trash) && Objects.equals(url, waifu.url) && Objects.equals(husbando, waifu.husbando) && Objects.equals(nsfw, waifu.nsfw) && Objects.equals(popularityRank, waifu.popularityRank) && Objects.equals(likeRank, waifu.likeRank) && Objects.equals(trashRank, waifu.trashRank) && Objects.equals(appearances, waifu.appearances) && Objects.equals(series, waifu.series);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, slug, creatorId, name, originalName, displayPicture, description, weight, height, bust, hip, waist, bloodType, origin, age, birthdayMonth, birthdayDay, birthdayYear, likes, trash, url, husbando, nsfw, popularityRank, likeRank, trashRank, appearances, series);
+        return Objects.hash(id, slug, creator, name, originalName, displayPicture, description, weight, height, bust, hip, waist, bloodType, origin, age, birthdayMonth, birthdayDay, birthdayYear, likes, trash, url, husbando, nsfw, popularityRank, likeRank, trashRank, appearances, series);
     }
 
     @Override
@@ -608,7 +625,7 @@ public class Waifu {
         return "Waifu{" +
                 "id=" + id +
                 ", slug='" + slug + '\'' +
-                ", creatorId=" + creatorId +
+                ", creatorId=" + creator +
                 ", name='" + name + '\'' +
                 ", originalName='" + originalName + '\'' +
                 ", displayPicture='" + displayPicture + '\'' +
