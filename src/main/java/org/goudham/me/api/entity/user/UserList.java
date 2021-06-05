@@ -19,7 +19,7 @@ import org.goudham.me.api.entity.waifu.Waifu;
  *  <li>{@link Integer id}</li>
  *  <li>{@link String name}</li>
  *  <li>{@link String order}</li>
- *  <li>{@link List< Waifu > waifus}</li>
+ *  <li>{@link List} of {@link Waifu}'s</li>
  * </ul>
  *
  */

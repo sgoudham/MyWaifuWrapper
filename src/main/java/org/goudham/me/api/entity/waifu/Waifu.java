@@ -47,7 +47,7 @@ import org.goudham.me.api.entity.series.Series;
  *  <li>{@link Integer popularityRank}</li>
  *  <li>{@link Integer likeRank}</li>
  *  <li>{@link Integer trashRank}</li>
- *  <li>{@link List<Appearance> appearances}</li>
+ *  <li>{@link List} of {@link Appearance}'s</li>
  *  <li>{@link Series series}</li>
  * </ul>
  *

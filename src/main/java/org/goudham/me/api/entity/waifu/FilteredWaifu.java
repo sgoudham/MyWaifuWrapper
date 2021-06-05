@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  *  <li>{@link Integer trash}</li>
  *  <li>{@link Integer episodeCount}</li>
  *  <li>{@link String url}</li>
- *  <li>{@link List<Appearance> appearances}</li>
+ *  <li>{@link List} of {@link Appearance}'s</li>
  *  <li>{@link Double id}</li>
  * </ul>
  *
