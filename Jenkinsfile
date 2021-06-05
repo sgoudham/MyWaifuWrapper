@@ -47,13 +47,13 @@ pipeline {
                     when {
                          allOf {
                             expression {
-                                return fileExists javadocsArtifact
+                                return fileExists(javadocsArtifact)
                             }
                             expression {
-                                return fileExists jarWithSourcesArtifact
+                                return fileExists(jarWithSourcesArtifact)
                             }
                             expression {
-                                return fileExists jarArtifact
+                                return fileExists(jarArtifact)
                             }
                         }
                     }
