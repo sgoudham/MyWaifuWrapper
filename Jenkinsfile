@@ -75,8 +75,8 @@ pipeline {
                            [artifactId: pom.artifactId, classifier: 'javadocs', file: javadocsArtifact, type: pom.packaging],
                            [artifactId: pom.artifactId, classifier: 'sources', file: jarWithSourcesArtifact, type: pom.packaging],
                            [artifactId: pom.artifactId, classifier: '', file: "pom.xml", type: "pom"]
-                        ])
-                    }
+                        ]
+                    )
                 }
             }
         }
