@@ -14,11 +14,8 @@ import java.util.concurrent.Executor;
 /**
  * A MyWaifuClient
  *
- * <p> Main entry point for retrieving information from MyWaifuList. </p>
+ * <p> Main entry point for retrieving information from MyWaifuList.</p>
  * <p> {@link MyWaifuWrapper} is utilised to make the API requests </p>
- * <p> Examples of such methods include:
- *  <li>{@link }</li>
- * </p>
  */
 public class MyWaifuClient {
     private final MyWaifuWrapper myWaifuWrapper;

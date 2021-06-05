@@ -15,17 +15,20 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * <p>Contains Waifu data structure for endpoints other than the primary endpoint (/waifu/{slug})</p>
  *
  * <p> Fields included are: </p>
- * <li>{@link String slug}</li>
- * <li>{@link String name}</li>
- * <li>{@link String originalName}</li>
- * <li>{@link String romajiName}</li>
- * <li>{@link String displayPicture}</li>
- * <li>{@link Integer likes}</li>
- * <li>{@link Integer trash}</li>
- * <li>{@link Integer episodeCount}</li>
- * <li>{@link String url}</li>
- * <li>{@link List<Appearance> appearances}</li>
- * <li>{@link Double id}</li>
+ * <ul>
+ *  <li>{@link String slug}</li>
+ *  <li>{@link String name}</li>
+ *  <li>{@link String originalName}</li>
+ *  <li>{@link String romajiName}</li>
+ *  <li>{@link String displayPicture}</li>
+ *  <li>{@link Integer likes}</li>
+ *  <li>{@link Integer trash}</li>
+ *  <li>{@link Integer episodeCount}</li>
+ *  <li>{@link String url}</li>
+ *  <li>{@link List} of {@link Appearance}'s</li>
+ *  <li>{@link Double id}</li>
+ * </ul>
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

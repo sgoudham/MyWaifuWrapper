@@ -14,9 +14,12 @@ import java.util.Objects;
  * <p> Contains information on a given animation or game development studio </p>
  *
  * <p>Fields included are:</p>
- * <li>{@link Integer id}</li>
- * <li>{@link String name}</li>
- * <li>{@link String originalName}</li>
+ * <ul>
+ *  <li>{@link Integer id}</li>
+ *  <li>{@link String name}</li>
+ *  <li>{@link String originalName}</li>
+ * </ul>
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

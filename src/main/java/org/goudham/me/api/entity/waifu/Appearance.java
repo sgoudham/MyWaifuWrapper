@@ -13,13 +13,16 @@ import javax.annotation.processing.Generated;
  * <p>Contains basic series information for most endpoints</p>
  *
  * <p> Fields included are: </p>
- * <li>{@link String name}</li>
- * <li>{@link String originalName}</li>
- * <li>{@link String romajiName}</li>
- * <li>{@link String slug}</li>
- * <li>{@link String description}</li>
- * <li>{@link String url}</li>
- * <li>{@link Integer id}</li>
+ * <ul>
+ *  <li>{@link String name}</li>
+ *  <li>{@link String originalName}</li>
+ *  <li>{@link String romajiName}</li>
+ *  <li>{@link String slug}</li>
+ *  <li>{@link String description}</li>
+ *  <li>{@link String url}</li>
+ *  <li>{@link Integer id}</li>
+ * </ul>
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
