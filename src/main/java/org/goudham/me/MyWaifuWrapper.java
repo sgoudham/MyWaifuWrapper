@@ -12,7 +12,7 @@ class MyWaifuWrapper {
      * Instantiates an instance of {@link MyWaifuWrapper} to retrieve API Information
      * @param apiKey API Key to authorise API request
      */
-    public MyWaifuWrapper(String apiKey) {
+    MyWaifuWrapper(String apiKey) {
         this.apiKey = apiKey;
     }
 }
