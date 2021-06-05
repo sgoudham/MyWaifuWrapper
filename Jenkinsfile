@@ -40,35 +40,42 @@ pipeline {
                     echo "${filesByGlob[1].name} ${filesByGlob[1].path} ${filesByGlob[1].directory} ${filesByGlob[1].length} ${filesByGlob[1].lastModified}"
                     echo "${filesByGlob[2].name} ${filesByGlob[2].path} ${filesByGlob[2].directory} ${filesByGlob[2].length} ${filesByGlob[2].lastModified}"
 
+                    javadocsArtifact = filesByGlob[0].path;
+                    jarWithSourcesArtifact = filesByGlob[1].path;
+                    jarArtifact = filesByGlob[2].path;
 
-                    artifactPath = filesByGlob[0].path;
-                    artifactExists = fileExists artifactPath;
+                    when {
+                         allOf {
+                            expression {
+                                return fileExists javadocsArtifact
+                            }
+                            expression {
+                                return fileExists jarWithSourcesArtifact
+                            }
+                            expression {
+                                return fileExists jarArtifact
+                            }
+                        }
+                    }
 
-                    if (artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                    echo "*** File: ${javadocsArtifact}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                    echo "*** File: ${jarWithSourcesArtifact}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                    echo "*** File: ${jarArtifact}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
 
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_CREDENTIAL_ID,
-                            artifacts: [
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
-                            ]
-                        )
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found";
+                    nexusArtifactUploader(
+                        nexusVersion: NEXUS_VERSION,
+                        protocol: NEXUS_PROTOCOL,
+                        nexusUrl: NEXUS_URL,
+                        groupId: pom.groupId,
+                        version: pom.version,
+                        repository: NEXUS_REPOSITORY,
+                        credentialsId: NEXUS_CREDENTIAL_ID,
+                        artifacts: [
+                           [artifactId: pom.artifactId, classifier: 'normal', file: jarArtifact, type: pom.packaging],
+                           [artifactId: pom.artifactId, classifier: 'javadocs', file: javadocsArtifact, type: pom.packaging],
+                           [artifactId: pom.artifactId, classifier: 'sources', file: jarWithSourcesArtifact, type: pom.packaging],
+                           [artifactId: pom.artifactId, classifier: '', file: "pom.xml", type: "pom"]
+                        ])
                     }
                 }
             }
