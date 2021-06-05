@@ -26,7 +26,7 @@ public class MyWaifuClient {
      * <p>See <a href="https://mywaifulist.docs.stoplight.io/">MyWaifuList</a> for obtaining an API Key</p>
      * @param apiKey API Key to authorise API request
      */
-    public MyWaifuClient(@NotNull String apiKey) {
+    MyWaifuClient(@NotNull String apiKey) {
         myWaifuWrapper = new MyWaifuWrapper(apiKey);
     }
 
@@ -45,6 +45,14 @@ public class MyWaifuClient {
                 .build());
 
         return myWaifuClient;
+    }
+
+    public void getWaifu(String slug) {
+        myWaifuWrapper.getWaifu(httpClient, slug);
+    }
+
+    public void getWaifu(Integer id) {
+        myWaifuWrapper.getWaifu(httpClient, String.valueOf(id));
     }
 
     /**

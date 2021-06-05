@@ -36,10 +36,6 @@ pipeline {
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
 
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    echo "${filesByGlob[1].name} ${filesByGlob[1].path} ${filesByGlob[1].directory} ${filesByGlob[1].length} ${filesByGlob[1].lastModified}"
-                    echo "${filesByGlob[2].name} ${filesByGlob[2].path} ${filesByGlob[2].directory} ${filesByGlob[2].length} ${filesByGlob[2].lastModified}"
-
                     javadocsArtifact = filesByGlob[0].path;
                     jarWithSourcesArtifact = filesByGlob[1].path;
                     jarArtifact = filesByGlob[2].path;
