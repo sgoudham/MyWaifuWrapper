@@ -44,20 +44,6 @@ pipeline {
                     jarWithSourcesArtifact = filesByGlob[1].path;
                     jarArtifact = filesByGlob[2].path;
 
-                    when {
-                         allOf {
-                            expression {
-                                return fileExists(javadocsArtifact)
-                            }
-                            expression {
-                                return fileExists(jarWithSourcesArtifact)
-                            }
-                            expression {
-                                return fileExists(jarArtifact)
-                            }
-                        }
-                    }
-
                     if (fileExists(javadocsArtifact) && fileExists(jarWithSourcesArtifact) && fileExists(jarArtifact)) {
                         echo "*** File: ${javadocsArtifact}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
                         echo "*** File: ${jarWithSourcesArtifact}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
