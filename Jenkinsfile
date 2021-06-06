@@ -54,7 +54,7 @@ pipeline {
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
-                               [artifactId: pom.artifactId, classifier: 'core', file: jarArtifact, type: pom.packaging],
+                               [artifactId: pom.artifactId, classifier: '', file: jarArtifact, type: pom.packaging],
                                [artifactId: pom.artifactId, classifier: 'javadocs', file: javadocsArtifact, type: pom.packaging],
                                [artifactId: pom.artifactId, classifier: 'sources', file: jarWithSourcesArtifact, type: pom.packaging],
                                [artifactId: pom.artifactId, classifier: '', file: "pom.xml", type: "pom"]
@@ -64,7 +64,6 @@ pipeline {
                         error "*** Files could not be found";
                     }
                 }
-                archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
             }
         }
     }
@@ -72,6 +71,9 @@ pipeline {
     post {
         success {
             echo "I'm Feeling Swag!"
+
+            echo "Archiving Artifacts"
+            archiveArtifacts artifacts: 'target/*.jar'
 
             echo "Generating Test Report..."
             publishCoverage adapters: [jacocoAdapter('target/site/jacoco/jacoco.xml')]
