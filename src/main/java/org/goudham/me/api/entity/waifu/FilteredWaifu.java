@@ -1,5 +1,7 @@
 package org.goudham.me.api.entity.waifu;
 
+import org.goudham.me.api.entity.series.FilteredSeries;
+
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.processing.Generated;
@@ -19,13 +21,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  *  <li>{@link String slug}</li>
  *  <li>{@link String name}</li>
  *  <li>{@link String originalName}</li>
+ *  <li>{@link Integer relevance}</li>
  *  <li>{@link String romajiName}</li>
  *  <li>{@link String displayPicture}</li>
  *  <li>{@link Integer likes}</li>
  *  <li>{@link Integer trash}</li>
- *  <li>{@link Integer episodeCount}</li>
+ *  <li>{@link String type}</li>
  *  <li>{@link String url}</li>
- *  <li>{@link List} of {@link Appearance}'s</li>
+ *  <li>{@link List} of {@link FilteredSeries}'s</li>
  *  <li>{@link Double id}</li>
  * </ul>
  *
@@ -35,11 +38,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "slug",
         "name",
         "original_name",
+        "relevance",
         "romaji_name",
         "display_picture",
         "description",
         "likes",
         "trash",
+        "type",
         "url",
         "appearances",
         "id"
@@ -47,11 +52,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @Generated("jsonschema2pojo")
 public class FilteredWaifu {
     /**
-     * Used to generate readable URL's for the Waifu
+     * Used to generate readable URL's for the {@link FilteredWaifu}
      *
      */
     @JsonProperty("slug")
-    @JsonPropertyDescription("Used to generate readable URL's for the Waifu")
+    @JsonPropertyDescription("Used to generate readable URL's for the FilteredWaifu")
     private String slug;
 
     /**
@@ -71,6 +76,13 @@ public class FilteredWaifu {
     private String originalName;
 
     /**
+     * Relevancy of {@link FilteredWaifu}
+     */
+    @JsonProperty("relevance")
+    @JsonPropertyDescription("Relevancy of FilteredWaifu")
+    private Integer relevance;
+
+    /**
      * If this character has a romaji name, we'll put it here.
      *
      */
@@ -87,28 +99,36 @@ public class FilteredWaifu {
     private String displayPicture;
 
     /**
-     * Truncated, spoiler-free description of this Waifu
+     * Truncated, spoiler-free description of this {@link FilteredWaifu}
      *
      */
     @JsonProperty("description")
-    @JsonPropertyDescription("Truncated, spoiler-free description of this Waifu")
+    @JsonPropertyDescription("Truncated, spoiler-free description of this FilteredWaifu")
     private String description;
 
     /**
-     * Number of likes for this Waifu
+     * Number of likes for this {@link FilteredWaifu}
      *
      */
     @JsonProperty("likes")
-    @JsonPropertyDescription("Number of likes for this Waifu")
+    @JsonPropertyDescription("Number of likes for this FilteredWaifu")
     private Integer likes;
 
     /**
-     * Number of trashes for this Waifu
+     * Number of trashes for this {@link FilteredWaifu}
      *
      */
     @JsonProperty("trash")
-    @JsonPropertyDescription("Number of trashes for this Waifu")
+    @JsonPropertyDescription("Number of trashes for this FilteredWaifu")
     private Integer trash;
+
+    /**
+     * Type that is returned. Eg Waifu, Husbando
+     *
+     */
+    @JsonProperty("type")
+    @JsonPropertyDescription("Type that is returned. Eg Waifu, Husbando")
+    private String type;
 
     /**
      * URL to view in browser
@@ -119,10 +139,10 @@ public class FilteredWaifu {
     private String url;
 
     /**
-     * <p>{@link List<Appearance>} of Waifu's {@link Appearance}</p>
+     * <p>{@link List} of Waifu's appearances</p>
      */
     @JsonProperty("appearances")
-    private List<Appearance> appearances;
+    private List<FilteredSeries> appearances;
 
     /**
      * {@link FilteredWaifu} ID
@@ -139,7 +159,6 @@ public class FilteredWaifu {
     public void setSlug(String slug) {
         this.slug = slug;
     }
-
 
     @JsonProperty("name")
     public String getName() {
@@ -160,6 +179,12 @@ public class FilteredWaifu {
     public void setOriginalName(String originalName) {
         this.originalName = originalName;
     }
+
+    @JsonProperty("relevance")
+    public Integer getRelevance() { return relevance; }
+
+    @JsonProperty("relevance")
+    public void setRelevance(Integer relevance) { this.relevance = relevance; }
 
     @JsonProperty("romaji_name")
     public String getRomajiName() {
@@ -211,6 +236,12 @@ public class FilteredWaifu {
         this.trash = trash;
     }
 
+    @JsonProperty("type")
+    public String getType() { return type; }
+
+    @JsonProperty("type")
+    public void setType(String type) { this.type = type; }
+
     @JsonProperty("url")
     public String getUrl() {
         return url;
@@ -222,13 +253,11 @@ public class FilteredWaifu {
     }
 
     @JsonProperty("appearances")
-    public List<Appearance> getAppearances() {
-        return appearances;
-    }
+    public List<FilteredSeries> getAppearances() { return appearances; }
 
     @JsonProperty("appearances")
-    public void setAppearances(List<Appearance> appearances) {
-        this.appearances = appearances;
+    public void setAppearances(List<FilteredSeries> filteredSeries) {
+        this.appearances = filteredSeries;
     }
 
     @JsonProperty("id")

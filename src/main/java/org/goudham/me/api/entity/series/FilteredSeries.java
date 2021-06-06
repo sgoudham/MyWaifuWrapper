@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Objects;
 
-
 /**
  * {@link FilteredSeries}
  * <p> Contains basic series information for most endpoints </p>
@@ -18,9 +17,12 @@ import java.util.Objects;
  * <ul>
  *  <li>{@link String name}</li>
  *  <li>{@link String originalName}</li>
+ *  <li>{@link Integer relevance}</li>
  *  <li>{@link String romajiName}</li>
  *  <li>{@link String slug}</li>
+ *  <li>{@link String} type</li>
  *  <li>{@link String description}</li>
+ *  <li>{@link String displayPicture}</li>
  *  <li>{@link String url}</li>
  *  <li>{@link Integer id}</li>
  * </ul>
@@ -30,9 +32,12 @@ import java.util.Objects;
 @JsonPropertyOrder({
         "name",
         "original_name",
+        "relevance",
         "romaji_name",
         "slug",
+        "type",
         "description",
+        "displayPicture",
         "url",
         "id"
 })
@@ -55,29 +60,51 @@ public class FilteredSeries {
     private String originalName;
 
     /**
-     * If this {@link Series} has a romaji name, we'll put it here.
+     * Relevancy of {@link FilteredSeries}
+     */
+    @JsonProperty("relevance")
+    @JsonPropertyDescription("Relevancy of FilteredSeries")
+    private Integer relevance;
+
+    /**
+     * If this {@link FilteredSeries} has a romaji name, we'll put it here.
      *
      */
     @JsonProperty("romaji_name")
-    @JsonPropertyDescription("if this character has a romaji name, we'll put it here. ")
+    @JsonPropertyDescription("if this series has a romaji name, we'll put it here. ")
     private String romajiName;
 
     /**
-     * Readable URL's for this {@link Series}
+     * Readable URL's for this {@link FilteredSeries}
      *
      */
     @JsonProperty("slug")
-    @JsonPropertyDescription("Used to generate readable URL's for the Waifu")
+    @JsonPropertyDescription("Used to generate readable URL's for the FilteredSeries")
     private String slug;
 
+    /**
+     * Type of {@link FilteredSeries}. E.g TV, Game
+     *
+     */
+    @JsonProperty("type")
+    @JsonPropertyDescription("Type of FilteredSeries. E.g TV, Game")
+    private String type;
 
     /**
-     * Truncated, spoiler-free description of this {@link Series}
+     * Truncated, spoiler-free description of this {@link FilteredSeries}
      *
      */
     @JsonProperty("description")
-    @JsonPropertyDescription("Truncated, spoiler-free description of this Waifu")
+    @JsonPropertyDescription("Truncated, spoiler-free description of this FilteredSeries")
     private String description;
+
+    /**
+     * URL of the display picture
+     *
+     */
+    @JsonProperty("display_picture")
+    @JsonPropertyDescription("URL of the display picture")
+    private String displayPicture;
 
     /**
      * URL to view in browser
@@ -88,10 +115,10 @@ public class FilteredSeries {
     private String url;
 
     /**
-     * Interal ID of this {@link Series}
+     * Interal ID of this {@link FilteredSeries}
      */
     @JsonProperty("id")
-    @JsonPropertyDescription("Internal ID of the series")
+    @JsonPropertyDescription("Internal ID of this FilteredSeries")
     private Integer id;
 
     @JsonProperty("name")
@@ -114,6 +141,12 @@ public class FilteredSeries {
         this.originalName = originalName;
     }
 
+    @JsonProperty("relevance")
+    public Integer getRelevance() { return relevance; }
+
+    @JsonProperty("relevance")
+    public void setRelevance(Integer relevance) { this.relevance = relevance; }
+
     @JsonProperty("romaji_name")
     public String getRomajiName() {
         return romajiName;
@@ -134,6 +167,12 @@ public class FilteredSeries {
         this.slug = slug;
     }
 
+    @JsonProperty("type")
+    public String getType() { return type; }
+
+    @JsonProperty("type")
+    public void setType(String type) { this.type = type; }
+
     @JsonProperty("description")
     public String getDescription() {
         return description;
@@ -142,6 +181,16 @@ public class FilteredSeries {
     @JsonProperty("description")
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @JsonProperty("display_picture")
+    public String getDisplayPicture() {
+        return displayPicture;
+    }
+
+    @JsonProperty("display_picture")
+    public void setDisplayPicture(String displayPicture) {
+        this.displayPicture = displayPicture;
     }
 
     @JsonProperty("url")
