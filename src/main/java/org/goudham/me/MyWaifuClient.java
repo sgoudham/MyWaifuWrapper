@@ -1,5 +1,7 @@
 package org.goudham.me;
 
+import org.goudham.me.api.entity.waifu.Waifu;
+import org.goudham.me.exception.APIResponseException;
 import org.jetbrains.annotations.NotNull;
 
 import javax.net.ssl.SSLParameters;
@@ -47,12 +49,12 @@ public class MyWaifuClient {
         return myWaifuClient;
     }
 
-    public void getWaifu(String slug) {
-        myWaifuWrapper.getWaifu(httpClient, slug);
+    public Response<Waifu> getWaifu(String slug) throws APIResponseException {
+        return myWaifuWrapper.getWaifu(httpClient, slug);
     }
 
-    public void getWaifu(Integer id) {
-        myWaifuWrapper.getWaifu(httpClient, String.valueOf(id));
+    public Response<Waifu> getWaifu(Integer id) throws APIResponseException {
+        return myWaifuWrapper.getWaifu(httpClient, String.valueOf(id));
     }
 
     /**
@@ -60,7 +62,7 @@ public class MyWaifuClient {
      *
      * @param httpClient HttpClient for executing API requests
      */
-    public void setHttpClient(HttpClient httpClient) {
+    void setHttpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
