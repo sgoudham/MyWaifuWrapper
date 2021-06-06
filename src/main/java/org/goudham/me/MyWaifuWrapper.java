@@ -3,7 +3,9 @@ package org.goudham.me;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.goudham.me.api.entity.series.Series;
 import org.goudham.me.api.entity.waifu.Waifu;
+import org.goudham.me.exception.APIMapperException;
 import org.goudham.me.exception.APIResponseException;
 
 import java.net.URI;
@@ -33,19 +35,24 @@ public class MyWaifuWrapper {
         this.apiKey = apiKey;
     }
 
+
     /**
-     *
+     * Handles sending a request to the API asynchronously using {@link HttpRequest}
+     * and the underlying {@link HttpClient}
      *
      * @param httpClient The {@link HttpClient} to use for sending {@link HttpRequest}'s
      * @param param The end of the endpoint appended onto the host
+     * @return {@link Result}
+     * @throws APIResponseException If the {@link CompletableFuture Response}
+     * cannot be decoded or the thread was interrupted while waiting to receive the data
+     *
      */
     private Result sendRequest(HttpClient httpClient, String param) throws APIResponseException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(host + param))
                 .version(httpClient.version())
-                .timeout(Duration.ofSeconds(30))
-                .header("Content-Type", "application/json")
-                .header("apikey", apiKey)
+                .timeout(Duration.ofSeconds(20))
+                .headers("Content-Type", "application/json", "apikey", apiKey)
                 .GET()
                 .build();
 
@@ -63,26 +70,35 @@ public class MyWaifuWrapper {
         return new Result(responseCode, responseBody);
     }
 
-    Response<Waifu> getWaifu(HttpClient httpClient, String param) throws APIResponseException {
-        Result waifuResult = sendRequest(httpClient, "waifu/" + param);
-        Integer statusCode = waifuResult.getStatusCode();
-        String body = waifuResult.getBody();
-        Waifu waifu = null;
+    private <T> Response<T> getPopulatedResponse(Result result, Class<T> entity) throws APIMapperException {
+        Integer statusCode = result.getStatusCode();
+        String body = result.getBody();
+        T newEntity = null;
 
         if (statusCode == 200) {
             try {
                 JsonNode parent = objectMapper.readTree(body);
-                String waifuData = parent.get("data").toString();
-                waifu = objectMapper.readValue(waifuData, Waifu.class);
+                String data = parent.get("data").toString();
+                newEntity = objectMapper.readValue(data, entity);
             } catch (JsonProcessingException jpe) {
-                jpe.printStackTrace();
+                String customExceptionMessage = "If you are seeing this message, this is more than likely a fault in my logic. " +
+                        "Please raise an issue including the printed stacktrace :D";
+                String exceptionMessage = "\n\n" + customExceptionMessage + "\n\n" + jpe.getMessage();
 
-                statusCode = 100;
-                body = "{\"message\":\"If you are seeing this message, this is more than likely a fault in my logic. " +
-                        "Please raise an issue with the printed stacktrace :D\",\"code\":Custom 100}";
+                throw new APIMapperException(exceptionMessage, jpe);
             }
         }
 
-        return new Response<>(statusCode, body, waifu);
+        return new Response<>(statusCode, body, newEntity);
+    }
+
+    Response<Waifu> getWaifu(HttpClient httpClient, String param) throws APIResponseException, APIMapperException {
+        Result waifuResult = sendRequest(httpClient, "waifu/" + param);
+        return getPopulatedResponse(waifuResult, Waifu.class);
+    }
+
+    Response<Series> getSeries(HttpClient httpClient, String param) throws APIResponseException, APIMapperException {
+        Result seriesResult = sendRequest(httpClient, "series/" + param);
+        return getPopulatedResponse(seriesResult, Series.class);
     }
 }
