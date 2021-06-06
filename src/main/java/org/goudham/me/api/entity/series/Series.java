@@ -138,8 +138,7 @@ public class Series {
 
     /**
      * {@link Studio}
-     * <p>
-     * Contains information on a given animation or game development studio
+     * <p> Contains information on a given animation or game development studio </p>
      *
      */
     @JsonProperty("studio")
