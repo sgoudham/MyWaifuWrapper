@@ -64,6 +64,7 @@ pipeline {
                         error "*** Files could not be found";
                     }
                 }
+                archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
             }
         }
     }
