@@ -1,6 +1,8 @@
 package org.goudham.me;
 
+import org.goudham.me.api.entity.series.Series;
 import org.goudham.me.api.entity.waifu.Waifu;
+import org.goudham.me.exception.APIMapperException;
 import org.goudham.me.exception.APIResponseException;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,7 +15,8 @@ import java.time.Duration;
 import java.util.concurrent.Executor;
 
 /**
- * A MyWaifuClient
+ * A MyWaifuClient, the underlying client used for making requests is {@link HttpClient}
+ *
  *
  * <p> Main entry point for retrieving information from MyWaifuList.</p>
  * <p> {@link MyWaifuWrapper} is utilised to make the API requests </p>
@@ -49,12 +52,16 @@ public class MyWaifuClient {
         return myWaifuClient;
     }
 
-    public Response<Waifu> getWaifu(String slug) throws APIResponseException {
+    public Response<Waifu> getWaifu(String slug) throws APIResponseException, APIMapperException {
         return myWaifuWrapper.getWaifu(httpClient, slug);
     }
 
-    public Response<Waifu> getWaifu(Integer id) throws APIResponseException {
+    public Response<Waifu> getWaifu(Integer id) throws APIResponseException, APIMapperException {
         return myWaifuWrapper.getWaifu(httpClient, String.valueOf(id));
+    }
+
+    public Response<Series> getSeries(Integer id) throws APIMapperException, APIResponseException {
+        return myWaifuWrapper.getSeries(httpClient, String.valueOf(id));
     }
 
     /**
