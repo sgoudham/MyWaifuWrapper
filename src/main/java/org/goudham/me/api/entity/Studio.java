@@ -27,7 +27,8 @@ import java.util.Objects;
 @Generated("jsonschema2pojo")
 public class Studio {
 
-    @JsonCreator
+    Studio() { }
+
     Studio(String name) {
         this.name = name;
     }
