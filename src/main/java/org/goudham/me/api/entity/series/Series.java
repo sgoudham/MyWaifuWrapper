@@ -26,6 +26,7 @@ import java.util.Objects;
  *  <li>{@link String displayPicture}</li>
  *  <li>{@link String url}</li>
  *  <li>{@link Studio}</li>
+ *  <li>{@link String} type</li>
  *  <li>{@link Integer id}</li>
  * </ul>
  *
@@ -44,6 +45,7 @@ import java.util.Objects;
         "display_picture",
         "url",
         "studio",
+        "type",
         "id"
 })
 @Generated("jsonschema2pojo")
@@ -144,6 +146,14 @@ public class Series {
     @JsonProperty("studio")
     @JsonPropertyDescription("Contains information on a given animation or game development studio")
     private Studio studio;
+
+    /**
+     * Type of {@link Series}. E.g TV, Game
+     *
+     */
+    @JsonProperty("type")
+    @JsonPropertyDescription("Type of FilteredSeries. E.g TV, Game")
+    private String type;
 
     /**
      * The internal ID of the {@link Series}
@@ -270,6 +280,12 @@ public class Series {
     public void setStudio(Studio studio) {
         this.studio = studio;
     }
+
+    @JsonProperty("type")
+    public String getType() { return type; }
+
+    @JsonProperty("type")
+    public void setType(String type) { this.type = type; }
 
     @JsonProperty("id")
     public Integer getId() {
