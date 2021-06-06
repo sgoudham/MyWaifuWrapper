@@ -13,7 +13,8 @@ import java.time.Duration;
 import java.util.concurrent.Executor;
 
 /**
- * A MyWaifuClient
+ * A MyWaifuClient, the underlying client used for making requests is {@link HttpClient}
+ *
  *
  * <p> Main entry point for retrieving information from MyWaifuList.</p>
  * <p> {@link MyWaifuWrapper} is utilised to make the API requests </p>
