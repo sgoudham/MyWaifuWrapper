@@ -83,4 +83,9 @@ public class APIWrapper {
         Result seriesResult = sendRequest(httpClient, "series/" + param);
         return apiMapper.deserialize(seriesResult, Series.class);
     }
+
+    Response<List<FilteredSeries>> getAiringAnime(HttpClient httpClient) throws APIResponseException, APIMapperException {
+        Result seriesResult = sendRequest(httpClient, "airing");
+        return apiMapper.deserializeToList(seriesResult, FilteredSeries.class);
+    }
 }

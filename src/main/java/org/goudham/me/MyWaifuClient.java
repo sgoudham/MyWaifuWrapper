@@ -66,6 +66,10 @@ public class MyWaifuClient {
         return APIWrapper.getSeries(httpClient, String.valueOf(id));
     }
 
+    public Response<List<FilteredSeries>> getAiringAnime() throws APIMapperException, APIResponseException {
+        return APIWrapper.getAiringAnime(httpClient);
+    }
+
     /**
      * Sets an instance of HttpClient
      *
