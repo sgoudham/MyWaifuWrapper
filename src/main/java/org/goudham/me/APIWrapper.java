@@ -1,8 +1,6 @@
 package org.goudham.me;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.goudham.me.api.entity.series.FilteredSeries;
 import org.goudham.me.api.entity.series.Series;
 import org.goudham.me.api.entity.waifu.Waifu;
 import org.goudham.me.exception.APIMapperException;
@@ -13,6 +11,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -20,19 +19,24 @@ import java.util.concurrent.ExecutionException;
 /**
  * Returns API information to {@link MyWaifuClient}
  */
-public class MyWaifuWrapper {
+public class APIWrapper {
     private final String version = "1.0";
     private static final String host = "https://mywaifulist.moe/api/v1/";
     private final String apiKey;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final APIMapper apiMapper;
 
     /**
-     * Instantiates an instance of {@link MyWaifuWrapper} to retrieve API Information
+     * Instantiates an instance of {@link APIWrapper} to retrieve API Information.
+     * An instance of {@link APIMapper} is created to be able to {@link APIMapper#deserialize(Result, Class)} JSON to
+     * Java objects
+     *
      * @param apiKey API Key to authorise API request
+     *
      */
-    MyWaifuWrapper(String apiKey) {
+    APIWrapper(String apiKey) {
         this.apiKey = apiKey;
+        apiMapper = new APIMapper();
     }
 
 
@@ -70,35 +74,13 @@ public class MyWaifuWrapper {
         return new Result(responseCode, responseBody);
     }
 
-    private <T> Response<T> getPopulatedResponse(Result result, Class<T> entity) throws APIMapperException {
-        Integer statusCode = result.getStatusCode();
-        String body = result.getBody();
-        T newEntity = null;
-
-        if (statusCode == 200) {
-            try {
-                JsonNode parent = objectMapper.readTree(body);
-                String data = parent.get("data").toString();
-                newEntity = objectMapper.readValue(data, entity);
-            } catch (JsonProcessingException jpe) {
-                String customExceptionMessage = "If you are seeing this message, this is more than likely a fault in my logic. " +
-                        "Please raise an issue including the printed stacktrace :D";
-                String exceptionMessage = "\n\n" + customExceptionMessage + "\n\n" + jpe.getMessage();
-
-                throw new APIMapperException(exceptionMessage, jpe);
-            }
-        }
-
-        return new Response<>(statusCode, body, newEntity);
-    }
-
     Response<Waifu> getWaifu(HttpClient httpClient, String param) throws APIResponseException, APIMapperException {
         Result waifuResult = sendRequest(httpClient, "waifu/" + param);
-        return getPopulatedResponse(waifuResult, Waifu.class);
+        return apiMapper.deserialize(waifuResult, Waifu.class);
     }
 
     Response<Series> getSeries(HttpClient httpClient, String param) throws APIResponseException, APIMapperException {
         Result seriesResult = sendRequest(httpClient, "series/" + param);
-        return getPopulatedResponse(seriesResult, Series.class);
+        return apiMapper.deserialize(seriesResult, Series.class);
     }
 }
