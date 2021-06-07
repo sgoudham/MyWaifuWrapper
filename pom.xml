@@ -6,7 +6,7 @@
 
     <groupId>org.goudham.me</groupId>
     <artifactId>MyWaifuWrapper</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.4</version>
     <name>MyWaifuWrapper</name>
 
     <properties>
