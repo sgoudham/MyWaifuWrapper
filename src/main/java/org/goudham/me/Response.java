@@ -4,8 +4,7 @@ import org.goudham.me.api.entity.series.Series;
 import org.goudham.me.api.entity.waifu.Waifu;
 
 /**
- * This is returned to the User when called by methods in {@link MyWaifuClient}
- * <br>
+ * This is returned to the User when called by methods in {@link MyWaifuClient}.
  * E.g {@link MyWaifuClient#getWaifu(Integer)}
  * <br>
  * Given a successful response, {@link #entity} will be populated with the requested entity.
