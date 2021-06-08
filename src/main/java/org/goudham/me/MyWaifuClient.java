@@ -25,16 +25,17 @@ import java.util.concurrent.Executor;
  */
 public class MyWaifuClient {
     private final APIWrapper APIWrapper;
-    private HttpClient httpClient;
 
     /**
      * Creates an instance of {@link MyWaifuClient}
      *
      * <p>See <a href="https://mywaifulist.docs.stoplight.io/">MyWaifuList</a> for obtaining an API Key</p>
      * @param apiKey API Key to authorise API request
+     * @param httpClient The underlying {@link HttpClient} to use for HttpRequests
+     *
      */
-    MyWaifuClient(@NotNull String apiKey) {
-        APIWrapper = new APIWrapper(apiKey);
+    MyWaifuClient(@NotNull String apiKey, HttpClient httpClient) {
+        APIWrapper = new APIWrapper(apiKey, httpClient);
     }
 
     /**
@@ -44,39 +45,29 @@ public class MyWaifuClient {
      * @return {@link MyWaifuClient}
      */
     public static MyWaifuClient createDefault(@NotNull String apiKey) {
-        MyWaifuClient myWaifuClient = new MyWaifuClient(apiKey);
-        myWaifuClient.setHttpClient(HttpClient.newBuilder()
+        HttpClient httpClient = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .connectTimeout(Duration.ofSeconds(20))
-                .build());
+                .build();
 
-        return myWaifuClient;
+        return new MyWaifuClient(apiKey, httpClient);
     }
 
-    public Response<Waifu> getWaifu(String slug) throws APIResponseException, APIMapperException {
-        return APIWrapper.getWaifu(httpClient, slug);
+    public Response<Waifu> getWaifu(@NotNull String slug) throws APIResponseException, APIMapperException {
+        return APIWrapper.getWaifu(slug);
     }
 
-    public Response<Waifu> getWaifu(Integer id) throws APIResponseException, APIMapperException {
-        return APIWrapper.getWaifu(httpClient, String.valueOf(id));
+    public Response<Waifu> getWaifu(@NotNull Integer id) throws APIResponseException, APIMapperException {
+        return APIWrapper.getWaifu(String.valueOf(id));
     }
 
-    public Response<Series> getSeries(Integer id) throws APIMapperException, APIResponseException {
-        return APIWrapper.getSeries(httpClient, String.valueOf(id));
+    public Response<Series> getSeries(@NotNull Integer id) throws APIMapperException, APIResponseException {
+        return APIWrapper.getSeries(String.valueOf(id));
     }
 
     public Response<List<FilteredSeries>> getAiringAnime() throws APIMapperException, APIResponseException {
-        return APIWrapper.getAiringAnime(httpClient);
-    }
-
-    /**
-     * Sets an instance of HttpClient
-     *
-     * @param httpClient HttpClient for executing API requests
-     */
-    void setHttpClient(HttpClient httpClient) {
-        this.httpClient = httpClient;
+        return APIWrapper.getAiringAnime();
     }
 
     /**
@@ -84,12 +75,10 @@ public class MyWaifuClient {
      */
     public static class Builder {
         private final String apiKey;
-        private final APIWrapper APIWrapper;
-        private HttpClient.Builder httpClientBuilder;
+        private final HttpClient.Builder httpClientBuilder = HttpClient.newBuilder();
 
         public Builder(String apiKey) {
             this.apiKey = apiKey;
-            APIWrapper = new APIWrapper(apiKey);
         }
 
         public Builder withCookieHandler(CookieHandler cookieHandler) {
@@ -138,9 +127,7 @@ public class MyWaifuClient {
         }
 
         public MyWaifuClient build() {
-            MyWaifuClient myWaifuClient = new MyWaifuClient(apiKey);
-            myWaifuClient.setHttpClient(httpClientBuilder.build());
-            return myWaifuClient;
+            return new MyWaifuClient(apiKey, httpClientBuilder.build());
         }
     }
 }
