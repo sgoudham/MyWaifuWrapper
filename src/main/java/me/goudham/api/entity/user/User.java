@@ -1,11 +1,6 @@
 package me.goudham.api.entity.user;
 
-import javax.annotation.processing.Generated;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import me.goudham.api.entity.waifu.Waifu;
 
 import java.util.Objects;
@@ -17,6 +12,7 @@ import java.util.Objects;
  *
  * <p> Fields included are: </p>
  * <ul>
+ *  <li>{@link String avatar}</li>
  *  <li>{@link Integer id}</li>
  *  <li>{@link String name}</li>
  *  <li>{@link String twitter}</li>
@@ -30,6 +26,7 @@ import java.util.Objects;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+        "avatar",
         "id",
         "name",
         "twitter",
@@ -39,13 +36,20 @@ import java.util.Objects;
         "waifus_trashed",
         "true_love"
 })
-@Generated("jsonschema2pojo")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
+    /**
+     * {@link User} Avatar
+     */
+    @JsonProperty("avatar")
+    @JsonPropertyDescription("User Avatar")
+    private String avatar;
 
     /**
      * {@link User} ID
      */
     @JsonProperty("id")
+    @JsonPropertyDescription("User ID")
     private Integer id;
 
     /**
@@ -97,10 +101,18 @@ public class User {
     private Integer waifusTrashed;
 
     /**
-     * <p>User's {@link TrueLove}</p>
+     * <p>{@link User}'s {@link TrueLove}</p>
+     *
      */
     @JsonProperty("true_love")
+    @JsonPropertyDescription("User's True Love")
     private TrueLove trueLove;
+
+    @JsonProperty("avatar")
+    public String getAvatar() { return avatar; }
+
+    @JsonProperty("avatar")
+    public void setAvatar(String avatar) { this.avatar = avatar; }
 
     @JsonProperty("id")
     public Integer getId() {
