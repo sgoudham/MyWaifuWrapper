@@ -5,7 +5,6 @@ import me.goudham.api.entity.series.FilteredSeries;
 
 import java.util.List;
 import java.util.Objects;
-import javax.annotation.processing.Generated;
 
 
 /**
@@ -47,8 +46,7 @@ import javax.annotation.processing.Generated;
         "appearances",
         "id"
 })
-@Generated("jsonschema2pojo")
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(value = { "series" })
 public class FilteredWaifu {
     /**
      * Used to generate readable URL's for the {@link FilteredWaifu}
