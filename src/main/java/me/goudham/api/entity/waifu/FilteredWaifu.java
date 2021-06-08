@@ -286,12 +286,12 @@ public class FilteredWaifu {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FilteredWaifu that = (FilteredWaifu) o;
-        return Objects.equals(slug, that.slug) && Objects.equals(name, that.name) && Objects.equals(originalName, that.originalName) && Objects.equals(romajiName, that.romajiName) && Objects.equals(displayPicture, that.displayPicture) && Objects.equals(description, that.description) && Objects.equals(likes, that.likes) && Objects.equals(trash, that.trash) && Objects.equals(url, that.url) && Objects.equals(appearances, that.appearances) && Objects.equals(id, that.id);
+        return Objects.equals(slug, that.slug) && Objects.equals(name, that.name) && Objects.equals(originalName, that.originalName) && Objects.equals(relevance, that.relevance) && Objects.equals(romaji, that.romaji) && Objects.equals(romajiName, that.romajiName) && Objects.equals(displayPicture, that.displayPicture) && Objects.equals(description, that.description) && Objects.equals(likes, that.likes) && Objects.equals(trash, that.trash) && Objects.equals(type, that.type) && Objects.equals(url, that.url) && Objects.equals(appearances, that.appearances) && Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(slug, name, originalName, romajiName, displayPicture, description, likes, trash, url, appearances, id);
+        return Objects.hash(slug, name, originalName, relevance, romaji, romajiName, displayPicture, description, likes, trash, type, url, appearances, id);
     }
 
     @Override
@@ -300,11 +300,14 @@ public class FilteredWaifu {
                 "slug='" + slug + '\'' +
                 ", name='" + name + '\'' +
                 ", originalName='" + originalName + '\'' +
+                ", relevance=" + relevance +
+                ", romaji='" + romaji + '\'' +
                 ", romajiName='" + romajiName + '\'' +
                 ", displayPicture='" + displayPicture + '\'' +
                 ", description='" + description + '\'' +
                 ", likes=" + likes +
                 ", trash=" + trash +
+                ", type='" + type + '\'' +
                 ", url='" + url + '\'' +
                 ", appearances=" + appearances +
                 ", id=" + id +

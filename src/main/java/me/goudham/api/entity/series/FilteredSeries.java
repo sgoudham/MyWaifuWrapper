@@ -1,12 +1,11 @@
 package me.goudham.api.entity.series;
 
-import javax.annotation.processing.Generated;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import javax.annotation.processing.Generated;
 import java.util.Objects;
 
 /**
@@ -41,7 +40,6 @@ import java.util.Objects;
         "url",
         "id"
 })
-@Generated("jsonschema2pojo")
 public class FilteredSeries {
     /**
      * Full name, in English.
@@ -218,12 +216,12 @@ public class FilteredSeries {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FilteredSeries that = (FilteredSeries) o;
-        return Objects.equals(name, that.name) && Objects.equals(originalName, that.originalName) && Objects.equals(romajiName, that.romajiName) && Objects.equals(slug, that.slug) && Objects.equals(description, that.description) && Objects.equals(url, that.url) && Objects.equals(id, that.id);
+        return Objects.equals(name, that.name) && Objects.equals(originalName, that.originalName) && Objects.equals(relevance, that.relevance) && Objects.equals(romajiName, that.romajiName) && Objects.equals(slug, that.slug) && Objects.equals(type, that.type) && Objects.equals(description, that.description) && Objects.equals(displayPicture, that.displayPicture) && Objects.equals(url, that.url) && Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, originalName, romajiName, slug, description, url, id);
+        return Objects.hash(name, originalName, relevance, romajiName, slug, type, description, displayPicture, url, id);
     }
 
     @Override
@@ -231,9 +229,12 @@ public class FilteredSeries {
         return "FilteredSeries{" +
                 "name='" + name + '\'' +
                 ", originalName='" + originalName + '\'' +
+                ", relevance=" + relevance +
                 ", romajiName='" + romajiName + '\'' +
                 ", slug='" + slug + '\'' +
+                ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
+                ", displayPicture='" + displayPicture + '\'' +
                 ", url='" + url + '\'' +
                 ", id=" + id +
                 '}';

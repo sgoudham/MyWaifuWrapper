@@ -1,8 +1,9 @@
 package me.goudham.api.entity;
 
-import javax.annotation.processing.Generated;
-
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Objects;
 
@@ -24,7 +25,6 @@ import java.util.Objects;
         "name",
         "original_name"
 })
-@Generated("jsonschema2pojo")
 public class Studio {
 
     Studio() { }

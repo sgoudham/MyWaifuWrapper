@@ -1,14 +1,13 @@
 package me.goudham.api.entity.user;
 
-import java.util.List;
-import java.util.Objects;
-import javax.annotation.processing.Generated;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import me.goudham.api.entity.waifu.Waifu;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * {@link UserList}
@@ -30,7 +29,6 @@ import me.goudham.api.entity.waifu.Waifu;
         "order",
         "waifus"
 })
-@Generated("jsonschema2pojo")
 public class UserList {
     /**
      * {@link UserList} ID

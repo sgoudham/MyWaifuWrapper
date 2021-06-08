@@ -1,7 +1,5 @@
 package me.goudham.api.entity.series;
 
-import javax.annotation.processing.Generated;
-
 import com.fasterxml.jackson.annotation.*;
 import me.goudham.api.entity.Studio;
 import me.goudham.api.entity.waifu.Waifu;
@@ -48,7 +46,6 @@ import java.util.Objects;
         "type",
         "id"
 })
-@Generated("jsonschema2pojo")
 public class Series {
     /**
      * Full Name (in English)
@@ -302,12 +299,12 @@ public class Series {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Series series = (Series) o;
-        return Objects.equals(name, series.name) && Objects.equals(originalName, series.originalName) && Objects.equals(romajiName, series.romajiName) && Objects.equals(description, series.description) && Objects.equals(slug, series.slug) && Objects.equals(releaseDate, series.releaseDate) && Objects.equals(airingStart, series.airingStart) && Objects.equals(airingEnd, series.airingEnd) && Objects.equals(episodeCount, series.episodeCount) && Objects.equals(displayPicture, series.displayPicture) && Objects.equals(url, series.url) && Objects.equals(studio, series.studio) && Objects.equals(id, series.id);
+        return Objects.equals(name, series.name) && Objects.equals(originalName, series.originalName) && Objects.equals(romajiName, series.romajiName) && Objects.equals(description, series.description) && Objects.equals(slug, series.slug) && Objects.equals(releaseDate, series.releaseDate) && Objects.equals(airingStart, series.airingStart) && Objects.equals(airingEnd, series.airingEnd) && Objects.equals(episodeCount, series.episodeCount) && Objects.equals(displayPicture, series.displayPicture) && Objects.equals(url, series.url) && Objects.equals(studio, series.studio) && Objects.equals(type, series.type) && Objects.equals(id, series.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, originalName, romajiName, description, slug, releaseDate, airingStart, airingEnd, episodeCount, displayPicture, url, studio, id);
+        return Objects.hash(name, originalName, romajiName, description, slug, releaseDate, airingStart, airingEnd, episodeCount, displayPicture, url, studio, type, id);
     }
 
     @Override
@@ -322,9 +319,10 @@ public class Series {
                 ", airingStart='" + airingStart + '\'' +
                 ", airingEnd='" + airingEnd + '\'' +
                 ", episodeCount=" + episodeCount +
-                ", image='" + displayPicture + '\'' +
+                ", displayPicture='" + displayPicture + '\'' +
                 ", url='" + url + '\'' +
                 ", studio=" + studio +
+                ", type='" + type + '\'' +
                 ", id=" + id +
                 '}';
     }

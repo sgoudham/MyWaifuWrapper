@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import me.goudham.api.entity.series.Series;
 
-import javax.annotation.processing.Generated;
 import java.util.Objects;
 
 /**
@@ -28,7 +27,6 @@ import java.util.Objects;
         "slug",
         "series"
 })
-@Generated("jsonschema2pojo")
 public class TrueLove {
     /**
      * Name of {@link TrueLove}

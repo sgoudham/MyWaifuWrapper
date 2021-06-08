@@ -1,14 +1,14 @@
 package me.goudham.api.entity.waifu;
 
+import com.fasterxml.jackson.annotation.*;
+import me.goudham.api.entity.series.Series;
+import me.goudham.api.entity.user.Creator;
+
+import javax.annotation.processing.Generated;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import javax.annotation.processing.Generated;
-
-import com.fasterxml.jackson.annotation.*;
-import me.goudham.api.entity.series.Series;
-import me.goudham.api.entity.user.Creator;
 
 
 /**
@@ -81,7 +81,6 @@ import me.goudham.api.entity.user.Creator;
         "appearances",
         "series"
 })
-@Generated("jsonschema2pojo")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Waifu {
     /**
@@ -612,12 +611,12 @@ public class Waifu {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Waifu waifu = (Waifu) o;
-        return Objects.equals(id, waifu.id) && Objects.equals(slug, waifu.slug) && Objects.equals(creator, waifu.creator) && Objects.equals(name, waifu.name) && Objects.equals(originalName, waifu.originalName) && Objects.equals(displayPicture, waifu.displayPicture) && Objects.equals(description, waifu.description) && Objects.equals(weight, waifu.weight) && Objects.equals(height, waifu.height) && Objects.equals(bust, waifu.bust) && Objects.equals(hip, waifu.hip) && Objects.equals(waist, waifu.waist) && bloodType == waifu.bloodType && Objects.equals(origin, waifu.origin) && Objects.equals(age, waifu.age) && Objects.equals(birthdayMonth, waifu.birthdayMonth) && Objects.equals(birthdayDay, waifu.birthdayDay) && Objects.equals(birthdayYear, waifu.birthdayYear) && Objects.equals(likes, waifu.likes) && Objects.equals(trash, waifu.trash) && Objects.equals(url, waifu.url) && Objects.equals(husbando, waifu.husbando) && Objects.equals(nsfw, waifu.nsfw) && Objects.equals(popularityRank, waifu.popularityRank) && Objects.equals(likeRank, waifu.likeRank) && Objects.equals(trashRank, waifu.trashRank) && Objects.equals(appearances, waifu.appearances) && Objects.equals(series, waifu.series);
+        return Objects.equals(id, waifu.id) && Objects.equals(slug, waifu.slug) && Objects.equals(creator, waifu.creator) && Objects.equals(name, waifu.name) && Objects.equals(originalName, waifu.originalName) && Objects.equals(romajiName, waifu.romajiName) && Objects.equals(displayPicture, waifu.displayPicture) && Objects.equals(description, waifu.description) && Objects.equals(weight, waifu.weight) && Objects.equals(height, waifu.height) && Objects.equals(bust, waifu.bust) && Objects.equals(hip, waifu.hip) && Objects.equals(waist, waifu.waist) && bloodType == waifu.bloodType && Objects.equals(origin, waifu.origin) && Objects.equals(age, waifu.age) && Objects.equals(birthdayMonth, waifu.birthdayMonth) && Objects.equals(birthdayDay, waifu.birthdayDay) && Objects.equals(birthdayYear, waifu.birthdayYear) && Objects.equals(likes, waifu.likes) && Objects.equals(trash, waifu.trash) && Objects.equals(url, waifu.url) && Objects.equals(husbando, waifu.husbando) && Objects.equals(nsfw, waifu.nsfw) && Objects.equals(popularityRank, waifu.popularityRank) && Objects.equals(likeRank, waifu.likeRank) && Objects.equals(trashRank, waifu.trashRank) && Objects.equals(appearances, waifu.appearances) && Objects.equals(series, waifu.series);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, slug, creator, name, originalName, displayPicture, description, weight, height, bust, hip, waist, bloodType, origin, age, birthdayMonth, birthdayDay, birthdayYear, likes, trash, url, husbando, nsfw, popularityRank, likeRank, trashRank, appearances, series);
+        return Objects.hash(id, slug, creator, name, originalName, romajiName, displayPicture, description, weight, height, bust, hip, waist, bloodType, origin, age, birthdayMonth, birthdayDay, birthdayYear, likes, trash, url, husbando, nsfw, popularityRank, likeRank, trashRank, appearances, series);
     }
 
     @Override
@@ -625,9 +624,10 @@ public class Waifu {
         return "Waifu{" +
                 "id=" + id +
                 ", slug='" + slug + '\'' +
-                ", creatorId=" + creator +
+                ", creator=" + creator +
                 ", name='" + name + '\'' +
                 ", originalName='" + originalName + '\'' +
+                ", romajiName='" + romajiName + '\'' +
                 ", displayPicture='" + displayPicture + '\'' +
                 ", description='" + description + '\'' +
                 ", weight=" + weight +

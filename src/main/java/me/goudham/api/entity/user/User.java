@@ -199,18 +199,19 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(twitter, user.twitter) && Objects.equals(joined, user.joined) && Objects.equals(waifusCreated, user.waifusCreated) && Objects.equals(waifusLiked, user.waifusLiked) && Objects.equals(waifusTrashed, user.waifusTrashed) && Objects.equals(trueLove, user.trueLove);
+        return Objects.equals(avatar, user.avatar) && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(twitter, user.twitter) && Objects.equals(joined, user.joined) && Objects.equals(waifusCreated, user.waifusCreated) && Objects.equals(waifusLiked, user.waifusLiked) && Objects.equals(waifusTrashed, user.waifusTrashed) && Objects.equals(trueLove, user.trueLove);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, twitter, joined, waifusCreated, waifusLiked, waifusTrashed, trueLove);
+        return Objects.hash(avatar, id, name, twitter, joined, waifusCreated, waifusLiked, waifusTrashed, trueLove);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "avatar='" + avatar + '\'' +
+                ", id=" + id +
                 ", name='" + name + '\'' +
                 ", twitter='" + twitter + '\'' +
                 ", joined='" + joined + '\'' +

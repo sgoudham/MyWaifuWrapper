@@ -1,11 +1,11 @@
 package me.goudham.api.entity;
 
-import javax.annotation.processing.Generated;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import java.util.Objects;
 
 
 /**
@@ -28,7 +28,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "per_page",
         "total"
 })
-@Generated("jsonschema2pojo")
 public class PaginationData {
     /**
      * Current requested page
@@ -102,4 +101,26 @@ public class PaginationData {
         this.total = total;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaginationData that = (PaginationData) o;
+        return Objects.equals(currentPage, that.currentPage) && Objects.equals(lastPage, that.lastPage) && Objects.equals(perPage, that.perPage) && Objects.equals(total, that.total);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(currentPage, lastPage, perPage, total);
+    }
+
+    @Override
+    public String toString() {
+        return "PaginationData{" +
+                "currentPage=" + currentPage +
+                ", lastPage=" + lastPage +
+                ", perPage=" + perPage +
+                ", total=" + total +
+                '}';
+    }
 }

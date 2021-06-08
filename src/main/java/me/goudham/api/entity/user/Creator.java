@@ -1,13 +1,10 @@
 package me.goudham.api.entity.user;
 
-import javax.annotation.processing.Generated;
-
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import me.goudham.api.entity.waifu.Waifu;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import me.goudham.api.entity.waifu.Waifu;
 
 import java.util.Objects;
 
@@ -27,7 +24,6 @@ import java.util.Objects;
         "id",
         "name"
 })
-@Generated("jsonschema2pojo")
 public class Creator {
 
     /**
@@ -35,14 +31,14 @@ public class Creator {
      *
      */
     @JsonProperty("id")
-    @JsonPropertyDescription("")
+    @JsonPropertyDescription("Creator ID")
     private Integer id;
 
     /**
      * {@link Creator} Name
      */
     @JsonProperty("name")
-    @JsonPropertyDescription("")
+    @JsonPropertyDescription("Creator Name")
     private String name;
 
     @JsonProperty("id")
