@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.goudham.me.api.entity.series.FilteredSeries;
 import org.goudham.me.api.entity.series.Series;
+import org.goudham.me.api.entity.waifu.FilteredWaifu;
 import org.goudham.me.api.entity.waifu.Waifu;
 import org.goudham.me.exception.APIMapperException;
 import org.goudham.me.exception.APIResponseException;
@@ -93,6 +94,11 @@ public class APIWrapper {
     Response<Waifu> getWaifu(String param) throws APIResponseException, APIMapperException {
         Result waifuResult = sendRequest(httpClient, "waifu/" + param);
         return apiMapper.deserialize(waifuResult, Waifu.class);
+    }
+
+    Response<FilteredWaifu> getDailyWaifu() throws APIResponseException, APIMapperException {
+        Result waifuResult = sendRequest(httpClient, "meta/daily");
+        return apiMapper.deserialize(waifuResult, FilteredWaifu.class);
     }
 
     Response<Series> getSeries(String param) throws APIResponseException, APIMapperException {

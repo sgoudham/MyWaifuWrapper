@@ -2,6 +2,7 @@ package org.goudham.me;
 
 import org.goudham.me.api.entity.series.FilteredSeries;
 import org.goudham.me.api.entity.series.Series;
+import org.goudham.me.api.entity.waifu.FilteredWaifu;
 import org.goudham.me.api.entity.waifu.Waifu;
 import org.goudham.me.exception.APIMapperException;
 import org.goudham.me.exception.APIResponseException;
@@ -60,6 +61,10 @@ public class MyWaifuClient {
 
     public Response<Waifu> getWaifu(@NotNull Integer id) throws APIResponseException, APIMapperException {
         return APIWrapper.getWaifu(String.valueOf(id));
+    }
+
+    public Response<FilteredWaifu> getDailyWaifu() throws APIResponseException, APIMapperException {
+        return APIWrapper.getDailyWaifu();
     }
 
     public Response<Series> getSeries(@NotNull Integer id) throws APIMapperException, APIResponseException {

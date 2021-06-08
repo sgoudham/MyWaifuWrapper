@@ -1,15 +1,11 @@
 package org.goudham.me.api.entity.waifu;
 
+import com.fasterxml.jackson.annotation.*;
 import org.goudham.me.api.entity.series.FilteredSeries;
 
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.processing.Generated;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
@@ -52,6 +48,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "id"
 })
 @Generated("jsonschema2pojo")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FilteredWaifu {
     /**
      * Used to generate readable URL's for the {@link FilteredWaifu}
