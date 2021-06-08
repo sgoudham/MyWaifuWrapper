@@ -1,5 +1,11 @@
 package me.goudham;
 
+import java.net.http.HttpRequest;
+
+/**
+ * Represents a Result from a {@link HttpRequest} with the resulting
+ * {@code statusCode} and {@code body}
+ */
 class Result {
     private final Integer statusCode;
     private final String body;
