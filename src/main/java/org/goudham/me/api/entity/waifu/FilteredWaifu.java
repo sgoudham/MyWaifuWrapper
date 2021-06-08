@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  *  <li>{@link String name}</li>
  *  <li>{@link String originalName}</li>
  *  <li>{@link Integer relevance}</li>
+ *  <li>{@link String romaji}</li>
  *  <li>{@link String romajiName}</li>
  *  <li>{@link String displayPicture}</li>
  *  <li>{@link Integer likes}</li>
@@ -39,6 +40,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "name",
         "original_name",
         "relevance",
+        "romaji",
         "romaji_name",
         "display_picture",
         "description",
@@ -81,6 +83,14 @@ public class FilteredWaifu {
     @JsonProperty("relevance")
     @JsonPropertyDescription("Relevancy of FilteredWaifu")
     private Integer relevance;
+
+    /**
+     * If this character has a romaji name, we'll put it here.
+     *
+     */
+    @JsonProperty("romaji")
+    @JsonPropertyDescription("if this character has a romaji name, we'll put it here. ")
+    private String romaji;
 
     /**
      * If this character has a romaji name, we'll put it here.
@@ -185,6 +195,12 @@ public class FilteredWaifu {
 
     @JsonProperty("relevance")
     public void setRelevance(Integer relevance) { this.relevance = relevance; }
+
+    @JsonProperty("romaji")
+    public String getRomaji() { return romaji; }
+
+    @JsonProperty("romaji")
+    public void setRomaji(String romaji) { this.romaji = romaji; }
 
     @JsonProperty("romaji_name")
     public String getRomajiName() {
