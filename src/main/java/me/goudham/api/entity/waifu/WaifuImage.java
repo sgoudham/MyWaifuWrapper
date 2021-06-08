@@ -16,7 +16,8 @@ import java.util.Objects;
  * <ul>
  *  <li>{@link Integer id}</li>
  *  <li>{@link String thumbnail}</li>
- *  <li>{@link String path}</li>
+ *  <li>{@link String image}</li>
+ *  <li>{@link Boolean nsfw}</li>
  * </ul>
  *
  */
@@ -24,9 +25,9 @@ import java.util.Objects;
 @JsonPropertyOrder({
         "id",
         "thumbnail",
-        "path"
+        "image",
+        "nsfw"
 })
-@Generated("jsonschema2pojo")
 public class WaifuImage {
 
     /**
@@ -51,7 +52,15 @@ public class WaifuImage {
      */
     @JsonProperty("path")
     @JsonPropertyDescription("Final URL of the original resolution image")
-    private String path;
+    private String image;
+
+    /**
+     * If image is NSFW or not
+     *
+     */
+    @JsonProperty("nsfw")
+    @JsonPropertyDescription("If image is NSFW or not")
+    private String nsfw;
 
     @JsonProperty("id")
     public Integer getId() {
@@ -74,26 +83,32 @@ public class WaifuImage {
     }
 
     @JsonProperty("path")
-    public String getPath() {
-        return path;
+    public String getImage() {
+        return image;
     }
 
     @JsonProperty("path")
-    public void setPath(String path) {
-        this.path = path;
+    public void setImage(String image) {
+        this.image = image;
     }
+
+    @JsonProperty("nsfw")
+    public String getNsfw() { return nsfw; }
+
+    @JsonProperty("nsfw")
+    public void setNsfw(String nsfw) { this.nsfw = nsfw; }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WaifuImage that = (WaifuImage) o;
-        return Objects.equals(id, that.id) && Objects.equals(thumbnail, that.thumbnail) && Objects.equals(path, that.path);
+        return Objects.equals(id, that.id) && Objects.equals(thumbnail, that.thumbnail) && Objects.equals(image, that.image) && Objects.equals(nsfw, that.nsfw);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, thumbnail, path);
+        return Objects.hash(id, thumbnail, image, nsfw);
     }
 
     @Override
@@ -101,7 +116,8 @@ public class WaifuImage {
         return "WaifuImage{" +
                 "id=" + id +
                 ", thumbnail='" + thumbnail + '\'' +
-                ", path='" + path + '\'' +
+                ", image='" + image + '\'' +
+                ", nsfw='" + nsfw + '\'' +
                 '}';
     }
 }
