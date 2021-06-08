@@ -1,4 +1,4 @@
-package org.goudham.me.api.entity.waifu;
+package me.goudham.api.entity.waifu;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

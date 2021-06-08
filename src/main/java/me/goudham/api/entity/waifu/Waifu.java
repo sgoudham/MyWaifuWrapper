@@ -1,4 +1,4 @@
-package org.goudham.me.api.entity.waifu;
+package me.goudham.api.entity.waifu;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Objects;
 import javax.annotation.processing.Generated;
 
 import com.fasterxml.jackson.annotation.*;
-import org.goudham.me.api.entity.series.Series;
-import org.goudham.me.api.entity.user.Creator;
+import me.goudham.api.entity.series.Series;
+import me.goudham.api.entity.user.Creator;
 
 
 /**

@@ -1,4 +1,4 @@
-package org.goudham.me.api.entity.user;
+package me.goudham.api.entity.user;
 
 import javax.annotation.processing.Generated;
 
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.goudham.me.api.entity.waifu.Waifu;
+import me.goudham.api.entity.waifu.Waifu;
 
 import java.util.Objects;
 

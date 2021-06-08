@@ -1,10 +1,10 @@
-package org.goudham.me.api.entity.series;
+package me.goudham.api.entity.series;
 
 import javax.annotation.processing.Generated;
 
 import com.fasterxml.jackson.annotation.*;
-import org.goudham.me.api.entity.Studio;
-import org.goudham.me.api.entity.waifu.Waifu;
+import me.goudham.api.entity.Studio;
+import me.goudham.api.entity.waifu.Waifu;
 
 import java.util.Objects;
 

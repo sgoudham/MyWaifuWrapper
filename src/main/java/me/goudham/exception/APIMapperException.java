@@ -1,7 +1,7 @@
-package org.goudham.me.exception;
+package me.goudham.exception;
 
-import org.goudham.me.APIWrapper;
-import org.goudham.me.Response;
+import me.goudham.APIWrapper;
+import me.goudham.Response;
 
 /**
  * Thrown when {@link APIWrapper} fails to deserialize json into Java POJO's ({@link Response#getEntity()})

@@ -1,6 +1,6 @@
-package org.goudham.me.exception;
+package me.goudham.exception;
 
-import org.goudham.me.APIWrapper;
+import me.goudham.APIWrapper;
 
 /**
  * Thrown when {@link APIWrapper} fails to return API information

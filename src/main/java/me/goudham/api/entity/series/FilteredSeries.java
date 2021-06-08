@@ -1,4 +1,4 @@
-package org.goudham.me.api.entity.series;
+package me.goudham.api.entity.series;
 
 import javax.annotation.processing.Generated;
 

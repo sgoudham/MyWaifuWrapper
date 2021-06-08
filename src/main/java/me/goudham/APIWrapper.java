@@ -1,13 +1,13 @@
-package org.goudham.me;
+package me.goudham;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import org.goudham.me.api.entity.series.FilteredSeries;
-import org.goudham.me.api.entity.series.Series;
-import org.goudham.me.api.entity.waifu.FilteredWaifu;
-import org.goudham.me.api.entity.waifu.Waifu;
-import org.goudham.me.exception.APIMapperException;
-import org.goudham.me.exception.APIResponseException;
+import me.goudham.api.entity.series.FilteredSeries;
+import me.goudham.api.entity.series.Series;
+import me.goudham.api.entity.waifu.FilteredWaifu;
+import me.goudham.api.entity.waifu.Waifu;
+import me.goudham.exception.APIMapperException;
+import me.goudham.exception.APIResponseException;
 
 import java.net.URI;
 import java.net.http.HttpClient;

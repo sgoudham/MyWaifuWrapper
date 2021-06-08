@@ -1,7 +1,7 @@
-package org.goudham.me;
+package me.goudham;
 
-import org.goudham.me.api.entity.series.Series;
-import org.goudham.me.api.entity.waifu.Waifu;
+import me.goudham.api.entity.series.Series;
+import me.goudham.api.entity.waifu.Waifu;
 
 /**
  * This is returned to the User when called by methods in {@link MyWaifuClient}.

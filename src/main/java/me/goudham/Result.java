@@ -1,4 +1,4 @@
-package org.goudham.me;
+package me.goudham;
 
 class Result {
     private final Integer statusCode;
