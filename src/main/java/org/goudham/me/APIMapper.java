@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.goudham.me.api.entity.series.FilteredSeries;
 import org.goudham.me.api.entity.series.Series;
 import org.goudham.me.api.entity.waifu.Waifu;
@@ -21,18 +20,6 @@ class APIMapper {
 
     APIMapper() {
         objectMapper = new ObjectMapper();
-    }
-
-    /**
-     * Honestly I don't really know how this works
-     *
-     * @param entity The actual class of the given entity. E.g {@link Waifu#getClass()}
-     * @param <T> The type of entity to be returned. E.g {@link Waifu} or {@link Series}
-     * @return {@link JavaType}
-     *
-     */
-    private <T> JavaType listOf(Class<T> entity) {
-        return TypeFactory.defaultInstance().constructCollectionType(List.class, entity);
     }
 
     /**
@@ -67,13 +54,13 @@ class APIMapper {
      * Using the given {@code entity}, {@link ObjectMapper} deserializes the given Json
      * into a Java POJO. This method enables support for retrieving {@link List} of entities
      *
+     * @param <T> List of entities to be returned. E.g {@link List} of {@link FilteredSeries}
      * @param result The result of the previous API response
      * @param entity The actual class of the given entity. E.g {@link Waifu#getClass()}
-     * @param <T> List of entities to be returned. E.g {@link List} of {@link FilteredSeries}
      * @return {@link Response}
      * @throws APIMapperException If {@link ObjectMapper} is not able to deserialize JSON to Java POJO properly
      */
-    <T> Response<List<T>> deserializeToList(Result result, Class<T> entity) throws APIMapperException {
+    <T> Response<List<T>> deserialize(Result result, JavaType entity) throws APIMapperException {
         Integer statusCode = result.getStatusCode();
         String body = result.getBody();
         List<T> listOfEntity = null;
@@ -81,7 +68,7 @@ class APIMapper {
         if (statusCode == 200) {
             try {
                 String data = getJsonTree(body);
-                listOfEntity = objectMapper.readValue(data, listOf(entity));
+                listOfEntity = objectMapper.readValue(data, entity);
             } catch (JsonProcessingException jpe) {
                 throwAPIMapperException(jpe);
             }

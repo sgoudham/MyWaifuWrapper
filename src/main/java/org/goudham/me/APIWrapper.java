@@ -1,5 +1,7 @@
 package org.goudham.me;
 
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.goudham.me.api.entity.series.FilteredSeries;
 import org.goudham.me.api.entity.series.Series;
 import org.goudham.me.api.entity.waifu.Waifu;
@@ -25,6 +27,7 @@ public class APIWrapper {
     private final String apiKey;
 
     private final APIMapper apiMapper;
+    private final HttpClient httpClient;
 
     /**
      * Instantiates an instance of {@link APIWrapper} to retrieve API Information.
@@ -32,13 +35,26 @@ public class APIWrapper {
      * Java objects
      *
      * @param apiKey API Key to authorise API request
+     * @param httpClient The underlying {@link HttpClient} to use for HttpRequests
      *
      */
-    APIWrapper(String apiKey) {
+    APIWrapper(String apiKey, HttpClient httpClient) {
         this.apiKey = apiKey;
+        this.httpClient = httpClient;
         apiMapper = new APIMapper();
     }
 
+    /**
+     * Honestly I don't really know how this works
+     *
+     * @param entity The actual class of the given entity. E.g {@link Waifu#getClass()}
+     * @param <T> The type of entity to be returned. E.g {@link Waifu} or {@link Series}
+     * @return {@link JavaType}
+     *
+     */
+    private <T> JavaType listOf(Class<T> entity) {
+        return TypeFactory.defaultInstance().constructCollectionType(List.class, entity);
+    }
 
     /**
      * Handles sending a request to the API asynchronously using {@link HttpRequest}
@@ -74,18 +90,18 @@ public class APIWrapper {
         return new Result(responseCode, responseBody);
     }
 
-    Response<Waifu> getWaifu(HttpClient httpClient, String param) throws APIResponseException, APIMapperException {
+    Response<Waifu> getWaifu(String param) throws APIResponseException, APIMapperException {
         Result waifuResult = sendRequest(httpClient, "waifu/" + param);
         return apiMapper.deserialize(waifuResult, Waifu.class);
     }
 
-    Response<Series> getSeries(HttpClient httpClient, String param) throws APIResponseException, APIMapperException {
+    Response<Series> getSeries(String param) throws APIResponseException, APIMapperException {
         Result seriesResult = sendRequest(httpClient, "series/" + param);
         return apiMapper.deserialize(seriesResult, Series.class);
     }
 
-    Response<List<FilteredSeries>> getAiringAnime(HttpClient httpClient) throws APIResponseException, APIMapperException {
+    Response<List<FilteredSeries>> getAiringAnime() throws APIResponseException, APIMapperException {
         Result seriesResult = sendRequest(httpClient, "airing");
-        return apiMapper.deserializeToList(seriesResult, FilteredSeries.class);
+        return apiMapper.deserialize(seriesResult, listOf(FilteredSeries.class));
     }
 }
