@@ -2,8 +2,10 @@ package me.goudham;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import me.goudham.util.Season;
 import me.goudham.api.entity.series.FilteredSeries;
 import me.goudham.api.entity.series.Series;
+import me.goudham.api.entity.user.User;
 import me.goudham.api.entity.waifu.FilteredWaifu;
 import me.goudham.api.entity.waifu.Waifu;
 import me.goudham.exception.APIMapperException;
@@ -21,6 +23,7 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * Returns API information to {@link MyWaifuClient}
+ *
  */
 public class APIWrapper {
     private final String version = "1.0";
@@ -97,8 +100,13 @@ public class APIWrapper {
     }
 
     Response<FilteredWaifu> getDailyWaifu() throws APIResponseException, APIMapperException {
-        Result waifuResult = sendRequest(httpClient, "meta/daily");
-        return apiMapper.deserialize(waifuResult, FilteredWaifu.class);
+        Result dailyWaifuResult = sendRequest(httpClient, "meta/daily");
+        return apiMapper.deserialize(dailyWaifuResult, FilteredWaifu.class);
+    }
+
+    Response<FilteredWaifu> getRandomWaifu() throws APIResponseException, APIMapperException {
+        Result randomWaifuResult = sendRequest(httpClient, "meta/random");
+        return apiMapper.deserialize(randomWaifuResult, FilteredWaifu.class);
     }
 
     Response<Series> getSeries(String param) throws APIResponseException, APIMapperException {
@@ -106,8 +114,38 @@ public class APIWrapper {
         return apiMapper.deserialize(seriesResult, Series.class);
     }
 
-    Response<List<FilteredSeries>> getAiringAnime() throws APIResponseException, APIMapperException {
-        Result seriesResult = sendRequest(httpClient, "airing");
-        return apiMapper.deserialize(seriesResult, listOf(FilteredSeries.class));
+    Response<List<FilteredSeries>> getSeasonalAnime() throws APIResponseException, APIMapperException {
+        Result seasonalAnimeResult = sendRequest(httpClient, "airing");
+        return apiMapper.deserialize(seasonalAnimeResult, listOf(FilteredSeries.class));
+    }
+
+    Response<List<FilteredWaifu>> getBestWaifus() throws APIResponseException, APIMapperException {
+        Result waifuResults = sendRequest(httpClient, "airing/best");
+        return apiMapper.deserialize(waifuResults, listOf(FilteredWaifu.class));
+    }
+
+    Response<List<FilteredWaifu>> getPopularWaifus() throws APIResponseException, APIMapperException {
+        Result waifuResults = sendRequest(httpClient, "airing/popular");
+        return apiMapper.deserialize(waifuResults, listOf(FilteredWaifu.class));
+    }
+
+    Response<List<FilteredWaifu>> getTrashWaifus() throws APIResponseException, APIMapperException {
+        Result waifuResults = sendRequest(httpClient, "airing/trash");
+        return apiMapper.deserialize(waifuResults, listOf(FilteredWaifu.class));
+    }
+
+    Response<List<FilteredSeries>> getAllSeries(Season season, Integer year) throws APIResponseException, APIMapperException {
+        Result allSeriesResult = sendRequest(httpClient, "airing/" + season.getSeason() + "/" + year);
+        return apiMapper.deserialize(allSeriesResult, listOf(FilteredSeries.class));
+    }
+
+    Response<List<FilteredWaifu>> getSeriesWaifus(String param) throws APIResponseException, APIMapperException {
+        Result allWaifusFromSeriesResults = sendRequest(httpClient, "series/" + param + "/waifus");
+        return apiMapper.deserialize(allWaifusFromSeriesResults, listOf(FilteredWaifu.class));
+    }
+
+    Response<User> getUserProfile(String param) throws APIResponseException, APIMapperException {
+        Result userProfileResult = sendRequest(httpClient, "user/" + param);
+        return apiMapper.deserialize(userProfileResult, User.class);
     }
 }

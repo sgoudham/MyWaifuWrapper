@@ -1,7 +1,9 @@
 package me.goudham;
 
+import me.goudham.util.Season;
 import me.goudham.api.entity.series.FilteredSeries;
 import me.goudham.api.entity.series.Series;
+import me.goudham.api.entity.user.User;
 import me.goudham.api.entity.waifu.FilteredWaifu;
 import me.goudham.api.entity.waifu.Waifu;
 import me.goudham.exception.APIMapperException;
@@ -35,7 +37,7 @@ public class MyWaifuClient {
      * @param httpClient The underlying {@link HttpClient} to use for HttpRequests
      *
      */
-    MyWaifuClient(@NotNull String apiKey, HttpClient httpClient) {
+    MyWaifuClient(@NotNull String apiKey, @NotNull HttpClient httpClient) {
         APIWrapper = new APIWrapper(apiKey, httpClient);
     }
 
@@ -59,7 +61,7 @@ public class MyWaifuClient {
         return APIWrapper.getWaifu(slug);
     }
 
-    public Response<Waifu> getWaifu(@NotNull Integer id) throws APIResponseException, APIMapperException {
+    Response<Waifu> getWaifu(@NotNull Integer id) throws APIResponseException, APIMapperException {
         return APIWrapper.getWaifu(String.valueOf(id));
     }
 
@@ -67,22 +69,59 @@ public class MyWaifuClient {
         return APIWrapper.getDailyWaifu();
     }
 
+    public Response<FilteredWaifu> getRandomWaifu() throws APIResponseException, APIMapperException {
+        return APIWrapper.getRandomWaifu();
+    }
+
+    public Response<Series> getSeries(@NotNull String param) throws APIMapperException, APIResponseException {
+        return APIWrapper.getSeries(param);
+    }
+
     public Response<Series> getSeries(@NotNull Integer id) throws APIMapperException, APIResponseException {
         return APIWrapper.getSeries(String.valueOf(id));
     }
 
-    public Response<List<FilteredSeries>> getAiringAnime() throws APIMapperException, APIResponseException {
-        return APIWrapper.getAiringAnime();
+    public Response<List<FilteredSeries>> getSeasonalAnime() throws APIMapperException, APIResponseException {
+        return APIWrapper.getSeasonalAnime();
+    }
+
+    public Response<List<FilteredWaifu>> getBestWaifus() throws APIMapperException, APIResponseException {
+        return APIWrapper.getBestWaifus();
+    }
+
+    public Response<List<FilteredWaifu>> getPopularWaifus() throws APIMapperException, APIResponseException {
+        return APIWrapper.getPopularWaifus();
+    }
+
+    public Response<List<FilteredWaifu>> getTrashWaifus() throws APIMapperException, APIResponseException {
+        return APIWrapper.getTrashWaifus();
+    }
+
+    public Response<List<FilteredSeries>> getAllSeries(@NotNull Season season, @NotNull Integer year) throws APIResponseException, APIMapperException {
+        return APIWrapper.getAllSeries(season, year);
+    }
+
+    public Response<List<FilteredWaifu>> getSeriesWaifus(@NotNull String slug) throws APIMapperException, APIResponseException {
+        return APIWrapper.getSeriesWaifus(slug);
+    }
+
+    public Response<List<FilteredWaifu>> getSeriesWaifus(@NotNull Integer id) throws APIMapperException, APIResponseException {
+        return APIWrapper.getSeriesWaifus(String.valueOf(id));
+    }
+
+    public Response<User> getUserProfile(@NotNull Integer id) throws APIMapperException, APIResponseException {
+        return APIWrapper.getUserProfile(String.valueOf(id));
     }
 
     /**
-     * Builder for MyWaifuClient
+     * Builder for {@link MyWaifuClient}
+     *
      */
     public static class Builder {
         private final String apiKey;
         private final HttpClient.Builder httpClientBuilder = HttpClient.newBuilder();
 
-        public Builder(String apiKey) {
+        public Builder(@NotNull String apiKey) {
             this.apiKey = apiKey;
         }
 
@@ -91,27 +130,27 @@ public class MyWaifuClient {
             return this;
         }
 
-        public Builder withConnectTimeout(Duration duration) {
+        public Builder withConnectTimeout(@NotNull Duration duration) {
             httpClientBuilder.connectTimeout(duration);
             return this;
         }
 
-        public Builder withSslParameters(SSLParameters sslParameters) {
+        public Builder withSslParameters(@NotNull SSLParameters sslParameters) {
             httpClientBuilder.sslParameters(sslParameters);
             return this;
         }
 
-        public Builder withExecutor(Executor executor) {
+        public Builder withExecutor(@NotNull Executor executor) {
             httpClientBuilder.executor(executor);
             return this;
         }
 
-        public Builder withFollowRedirects(HttpClient.Redirect policy) {
+        public Builder withFollowRedirects(@NotNull HttpClient.Redirect policy) {
             httpClientBuilder.followRedirects(policy);
             return this;
         }
 
-        public Builder withVersion(HttpClient.Version version) {
+        public Builder withVersion(@NotNull HttpClient.Version version) {
             httpClientBuilder.version(version);
             return this;
         }
@@ -121,12 +160,12 @@ public class MyWaifuClient {
             return this;
         }
 
-        public Builder withProxy(ProxySelector proxySelector) {
+        public Builder withProxy(@NotNull ProxySelector proxySelector) {
             httpClientBuilder.proxy(proxySelector);
             return this;
         }
 
-        public Builder withAuthenticator(Authenticator authenticator) {
+        public Builder withAuthenticator(@NotNull Authenticator authenticator) {
             httpClientBuilder.authenticator(authenticator);
             return this;
         }
