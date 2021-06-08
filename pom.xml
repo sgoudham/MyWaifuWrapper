@@ -7,13 +7,39 @@
     <groupId>org.goudham.me</groupId>
     <artifactId>MyWaifuWrapper</artifactId>
     <version>0.1.4</version>
-    <name>MyWaifuWrapper</name>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+
+    <name>MyWaifuWrapper</name>
+    <description>An Asynchronous Java API Wrapper for MyWaifuList.</description>
+    <url>https://github.com/sgoudham/MyWaifuWrapper</url>
+
+    <scm>
+        <connection>scm:git:git://github.com/sgoudham/MyWaifuWrapper.git</connection>
+        <developerConnection>scm:git:ssh://github.com:sgoudham/MyWaifuWrapper.git</developerConnection>
+        <url>https://github.com/sgoudham/MyWaifuWrapper/tree/main</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Goudham Suresh</name>
+            <email>sgoudham@gmail.com</email>
+            <organization>Github</organization>
+            <organizationUrl>https://github.com/sgoudham</organizationUrl>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
 
     <dependencies>
         <dependency>
