@@ -61,7 +61,7 @@ public class MyWaifuClient {
         return APIWrapper.getWaifu(slug);
     }
 
-    Response<Waifu> getWaifu(@NotNull Integer id) throws APIResponseException, APIMapperException {
+    public Response<Waifu> getWaifu(@NotNull Integer id) throws APIResponseException, APIMapperException {
         return APIWrapper.getWaifu(String.valueOf(id));
     }
 
