@@ -9,21 +9,21 @@ import me.goudham.api.entity.waifu.Waifu;
  * <br>
  * Given a successful response, {@link #entity} will be populated with the requested entity.
  * <br>
- * No matter successful or unsuccessful response, {@link #responseCode} and {@link #responseBody}
+ * No matter successful or unsuccessful response, {@link #statusCode} and {@link #body}
  * will be populated to ensure the user has all the information for debugging or extra information within
- * the {@link #responseBody}
+ * the {@link #body}
  *
  * @param <T> The type of entity to be returned. E.g {@link Waifu} or {@link Series}
  *
  */
 public class Response<T> {
     private final T entity;
-    private final Integer responseCode;
-    private final String responseBody;
+    private final Integer statusCode;
+    private final String body;
 
-    Response(Integer responseCode, String responseBody, T entity) {
-        this.responseCode = responseCode;
-        this.responseBody = responseBody;
+    Response(Integer statusCode, String body, T entity) {
+        this.statusCode = statusCode;
+        this.body = body;
         this.entity = entity;
     }
 
@@ -31,11 +31,11 @@ public class Response<T> {
         return entity;
     }
 
-    public Integer getResponseCode() {
-        return responseCode;
+    public Integer getStatusCode() {
+        return statusCode;
     }
 
-    public String getResponseBody() {
-        return responseBody;
+    public String getBody() {
+        return body;
     }
 }
