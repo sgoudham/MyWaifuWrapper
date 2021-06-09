@@ -11,7 +11,7 @@
     </a>
 </p>
 <p align="center">
-    <img src="https://img.shields.io/nexus/maven-goudham/org.goudham.me/MyWaifuWrapper?server=https%3A%2F%2Fgoudham.me"/>
+    <img src="https://img.shields.io/maven-central/v/me.goudham/MyWaifuWrapper"/>
     <img src="https://img.shields.io/badge/project%20type-personal-blueviolet"/>
     <img src="https://img.shields.io/github/last-commit/sgoudham/MyWaifuWrapper"/>
     <img src="https://img.shields.io/github/issues/sgoudham/MyWaifuWrapper?label=issues"/>
