@@ -21,25 +21,34 @@ pipeline {
     stages {
         stage("Import GPG Keys") {
             steps {
-                sh """
-                    gpg --batch --import ${GPG_SECRET_KEY}
-                    gpg --import-ownertrust ${GPG_OWNER_TRUST}
-                """
+                sh 'gpg --batch --import $GPG_SECRET_KEY'
+                sh 'gpg --import-ownertrust $GPG_OWNER_TRUST'
             }
         }
-        stage("Building") {
+        stage("Build") {
             steps {
                 withCredentials([file(credentialsId: '076a36e8-d448-46fc-af11-7e7181a6cb99', variable: 'MAVEN_SETTINGS')]) {
-                    sh 'mvn -s $MAVEN_SETTINGS -B -DskipTests clean install'
+                    sh 'mvn -s $MAVEN_SETTINGS -B -DskipTests clean package'
                 }
             }
         }
-        stage("Testing") {
+        stage("Test") {
             steps {
                 sh "mvn test"
             }
+            post {
+                success {
+                    echo "Generating Test Report..."
+                    publishCoverage adapters: [jacocoAdapter('target/site/jacoco/jacoco.xml')]
+
+                    echo "Sending Report to CodeCov..."
+                    sh '''#!/bin/bash
+                          bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN || echo "Codecov did not collect coverage reports"
+                       '''
+                }
+            }
         }
-        stage("Deploying To Nexus") {
+        stage("Deploy To Nexus") {
             when {
                 branch 'release'
             }
@@ -77,23 +86,18 @@ pipeline {
                     }
                 }
             }
+            post {
+                success {
+                    echo "Archiving Artifacts"
+                    archiveArtifacts artifacts: 'target/*.jar'
+                }
+            }
         }
     }
 
     post {
         success {
             echo "I'm Feeling Swag!"
-
-            echo "Archiving Artifacts"
-            archiveArtifacts artifacts: 'target/*.jar'
-
-            echo "Generating Test Report..."
-            publishCoverage adapters: [jacocoAdapter('target/site/jacoco/jacoco.xml')]
-
-            echo "Sending Report to CodeCov..."
-            sh '''#!/bin/bash
-                  bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN || echo "Codecov did not collect coverage reports"
-               '''
         }
         failure {
             echo 'Not Very Swag :('
