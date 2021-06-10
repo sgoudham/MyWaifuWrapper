@@ -1,4 +1,7 @@
 FROM maven:3.8.1-adoptopenjdk-11
+MAINTAINER Goudham Suresh
 
-RUN apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
-RUN apt install gpg
+RUN apt-get -y update && \
+    apt-get -y upgrade && \
+    apt-get -y dist-upgrade && \
+    apt-get -y install gpg

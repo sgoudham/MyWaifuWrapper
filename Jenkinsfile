@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            args '-v /root/.m2:/root/.m2'
+            args '-u root'
         }
     }
 
@@ -13,12 +13,25 @@ pipeline {
         NEXUS_CREDENTIAL_ID = 'e5582b32-3507-4e88-ab7c-d16d701c46e9'
 
         CODECOV_TOKEN = credentials('44a3c021-5cbb-4a6f-bea2-ae6c51d43038')
+
+        GPG_SECRET_KEY = credentials('4dbfd4ed-bba4-44e0-8410-fbce1a9bba73')
+        GPG_OWNER_TRUST = credentials('8703bbe8-c099-481f-8337-1dce32d51771')
     }
 
     stages {
+        stage("Import GPG Keys") {
+            steps {
+                sh """
+                    gpg --batch --import ${GPG_SECRET_KEY}
+                    gpg --import-ownertrust ${GPG_OWNER_TRUST}
+                """
+            }
+        }
         stage("Building") {
             steps {
-                sh "mvn -B -DskipTests clean install"
+                withCredentials([file(credentialsId: '076a36e8-d448-46fc-af11-7e7181a6cb99', variable: 'MAVEN_SETTINGS')]) {
+                    sh 'mvn -s $MAVEN_SETTINGS -B -DskipTests clean install'
+                }
             }
         }
         stage("Testing") {
