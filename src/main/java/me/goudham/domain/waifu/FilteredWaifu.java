@@ -1,7 +1,7 @@
-package me.goudham.api.entity.waifu;
+package me.goudham.domain.waifu;
 
 import com.fasterxml.jackson.annotation.*;
-import me.goudham.api.entity.series.FilteredSeries;
+import me.goudham.domain.series.FilteredSeries;
 
 import java.util.List;
 import java.util.Objects;

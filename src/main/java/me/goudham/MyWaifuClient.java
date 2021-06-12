@@ -1,11 +1,12 @@
 package me.goudham;
 
+import me.goudham.domain.user.UserList;
 import me.goudham.util.Season;
-import me.goudham.api.entity.series.FilteredSeries;
-import me.goudham.api.entity.series.Series;
-import me.goudham.api.entity.user.User;
-import me.goudham.api.entity.waifu.FilteredWaifu;
-import me.goudham.api.entity.waifu.Waifu;
+import me.goudham.domain.series.FilteredSeries;
+import me.goudham.domain.series.Series;
+import me.goudham.domain.user.User;
+import me.goudham.domain.waifu.FilteredWaifu;
+import me.goudham.domain.waifu.Waifu;
 import me.goudham.exception.APIMapperException;
 import me.goudham.exception.APIResponseException;
 import org.jetbrains.annotations.NotNull;
@@ -57,10 +58,28 @@ public class MyWaifuClient {
         return new MyWaifuClient(apiKey, httpClient);
     }
 
+    /**
+     * Retrieves information about the {@link Waifu} specified by the given slug
+     *
+     * @param slug The slug of the {@link Waifu}
+     * @return {@link Response}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<Waifu> getWaifu(@NotNull String slug) throws APIResponseException, APIMapperException {
         return APIWrapper.getWaifu(slug);
     }
 
+    /**
+     * Retrieves information about the {@link Waifu} specified by the given id
+     *
+     * @param id The id of the {@link Waifu}
+     * @return {@link Response}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<Waifu> getWaifu(@NotNull Integer id) throws APIResponseException, APIMapperException {
         return APIWrapper.getWaifu(String.valueOf(id));
     }
@@ -73,8 +92,8 @@ public class MyWaifuClient {
         return APIWrapper.getRandomWaifu();
     }
 
-    public Response<Series> getSeries(@NotNull String param) throws APIMapperException, APIResponseException {
-        return APIWrapper.getSeries(param);
+    public Response<Series> getSeries(@NotNull String slug) throws APIMapperException, APIResponseException {
+        return APIWrapper.getSeries(slug);
     }
 
     public Response<Series> getSeries(@NotNull Integer id) throws APIMapperException, APIResponseException {
@@ -111,6 +130,14 @@ public class MyWaifuClient {
 
     public Response<User> getUserProfile(@NotNull Integer id) throws APIMapperException, APIResponseException {
         return APIWrapper.getUserProfile(String.valueOf(id));
+    }
+
+    public Response<List<UserList>> getUserLists(@NotNull Integer id) throws APIMapperException, APIResponseException {
+        return APIWrapper.getUserLists(String.valueOf(id));
+    }
+
+    public Response<UserList> getUserList(@NotNull Integer userId, @NotNull Integer listId) throws APIMapperException, APIResponseException {
+        return APIWrapper.getUserList(String.valueOf(userId), String.valueOf(listId));
     }
 
     /**

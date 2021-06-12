@@ -1,8 +1,8 @@
-package me.goudham.api.entity.series;
+package me.goudham.domain.series;
 
 import com.fasterxml.jackson.annotation.*;
-import me.goudham.api.entity.Studio;
-import me.goudham.api.entity.waifu.Waifu;
+import me.goudham.domain.Studio;
+import me.goudham.domain.waifu.Waifu;
 
 import java.util.Objects;
 

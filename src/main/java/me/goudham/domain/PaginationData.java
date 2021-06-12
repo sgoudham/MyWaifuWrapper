@@ -1,4 +1,4 @@
-package me.goudham.api.entity;
+package me.goudham.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

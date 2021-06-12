@@ -1,8 +1,8 @@
-package me.goudham.api.entity.waifu;
+package me.goudham.domain.waifu;
 
 import com.fasterxml.jackson.annotation.*;
-import me.goudham.api.entity.series.Series;
-import me.goudham.api.entity.user.Creator;
+import me.goudham.domain.series.Series;
+import me.goudham.domain.user.Creator;
 
 import javax.annotation.processing.Generated;
 import java.util.HashMap;

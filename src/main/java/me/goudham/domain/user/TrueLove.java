@@ -1,11 +1,11 @@
 
-package me.goudham.api.entity.user;
+package me.goudham.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import me.goudham.api.entity.series.Series;
+import me.goudham.domain.series.Series;
 
 import java.util.Objects;
 
