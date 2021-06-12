@@ -1,6 +1,8 @@
 package me.goudham;
 
+import me.goudham.domain.pagination.PaginationData;
 import me.goudham.domain.user.UserList;
+import me.goudham.domain.waifu.WaifuImage;
 import me.goudham.util.Season;
 import me.goudham.domain.series.FilteredSeries;
 import me.goudham.domain.series.Series;
@@ -82,6 +84,10 @@ public class MyWaifuClient {
      */
     public Response<Waifu> getWaifu(@NotNull Integer id) throws APIResponseException, APIMapperException {
         return APIWrapper.getWaifu(String.valueOf(id));
+    }
+
+    public Response<PaginationData<WaifuImage>> getWaifuImages(@NotNull Integer id, @NotNull Integer pageNum) throws APIResponseException, APIMapperException {
+        return APIWrapper.getWaifuImages(String.valueOf(id), String.valueOf(pageNum));
     }
 
     public Response<FilteredWaifu> getDailyWaifu() throws APIResponseException, APIMapperException {
