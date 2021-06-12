@@ -4,7 +4,7 @@ import me.goudham.APIWrapper;
 import me.goudham.Response;
 
 /**
- * Thrown when {@link APIWrapper} fails to deserialize json into Java POJO's ({@link Response#getEntity()})
+ * Thrown when {@link APIWrapper} fails to deserialize json into Java POJO's ({@link Response#getModel()})
  *
  */
 public class APIMapperException extends Throwable {

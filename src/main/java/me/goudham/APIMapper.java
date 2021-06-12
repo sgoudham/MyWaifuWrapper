@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.goudham.api.entity.series.Series;
+import me.goudham.domain.series.Series;
 import me.goudham.exception.APIMapperException;
-import me.goudham.api.entity.series.FilteredSeries;
-import me.goudham.api.entity.waifu.Waifu;
+import me.goudham.domain.series.FilteredSeries;
+import me.goudham.domain.waifu.Waifu;
 
 import java.util.List;
 
@@ -23,58 +23,58 @@ class APIMapper {
     }
 
     /**
-     * Using the given {@code entity}, {@link ObjectMapper} deserializes the given Json
+     * Using the given {@code model}, {@link ObjectMapper} deserializes the given Json
      * into a Java POJO
      *
      * @param result The result of the previous API response
-     * @param entity The actual class of the given entity. E.g {@link Waifu#getClass()}
-     * @param <T> The type of entity to be returned. E.g {@link Waifu} or {@link Series}
+     * @param model The actual class of the given model. E.g {@link Waifu#getClass()}
+     * @param <T> The type of model to be returned. E.g {@link Waifu} or {@link Series}
      * @return {@link Response}
      * @throws APIMapperException If {@link ObjectMapper} is not able to deserialize JSON to Java POJO properly
      *
      */
-    <T> Response<T> deserialize(Result result, Class<T> entity) throws APIMapperException {
+    <T> Response<T> deserialize(Result result, Class<T> model) throws APIMapperException {
         Integer statusCode = result.getStatusCode();
         String body = result.getBody();
-        T newEntity = null;
+        T newModel = null;
 
         if (statusCode == 200) {
             try {
                 String data = getJsonTree(body);
-                newEntity = objectMapper.readValue(data, entity);
+                newModel = objectMapper.readValue(data, model);
             } catch (JsonProcessingException jpe) {
                 throwAPIMapperException(jpe);
             }
         }
 
-        return new Response<>(statusCode, body, newEntity);
+        return new Response<>(statusCode, body, newModel);
     }
 
     /**
-     * Using the given {@code entity}, {@link ObjectMapper} deserializes the given Json
+     * Using the given {@code model}, {@link ObjectMapper} deserializes the given Json
      * into a Java POJO. This method enables support for retrieving {@link List} of entities
      *
      * @param <T> List of entities to be returned. E.g {@link List} of {@link FilteredSeries}
      * @param result The result of the previous API response
-     * @param entity The actual class of the given entity. E.g {@link Waifu#getClass()}
+     * @param model The actual class of the given model. E.g {@link Waifu#getClass()}
      * @return {@link Response}
      * @throws APIMapperException If {@link ObjectMapper} is not able to deserialize JSON to Java POJO properly
      */
-    <T> Response<List<T>> deserialize(Result result, JavaType entity) throws APIMapperException {
+    <T> Response<List<T>> deserialize(Result result, JavaType model) throws APIMapperException {
         Integer statusCode = result.getStatusCode();
         String body = result.getBody();
-        List<T> listOfEntity = null;
+        List<T> listOfModels = null;
 
         if (statusCode == 200) {
             try {
                 String data = getJsonTree(body);
-                listOfEntity = objectMapper.readValue(data, entity);
+                listOfModels = objectMapper.readValue(data, model);
             } catch (JsonProcessingException jpe) {
                 throwAPIMapperException(jpe);
             }
         }
 
-        return new Response<>(statusCode, body, listOfEntity);
+        return new Response<>(statusCode, body, listOfModels);
     }
 
     /**
