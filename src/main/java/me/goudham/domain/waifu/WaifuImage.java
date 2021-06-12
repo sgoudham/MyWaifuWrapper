@@ -49,7 +49,7 @@ public class WaifuImage {
      * Final URL of the original resolution image
      *
      */
-    @JsonProperty("path")
+    @JsonProperty("image")
     @JsonPropertyDescription("Final URL of the original resolution image")
     private String image;
 
@@ -81,12 +81,12 @@ public class WaifuImage {
         this.thumbnail = thumbnail;
     }
 
-    @JsonProperty("path")
+    @JsonProperty("image")
     public String getImage() {
         return image;
     }
 
-    @JsonProperty("path")
+    @JsonProperty("image")
     public void setImage(String image) {
         this.image = image;
     }
