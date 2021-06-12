@@ -2,12 +2,13 @@ package me.goudham;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import me.goudham.domain.user.UserList;
 import me.goudham.util.Season;
-import me.goudham.api.entity.series.FilteredSeries;
-import me.goudham.api.entity.series.Series;
-import me.goudham.api.entity.user.User;
-import me.goudham.api.entity.waifu.FilteredWaifu;
-import me.goudham.api.entity.waifu.Waifu;
+import me.goudham.domain.series.FilteredSeries;
+import me.goudham.domain.series.Series;
+import me.goudham.domain.user.User;
+import me.goudham.domain.waifu.FilteredWaifu;
+import me.goudham.domain.waifu.Waifu;
 import me.goudham.exception.APIMapperException;
 import me.goudham.exception.APIResponseException;
 
@@ -51,13 +52,13 @@ public class APIWrapper {
     /**
      * Honestly I don't really know how this works
      *
-     * @param entity The actual class of the given entity. E.g {@link Waifu#getClass()}
-     * @param <T> The type of entity to be returned. E.g {@link Waifu} or {@link Series}
+     * @param model The actual class of the given model. E.g {@link Waifu#getClass()}
+     * @param <T> The type of model to be returned. E.g {@link Waifu} or {@link Series}
      * @return {@link JavaType}
      *
      */
-    private <T> JavaType listOf(Class<T> entity) {
-        return TypeFactory.defaultInstance().constructCollectionType(List.class, entity);
+    private <T> JavaType listOf(Class<T> model) {
+        return TypeFactory.defaultInstance().constructCollectionType(List.class, model);
     }
 
     /**
@@ -94,8 +95,8 @@ public class APIWrapper {
         return new Result(responseCode, responseBody);
     }
 
-    Response<Waifu> getWaifu(String param) throws APIResponseException, APIMapperException {
-        Result waifuResult = sendRequest(httpClient, "waifu/" + param);
+    Response<Waifu> getWaifu(String waifuId) throws APIResponseException, APIMapperException {
+        Result waifuResult = sendRequest(httpClient, "waifu/" + waifuId);
         return apiMapper.deserialize(waifuResult, Waifu.class);
     }
 
@@ -109,8 +110,8 @@ public class APIWrapper {
         return apiMapper.deserialize(randomWaifuResult, FilteredWaifu.class);
     }
 
-    Response<Series> getSeries(String param) throws APIResponseException, APIMapperException {
-        Result seriesResult = sendRequest(httpClient, "series/" + param);
+    Response<Series> getSeries(String seriesId) throws APIResponseException, APIMapperException {
+        Result seriesResult = sendRequest(httpClient, "series/" + seriesId);
         return apiMapper.deserialize(seriesResult, Series.class);
     }
 
@@ -139,13 +140,23 @@ public class APIWrapper {
         return apiMapper.deserialize(allSeriesResult, listOf(FilteredSeries.class));
     }
 
-    Response<List<FilteredWaifu>> getSeriesWaifus(String param) throws APIResponseException, APIMapperException {
-        Result allWaifusFromSeriesResults = sendRequest(httpClient, "series/" + param + "/waifus");
+    Response<List<FilteredWaifu>> getSeriesWaifus(String seriesId) throws APIResponseException, APIMapperException {
+        Result allWaifusFromSeriesResults = sendRequest(httpClient, "series/" + seriesId + "/waifus");
         return apiMapper.deserialize(allWaifusFromSeriesResults, listOf(FilteredWaifu.class));
     }
 
-    Response<User> getUserProfile(String param) throws APIResponseException, APIMapperException {
-        Result userProfileResult = sendRequest(httpClient, "user/" + param);
+    Response<User> getUserProfile(String userId) throws APIResponseException, APIMapperException {
+        Result userProfileResult = sendRequest(httpClient, "user/" + userId);
         return apiMapper.deserialize(userProfileResult, User.class);
+    }
+
+    Response<List<UserList>> getUserLists(String userId) throws APIResponseException, APIMapperException {
+        Result userProfileResult = sendRequest(httpClient, "user/" + userId + "/lists");
+        return apiMapper.deserialize(userProfileResult, listOf(UserList.class));
+    }
+
+    Response<UserList> getUserList(String userId, String listId) throws APIResponseException, APIMapperException {
+        Result userProfileResult = sendRequest(httpClient, "user/" + userId + "/lists/" + listId);
+        return apiMapper.deserialize(userProfileResult, UserList.class);
     }
 }
