@@ -46,6 +46,7 @@ import java.util.Objects;
         "type",
         "id"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Series {
     /**
      * Full Name (in English)

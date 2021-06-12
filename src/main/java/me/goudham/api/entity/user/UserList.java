@@ -1,9 +1,6 @@
 package me.goudham.api.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import me.goudham.api.entity.waifu.Waifu;
 
 import java.util.List;
@@ -11,13 +8,13 @@ import java.util.Objects;
 
 /**
  * {@link UserList}
- * <p>Get an array of all user lists on their profile</p>
+ * <p>Get an array of all Waifu lists on their profile</p>
  *
  * <p> Fields included are: </p>
  * <ul>
  *  <li>{@link Integer id}</li>
  *  <li>{@link String name}</li>
- *  <li>{@link String order}</li>
+ *  <li>{@link Integer order}</li>
  *  <li>{@link List} of {@link Waifu}'s</li>
  * </ul>
  *
@@ -29,6 +26,7 @@ import java.util.Objects;
         "order",
         "waifus"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserList {
     /**
      * {@link UserList} ID

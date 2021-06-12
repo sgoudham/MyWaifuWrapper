@@ -46,7 +46,7 @@ import java.util.Objects;
         "appearances",
         "id"
 })
-@JsonIgnoreProperties(value = { "series" })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FilteredWaifu {
     /**
      * Used to generate readable URL's for the {@link FilteredWaifu}
