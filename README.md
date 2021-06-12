@@ -15,6 +15,12 @@
 <h1 align="center">MyWaifuWrapper</h1>
 <h2 align="center">An Asynchronous Java API Wrapper for MyWaifuList</h2>
 
+# Disclaimer 
+
+This API is currently in an Alpha state, the data returned may not be at its best quality and not all the fields 
+will be populated. 
+As MyWaifuList is a primarily user-driven website, the data returned may not be fully complete
+
 # Summary
 
 This is an Asynchronous API Wrapper for [MyWaifuList](https://mywaifulist.moe/dash)
