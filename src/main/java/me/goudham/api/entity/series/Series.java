@@ -24,7 +24,7 @@ import java.util.Objects;
  *  <li>{@link String displayPicture}</li>
  *  <li>{@link String url}</li>
  *  <li>{@link Studio}</li>
- *  <li>{@link String} type</li>
+ *  <li>{@link String type}</li>
  *  <li>{@link Integer id}</li>
  * </ul>
  *
