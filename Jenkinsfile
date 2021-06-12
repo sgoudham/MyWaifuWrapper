@@ -48,42 +48,13 @@ pipeline {
                 }
             }
         }
-        stage("Deploy To Nexus") {
+        stage("Deploy") {
             when {
                 branch 'release'
             }
             steps {
-                script {
-                    pom = readMavenPom file: "pom.xml";
-                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-
-                    javadocsArtifact = filesByGlob[0].path;
-                    jarWithSourcesArtifact = filesByGlob[1].path;
-                    jarArtifact = filesByGlob[2].path;
-
-                    if (fileExists(javadocsArtifact) && fileExists(jarWithSourcesArtifact) && fileExists(jarArtifact)) {
-                        echo "*** File: ${javadocsArtifact}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-                        echo "*** File: ${jarWithSourcesArtifact}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-                        echo "*** File: ${jarArtifact}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_CREDENTIAL_ID,
-                            artifacts: [
-                               [artifactId: pom.artifactId, classifier: '', file: jarArtifact, type: pom.packaging],
-                               [artifactId: pom.artifactId, classifier: 'javadocs', file: javadocsArtifact, type: pom.packaging],
-                               [artifactId: pom.artifactId, classifier: 'sources', file: jarWithSourcesArtifact, type: pom.packaging],
-                               [artifactId: pom.artifactId, classifier: '', file: "pom.xml", type: "pom"]
-                            ]
-                        )
-                    } else {
-                        error "*** Files could not be found";
-                    }
+                withCredentials([file(credentialsId: '076a36e8-d448-46fc-af11-7e7181a6cb99', variable: 'MAVEN_SETTINGS')]) {
+                    sh 'mvn -s $MAVEN_SETTINGS -B -DskipTests clean deploy'
                 }
             }
             post {
