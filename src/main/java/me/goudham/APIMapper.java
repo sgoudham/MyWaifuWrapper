@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import me.goudham.domain.pagination.PaginationData;
 import me.goudham.domain.series.Series;
-import me.goudham.exception.APIMapperException;
-import me.goudham.domain.series.FilteredSeries;
 import me.goudham.domain.waifu.Waifu;
+import me.goudham.exception.APIMapperException;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ class APIMapper {
 
         if (statusCode == 200) {
             try {
-                String data = getJsonTree(body);
+                String data = getData(body);
                 newModel = objectMapper.readValue(data, model);
             } catch (JsonProcessingException jpe) {
                 throwAPIMapperException(jpe);
@@ -52,22 +52,22 @@ class APIMapper {
 
     /**
      * Using the given {@code model}, {@link ObjectMapper} deserializes the given Json
-     * into a Java POJO. This method enables support for retrieving {@link List} of entities
+     * into a Java POJO. This method enables support for retrieving {@link List} of models
      *
-     * @param <T> List of entities to be returned. E.g {@link List} of {@link FilteredSeries}
      * @param result The result of the previous API response
      * @param model The actual class of the given model. E.g {@link Waifu#getClass()}
+     * @param <T> The type of model to be returned. E.g {@link Waifu} or {@link Series}
      * @return {@link Response}
      * @throws APIMapperException If {@link ObjectMapper} is not able to deserialize JSON to Java POJO properly
      */
-    <T> Response<List<T>> deserialize(Result result, JavaType model) throws APIMapperException {
+    <T> Response<List<T>> deserializeToList(Result result, JavaType model) throws APIMapperException {
         Integer statusCode = result.getStatusCode();
         String body = result.getBody();
         List<T> listOfModels = null;
 
         if (statusCode == 200) {
             try {
-                String data = getJsonTree(body);
+                String data = getData(body);
                 listOfModels = objectMapper.readValue(data, model);
             } catch (JsonProcessingException jpe) {
                 throwAPIMapperException(jpe);
@@ -78,17 +78,41 @@ class APIMapper {
     }
 
     /**
+     * Using the given {@code model}, {@link ObjectMapper} deserializes the given Json
+     * into a Java POJO. This method enables support for retrieving {@link PaginationData} of specific models
+     *
+     * @param result The result of the previous API response
+     * @param model The actual class of the given model. E.g {@link Waifu#getClass()}
+     * @param <T> The type of model to be returned. E.g {@link Waifu} or {@link Series}
+     * @return {@link Response}
+     * @throws APIMapperException If {@link ObjectMapper} is not able to deserialize JSON to Java POJO properly
+     */
+    <T> Response<PaginationData<T>> deserializeToPaginationData(Result result, JavaType model) throws APIMapperException {
+        Integer statusCode = result.getStatusCode();
+        String body = result.getBody();
+        PaginationData<T> newModel = null;
+
+        if (statusCode == 200) {
+            try {
+                newModel = objectMapper.readValue(body, model);
+            } catch (JsonProcessingException jpe) {
+                throwAPIMapperException(jpe);
+            }
+        }
+
+        return new Response<>(statusCode, body, newModel);
+    }
+
+    /**
      * Helper method for reducing duplicate code in {@code deserialize()}
      * and {@code deserializeToList()}
-     * <br>
-     * Returns the proper json data to deserialize
      *
      * @param jsonBody jsonBody returned by the API
-     * @return {@link String}
+     * @return {@link String} — The proper json data to deserialize
      * @throws JsonProcessingException If {@link ObjectMapper} is not able to
      * read the given {@code jsonBody}
      */
-    private String getJsonTree(String jsonBody) throws JsonProcessingException {
+    private String getData(String jsonBody) throws JsonProcessingException {
         JsonNode parent = objectMapper.readTree(jsonBody);
         return parent.get("data").toString();
     }
