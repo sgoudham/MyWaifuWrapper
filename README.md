@@ -26,6 +26,52 @@ This is an Asynchronous API Wrapper for [MyWaifuList](https://mywaifulist.moe/da
 Given that MyWaifuList is a primarily user-driven website and this API is currently in an Alpha state,
 the data returned **may not be** fully complete and at its best quality
 
+# Configuration
+
+## Creating The MyWaifuClient
+
+There are 2 ways to create the [MyWaifuClient](https://github.com/sgoudham/MyWaifuWrapper/blob/main/src/main/java/me/goudham/MyWaifuClient.java)
++ `createDefault(apiKey)`
++ `build()`
+
+### createDefault()
+
+`createDefault(apiKey)` will provide a default implementation and return a MyWaifuClient ready to be used.
+
+```java
+public class Main {
+    private static void main(String[] args) {
+        MyWaifuClient myWaifuClient = MyWaifuClient.createDefault("apiKey");
+    }
+}
+```
+
+### build()
+
+`build()` is used to build the object from the ground up, allowing for the fine-tuning of properties within the
+MyWaifuClient
+
+```java
+import me.goudham.MyWaifuClient;
+
+import java.net.http.HttpClient;
+import java.time.Duration;
+
+public class Main {
+    private static void main(String[] args) {
+        // Creating MyWaifuClient through Builder
+        MyWaifuClient myWaifuClient = new MyWaifuClient.Builder("apiKey")
+                .withVersion(HttpClient.Version.HTTP_2)
+                .withConnectTimeout(Duration.ofMinutes(10))
+                .build();
+    }
+}
+```
+
+# Usage 
+
+TODO
+
 # Download
 
 Latest Stable Version: ![Maven Central](https://img.shields.io/maven-central/v/me.goudham/MyWaifuWrapper)
@@ -53,10 +99,6 @@ dependencies {
     implementation group: 'me.goudham', name: 'MyWaifuWrapper', version: 'VERSION'
 }
 ```
-
-# Usage
-
-TODO
 
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper?ref=badge_large)
