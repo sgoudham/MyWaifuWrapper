@@ -6,7 +6,7 @@
 [pull-requests]: https://img.shields.io/github/issues-pr/sgoudham/MyWaifuWrapper
 [fossa]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper.svg?type=shield
 
-[![fossa]](https://app.fossa.com/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper?ref=badge_shield)
+![fossa]
 ![license]
 ![maven-central]
 ![build-status]
@@ -74,7 +74,7 @@ TODO
 
 # Download
 
-Latest Stable Version: ![Maven Central](https://img.shields.io/maven-central/v/me.goudham/MyWaifuWrapper)
+Latest Stable Version: ![maven-central]
 <p>Be sure to replace the **VERSION** key below with the one of the versions shown above!</p>
 
 **Maven**
