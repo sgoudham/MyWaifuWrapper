@@ -20,6 +20,7 @@ import java.util.Objects;
  *  <li>{@link String romaji}</li>
  *  <li>{@link String romajiName}</li>
  *  <li>{@link String displayPicture}</li>
+ *  <li>{@link String description}</li>
  *  <li>{@link Integer likes}</li>
  *  <li>{@link Integer trash}</li>
  *  <li>{@link String type}</li>
