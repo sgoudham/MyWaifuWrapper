@@ -4,7 +4,9 @@
 [codecov]: https://codecov.io/gh/sgoudham/MyWaifuWrapper/branch/release/graph/badge.svg?token=RxUDnCWnF0
 [issues]: https://img.shields.io/github/issues/sgoudham/MyWaifuWrapper?label=issues
 [pull-requests]: https://img.shields.io/github/issues-pr/sgoudham/MyWaifuWrapper
+[fossa]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper.svg?type=shield
 
+[![fossa]](https://app.fossa.com/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper?ref=badge_shield)
 ![license]
 ![maven-central]
 ![build-status]
@@ -16,7 +18,6 @@
 <h2 align="center">An Asynchronous Java API Wrapper for MyWaifuList</h2>
 
 # Summary
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper?ref=badge_shield)
 
 
 This is an Asynchronous API Wrapper for [MyWaifuList](https://mywaifulist.moe/dash) 
@@ -33,9 +34,6 @@ TODO
 # Usage
 
 TODO
-
-
-
 
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper?ref=badge_large)
