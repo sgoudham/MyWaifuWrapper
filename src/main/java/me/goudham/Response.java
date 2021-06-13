@@ -3,6 +3,8 @@ package me.goudham;
 import me.goudham.domain.series.Series;
 import me.goudham.domain.waifu.Waifu;
 
+import java.util.Objects;
+
 /**
  * This is returned to the User when called by methods in {@link MyWaifuClient}.
  * E.g {@link MyWaifuClient#getWaifu(Integer)}
@@ -37,5 +39,27 @@ public class Response<T> {
 
     public String getBody() {
         return body;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Response<?> response = (Response<?>) o;
+        return Objects.equals(model, response.model) && Objects.equals(statusCode, response.statusCode) && Objects.equals(body, response.body);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(model, statusCode, body);
+    }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "model=" + model +
+                ", statusCode=" + statusCode +
+                ", body='" + body + '\'' +
+                '}';
     }
 }
