@@ -36,7 +36,8 @@ There are 2 ways to create the [MyWaifuClient](https://github.com/sgoudham/MyWai
 
 ### createDefault()
 
-`createDefault(apiKey)` will provide a default implementation and return a MyWaifuClient ready to be used.
+`createDefault(apiKey)` will provide a default implementation and return a MyWaifuClient ready to be used. Only 
+the `apiKey` is required to instantiate MyWaifuClient.
 
 ```java
 public class Main {
@@ -49,7 +50,8 @@ public class Main {
 ### build()
 
 `build()` is used to build the object from the ground up, allowing for the fine-tuning of properties within the
-MyWaifuClient
+MyWaifuClient. Not all the additional properties need to specified within the builder but the bare minimum would be 
+the `apiKey` within the Builder constructor and then `.build()`
 
 ```java
 import me.goudham.MyWaifuClient;
@@ -59,6 +61,9 @@ import java.time.Duration;
 
 public class Main {
     private static void main(String[] args) {
+        // Bare Minimum (Would recommend using createDefault())
+        MyWaifuClient myWaifuClient = new MyWaifuClient.Builder("apiKey").build();
+        
         // Creating MyWaifuClient through Builder
         MyWaifuClient myWaifuClient = new MyWaifuClient.Builder("apiKey")
                 .withVersion(HttpClient.Version.HTTP_2)
