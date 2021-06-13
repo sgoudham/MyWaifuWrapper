@@ -1,16 +1,16 @@
 package me.goudham;
 
 import me.goudham.domain.pagination.PaginationData;
-import me.goudham.domain.user.UserList;
-import me.goudham.domain.waifu.WaifuImage;
-import me.goudham.util.Season;
 import me.goudham.domain.series.FilteredSeries;
 import me.goudham.domain.series.Series;
 import me.goudham.domain.user.User;
+import me.goudham.domain.user.UserList;
 import me.goudham.domain.waifu.FilteredWaifu;
 import me.goudham.domain.waifu.Waifu;
+import me.goudham.domain.waifu.WaifuImage;
 import me.goudham.exception.APIMapperException;
 import me.goudham.exception.APIResponseException;
+import me.goudham.util.Season;
 import org.jetbrains.annotations.NotNull;
 
 import javax.net.ssl.SSLParameters;
@@ -98,14 +98,6 @@ public class MyWaifuClient {
         return APIWrapper.getRandomWaifu();
     }
 
-    public Response<Series> getSeries(@NotNull String slug) throws APIMapperException, APIResponseException {
-        return APIWrapper.getSeries(slug);
-    }
-
-    public Response<Series> getSeries(@NotNull Integer id) throws APIMapperException, APIResponseException {
-        return APIWrapper.getSeries(String.valueOf(id));
-    }
-
     public Response<List<FilteredSeries>> getSeasonalAnime() throws APIMapperException, APIResponseException {
         return APIWrapper.getSeasonalAnime();
     }
@@ -120,6 +112,18 @@ public class MyWaifuClient {
 
     public Response<List<FilteredWaifu>> getTrashWaifus() throws APIMapperException, APIResponseException {
         return APIWrapper.getTrashWaifus();
+    }
+
+    public Response<Series> getSeries(@NotNull String slug) throws APIMapperException, APIResponseException {
+        return APIWrapper.getSeries(slug);
+    }
+
+    public Response<Series> getSeries(@NotNull Integer id) throws APIMapperException, APIResponseException {
+        return APIWrapper.getSeries(String.valueOf(id));
+    }
+
+    public Response<PaginationData<FilteredSeries>> getSeriesByPage(@NotNull Integer pageNum) throws APIMapperException, APIResponseException {
+        return APIWrapper.getSeriesByPage(String.valueOf(pageNum));
     }
 
     public Response<List<FilteredSeries>> getAllSeries(@NotNull Season season, @NotNull Integer year) throws APIResponseException, APIMapperException {

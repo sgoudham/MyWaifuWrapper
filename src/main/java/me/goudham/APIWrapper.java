@@ -1,7 +1,5 @@
 package me.goudham;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import me.goudham.domain.pagination.PaginationData;
 import me.goudham.domain.series.FilteredSeries;
 import me.goudham.domain.series.Series;
@@ -14,6 +12,7 @@ import me.goudham.exception.APIMapperException;
 import me.goudham.exception.APIResponseException;
 import me.goudham.util.Season;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -22,6 +21,11 @@ import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+import static me.goudham.APIUtils.listOf;
+import static me.goudham.APIUtils.paginationData;
 
 
 /**
@@ -35,10 +39,11 @@ public class APIWrapper {
 
     private final APIMapper apiMapper;
     private final HttpClient httpClient;
+    private final Executor executor = Executors.newFixedThreadPool(10);
 
     /**
      * Instantiates an instance of {@link APIWrapper} to retrieve API Information.
-     * An instance of {@link APIMapper} is created to be able to {@link APIMapper#deserialize(Result, Class)} JSON to
+     * An instance of {@link APIMapper} is created to be able to {@code deserialize} JSON to
      * Java objects
      *
      * @param apiKey API Key to authorise API request
@@ -52,22 +57,6 @@ public class APIWrapper {
     }
 
     /**
-     * Honestly I don't really know how this works
-     *
-     * @param model The actual class of the given model. E.g {@link Waifu#getClass()}
-     * @param <T> The type of model to be returned. E.g {@link Waifu} or {@link Series}
-     * @return {@link JavaType}
-     *
-     */
-    private <T> JavaType listOf(Class<T> model) {
-        return TypeFactory.defaultInstance().constructCollectionType(List.class, model);
-    }
-
-    private <T> JavaType paginationData(Class<T> model) {
-        return TypeFactory.defaultInstance().constructParametricType(PaginationData.class, model);
-    }
-
-    /**
      * Handles sending a request to the API asynchronously using {@link HttpRequest}
      * and the underlying {@link HttpClient}
      *
@@ -78,26 +67,28 @@ public class APIWrapper {
      *
      */
     private Result sendRequest(String param) throws APIResponseException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(host + param))
-                .version(httpClient.version())
-                .timeout(Duration.ofSeconds(20))
-                .headers("Content-Type", "application/json", "apikey", apiKey)
-                .GET()
-                .build();
+        CompletableFuture<Result> futureResult = CompletableFuture.supplyAsync(() -> {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(host + param))
+                    .version(httpClient.version())
+                    .timeout(Duration.ofSeconds(20))
+                    .headers("Content-Type", "application/json", "apikey", apiKey)
+                    .GET()
+                    .build();
 
-        CompletableFuture<HttpResponse<String>> response = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+            try {
+                return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            } catch (IOException | InterruptedException exp) {
+                exp.printStackTrace();
+            }
+            return null;
+        }, executor).thenApply(httpResponse -> new Result(httpResponse.statusCode(), httpResponse.body()));
 
-        int responseCode;
-        String responseBody;
         try {
-            responseCode = response.thenApply(HttpResponse::statusCode).get();
-            responseBody = response.thenApply(HttpResponse::body).get();
+            return futureResult.get();
         } catch (InterruptedException | ExecutionException exp) {
             throw new APIResponseException(exp.getMessage(), exp);
         }
-
-        return new Result(responseCode, responseBody);
     }
 
     Response<Waifu> getWaifu(String waifuId) throws APIResponseException, APIMapperException {
@@ -120,11 +111,6 @@ public class APIWrapper {
         return apiMapper.deserialize(randomWaifuResult, FilteredWaifu.class);
     }
 
-    Response<Series> getSeries(String seriesId) throws APIResponseException, APIMapperException {
-        Result seriesResult = sendRequest("series/" + seriesId);
-        return apiMapper.deserialize(seriesResult, Series.class);
-    }
-
     Response<List<FilteredSeries>> getSeasonalAnime() throws APIResponseException, APIMapperException {
         Result seasonalAnimeResult = sendRequest("airing");
         return apiMapper.deserializeToList(seasonalAnimeResult, listOf(FilteredSeries.class));
@@ -143,6 +129,16 @@ public class APIWrapper {
     Response<List<FilteredWaifu>> getTrashWaifus() throws APIResponseException, APIMapperException {
         Result waifuResults = sendRequest("airing/trash");
         return apiMapper.deserializeToList(waifuResults, listOf(FilteredWaifu.class));
+    }
+
+    Response<Series> getSeries(String seriesId) throws APIResponseException, APIMapperException {
+        Result seriesResult = sendRequest("series/" + seriesId);
+        return apiMapper.deserialize(seriesResult, Series.class);
+    }
+
+    Response<PaginationData<FilteredSeries>> getSeriesByPage(String pageNum) throws APIResponseException, APIMapperException {
+        Result seriesPageResult = sendRequest("series?page=" + pageNum);
+        return apiMapper.deserializeToPaginationData(seriesPageResult, paginationData(FilteredSeries.class));
     }
 
     Response<List<FilteredSeries>> getAllSeries(Season season, Integer year) throws APIResponseException, APIMapperException {
