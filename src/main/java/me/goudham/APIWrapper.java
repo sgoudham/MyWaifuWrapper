@@ -36,7 +36,7 @@ import static me.goudham.APIUtils.paginationData;
 public class APIWrapper {
     private final String version = "1.0";
     private static final String host = "https://mywaifulist.moe/api/v1/";
-    private final String apiKey;
+    private String apiKey;
 
     private final APIMapper apiMapper;
     private final HttpClient httpClient;
@@ -67,7 +67,7 @@ public class APIWrapper {
      * cannot be decoded or the thread was interrupted while waiting to receive the data
      *
      */
-    private Result sendRequest(String param) throws APIResponseException {
+    Result sendRequest(String param) throws APIResponseException {
         CompletableFuture<Result> futureResult = CompletableFuture.supplyAsync(() -> {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(host + param))
@@ -328,5 +328,13 @@ public class APIWrapper {
     Response<UserList> getUserList(String userId, String listId) throws APIResponseException, APIMapperException {
         Result userProfileResult = sendRequest("user/" + userId + "/lists/" + listId);
         return apiMapper.deserialize(userProfileResult, UserList.class);
+    }
+
+    void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    String getApiKey() {
+        return apiKey;
     }
 }
