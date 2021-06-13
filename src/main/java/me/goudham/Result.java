@@ -1,6 +1,7 @@
 package me.goudham;
 
 import java.net.http.HttpRequest;
+import java.util.Objects;
 
 /**
  * Represents a Result from a {@link HttpRequest} with the resulting
@@ -21,5 +22,26 @@ class Result {
 
     String getBody() {
         return body;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Result result = (Result) o;
+        return Objects.equals(statusCode, result.statusCode) && Objects.equals(body, result.body);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(statusCode, body);
+    }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "statusCode=" + statusCode +
+                ", body='" + body + '\'' +
+                '}';
     }
 }

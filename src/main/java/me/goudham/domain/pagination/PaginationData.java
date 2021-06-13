@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * {@link PaginationData}
@@ -81,4 +82,25 @@ public class PaginationData<T> {
         this.meta = meta;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaginationData<?> that = (PaginationData<?>) o;
+        return Objects.equals(data, that.data) && Objects.equals(links, that.links) && Objects.equals(meta, that.meta);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(data, links, meta);
+    }
+
+    @Override
+    public String toString() {
+        return "PaginationData{" +
+                "data=" + data +
+                ", links=" + links +
+                ", meta=" + meta +
+                '}';
+    }
 }
