@@ -16,6 +16,8 @@
 <h2 align="center">An Asynchronous Java API Wrapper for MyWaifuList</h2>
 
 # Summary
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper?ref=badge_shield)
+
 
 This is an Asynchronous API Wrapper for [MyWaifuList](https://mywaifulist.moe/dash) 
 
@@ -33,3 +35,7 @@ TODO
 TODO
 
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper?ref=badge_large)
