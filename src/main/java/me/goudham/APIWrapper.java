@@ -156,6 +156,11 @@ public class APIWrapper {
         return apiMapper.deserialize(userProfileResult, User.class);
     }
 
+    Response<PaginationData<FilteredWaifu>> getUserWaifus(String userId, String listType, String pageNum) throws APIResponseException, APIMapperException {
+        Result userWaifusResult = sendRequest("user/" + userId + "/" + listType + "?page=" + pageNum);
+        return apiMapper.deserializeToPaginationData(userWaifusResult, paginationData(FilteredWaifu.class));
+    }
+
     Response<List<UserList>> getUserLists(String userId) throws APIResponseException, APIMapperException {
         Result userProfileResult = sendRequest("user/" + userId + "/lists");
         return apiMapper.deserializeToList(userProfileResult, listOf(UserList.class));

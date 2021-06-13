@@ -11,6 +11,7 @@ import me.goudham.domain.waifu.WaifuImage;
 import me.goudham.exception.APIMapperException;
 import me.goudham.exception.APIResponseException;
 import me.goudham.util.Season;
+import me.goudham.util.WaifuListType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.net.ssl.SSLParameters;
@@ -86,6 +87,15 @@ public class MyWaifuClient {
         return APIWrapper.getWaifu(String.valueOf(id));
     }
 
+    /**
+     * Retrieves paginated images from the gallery, in sets of 10
+     *
+     * @param id The id of the {@link Waifu}
+     * @param pageNum The page number of the gallery
+     * @return {@link Response}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     */
     public Response<PaginationData<WaifuImage>> getWaifuImages(@NotNull Integer id, @NotNull Integer pageNum) throws APIResponseException, APIMapperException {
         return APIWrapper.getWaifuImages(String.valueOf(id), String.valueOf(pageNum));
     }
@@ -142,6 +152,9 @@ public class MyWaifuClient {
         return APIWrapper.getUserProfile(String.valueOf(id));
     }
 
+    public Response<PaginationData<FilteredWaifu>> getUserWaifus(@NotNull Integer id, @NotNull WaifuListType waifuListType, @NotNull Integer pageNum) throws APIMapperException, APIResponseException {
+        return APIWrapper.getUserWaifus(String.valueOf(id), waifuListType.getListType(), String.valueOf(pageNum));
+    }
     public Response<List<UserList>> getUserLists(@NotNull Integer id) throws APIMapperException, APIResponseException {
         return APIWrapper.getUserLists(String.valueOf(id));
     }
