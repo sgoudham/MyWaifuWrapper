@@ -101,6 +101,11 @@ public class APIWrapper {
         return apiMapper.deserializeToPaginationData(waifuImagesResult, paginationData(WaifuImage.class));
     }
 
+    Response<PaginationData<FilteredWaifu>> getWaifusByPage(String pageNum) throws APIResponseException, APIMapperException {
+        Result waifusByPageResult = sendRequest("waifu?page=" + pageNum);
+        return apiMapper.deserializeToPaginationData(waifusByPageResult, paginationData(FilteredWaifu.class));
+    }
+
     Response<FilteredWaifu> getDailyWaifu() throws APIResponseException, APIMapperException {
         Result dailyWaifuResult = sendRequest("meta/daily");
         return apiMapper.deserialize(dailyWaifuResult, FilteredWaifu.class);

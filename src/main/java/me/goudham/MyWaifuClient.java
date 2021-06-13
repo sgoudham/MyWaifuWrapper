@@ -100,6 +100,10 @@ public class MyWaifuClient {
         return APIWrapper.getWaifuImages(String.valueOf(id), String.valueOf(pageNum));
     }
 
+    public Response<PaginationData<FilteredWaifu>> getWaifusByPage(@NotNull Integer pageNum) throws APIMapperException, APIResponseException {
+        return APIWrapper.getWaifusByPage(String.valueOf(pageNum));
+    }
+
     public Response<FilteredWaifu> getDailyWaifu() throws APIResponseException, APIMapperException {
         return APIWrapper.getDailyWaifu();
     }
