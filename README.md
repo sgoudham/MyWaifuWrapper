@@ -19,17 +19,40 @@
 
 # Summary
 
-
 This is an Asynchronous API Wrapper for [MyWaifuList](https://mywaifulist.moe/dash) 
 
 # Disclaimer
 
 Given that MyWaifuList is a primarily user-driven website and this API is currently in an Alpha state,
-the data returned may not be fully complete and at its best quality
+the data returned **may not be** fully complete and at its best quality
 
 # Download
 
-TODO
+Latest Stable Version: ![Maven Central](https://img.shields.io/maven-central/v/me.goudham/MyWaifuWrapper)
+<p>Be sure to replace the **VERSION** key below with the one of the versions shown above!</p>
+
+**Maven**
+```xml
+<!-- https://mvnrepository.com/artifact/me.goudham/MyWaifuWrapper -->
+<dependency>
+    <groupId>me.goudham</groupId>
+    <artifactId>MyWaifuWrapper</artifactId>
+    <version>VERSION</version>
+</dependency>
+
+```
+
+**Gradle**
+```gradle
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/me.goudham/MyWaifuWrapper
+    implementation group: 'me.goudham', name: 'MyWaifuWrapper', version: 'VERSION'
+}
+```
 
 # Usage
 
