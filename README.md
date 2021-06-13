@@ -1,7 +1,7 @@
 [license]: https://img.shields.io/github/license/sgoudham/MyWaifuWrapper
 [maven-central]: https://img.shields.io/maven-central/v/me.goudham/MyWaifuWrapper
-[build-status]: https://goudham.me/jenkins/job/MyWaifuWrapper/job/release/badge/icon
-[codecov]: https://codecov.io/gh/sgoudham/MyWaifuWrapper/branch/release/graph/badge.svg?token=RxUDnCWnF0
+[build-status]: https://goudham.me/jenkins/job/MyWaifuWrapper/job/main/badge/icon
+[codecov]: https://codecov.io/gh/sgoudham/MyWaifuWrapper/branch/main/graph/badge.svg?token=RxUDnCWnF0
 [issues]: https://img.shields.io/github/issues/sgoudham/MyWaifuWrapper?label=issues
 [pull-requests]: https://img.shields.io/github/issues-pr/sgoudham/MyWaifuWrapper
 [fossa]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper.svg?type=shield
