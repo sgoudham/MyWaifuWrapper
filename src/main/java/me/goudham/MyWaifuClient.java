@@ -29,6 +29,7 @@ import java.util.concurrent.Executor;
  *
  * <p> Main entry point for retrieving information from MyWaifuList.</p>
  * <p> {@link APIWrapper} is utilised to make the API requests </p>
+ *
  */
 public class MyWaifuClient {
     private final APIWrapper APIWrapper;
@@ -50,6 +51,7 @@ public class MyWaifuClient {
      *
      * @param apiKey API Key to authorise API request
      * @return {@link MyWaifuClient}
+     *
      */
     public static MyWaifuClient createDefault(@NotNull String apiKey) {
         HttpClient httpClient = HttpClient.newBuilder()
@@ -62,25 +64,27 @@ public class MyWaifuClient {
     }
 
     /**
-     * Retrieves information about the {@link Waifu} specified by the given slug
+     * Retrieve detailed information about the {@link Waifu} specified by the given slug
      *
      * @param slug The slug of the {@link Waifu}
-     * @return {@link Response}
+     * @return {@link Response} of {@link Waifu}
      * @throws APIResponseException If {@link APIWrapper} could not return information properly
      * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     * @see #getWaifu(Integer)
      *
      */
-    public Response<Waifu> getWaifu(@NotNull String slug) throws APIResponseException, APIMapperException {
+    private Response<Waifu> getWaifu(@NotNull String slug) throws APIResponseException, APIMapperException {
         return APIWrapper.getWaifu(slug);
     }
 
     /**
-     * Retrieves information about the {@link Waifu} specified by the given id
+     * Retrieve information about the {@link Waifu} specified by the given id
      *
      * @param id The id of the {@link Waifu}
-     * @return {@link Response}
+     * @return {@link Response} of {@link Waifu}
      * @throws APIResponseException If {@link APIWrapper} could not return information properly
      * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     * @see #getWaifu(String)
      *
      */
     public Response<Waifu> getWaifu(@NotNull Integer id) throws APIResponseException, APIMapperException {
@@ -88,81 +92,238 @@ public class MyWaifuClient {
     }
 
     /**
-     * Retrieves paginated images from the gallery, in sets of 10
+     * Retrieve paginated images from the gallery, in sets of 10
      *
      * @param id The id of the {@link Waifu}
      * @param pageNum The page number of the gallery
-     * @return {@link Response}
+     * @return {@link Response} of {@link WaifuImage}
      * @throws APIResponseException If {@link APIWrapper} could not return information properly
      * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
      */
     public Response<PaginationData<WaifuImage>> getWaifuImages(@NotNull Integer id, @NotNull Integer pageNum) throws APIResponseException, APIMapperException {
         return APIWrapper.getWaifuImages(String.valueOf(id), String.valueOf(pageNum));
     }
 
+    /**
+     * Retrieve an array of {@link FilteredWaifu}'s, sorted alphabetically
+     *
+     * @param pageNum The page number of the gallery
+     * @return {@link Response} of {@link PaginationData} with {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<PaginationData<FilteredWaifu>> getWaifusByPage(@NotNull Integer pageNum) throws APIMapperException, APIResponseException {
         return APIWrapper.getWaifusByPage(String.valueOf(pageNum));
     }
 
+    /**
+     * Retrieve the Waifu of the Day
+     *
+     * @return {@link Response} of {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<FilteredWaifu> getDailyWaifu() throws APIResponseException, APIMapperException {
         return APIWrapper.getDailyWaifu();
     }
 
+    /**
+     * Retrieve a Random Waifu from the Website
+     *
+     * @return {@link Response} of {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<FilteredWaifu> getRandomWaifu() throws APIResponseException, APIMapperException {
         return APIWrapper.getRandomWaifu();
     }
 
+    /**
+     * Retrieve a List of Currently Airing Anime
+     *
+     * @return {@link Response} of {@link List} with {@link FilteredSeries}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<List<FilteredSeries>> getSeasonalAnime() throws APIMapperException, APIResponseException {
         return APIWrapper.getSeasonalAnime();
     }
 
+    /**
+     * Retrieve the Best Waifus of the Current Season
+     *
+     * @return {@link Response} of {@link List} with {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<List<FilteredWaifu>> getBestWaifus() throws APIMapperException, APIResponseException {
         return APIWrapper.getBestWaifus();
     }
 
+    /**
+     * Retrieve a List of Popular Waifus <i>(Raw Count of Total Votes)</i> of the Current Season
+     *
+     * @return {@link Response} of {@link List} with {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<List<FilteredWaifu>> getPopularWaifus() throws APIMapperException, APIResponseException {
         return APIWrapper.getPopularWaifus();
     }
 
+    /**
+     * Retrieve the Most Disliked Waifus of the Current Season
+     *
+     * @return {@link Response} of {@link List} with {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<List<FilteredWaifu>> getTrashWaifus() throws APIMapperException, APIResponseException {
         return APIWrapper.getTrashWaifus();
     }
 
-    public Response<Series> getSeries(@NotNull String slug) throws APIMapperException, APIResponseException {
+    /**
+     * Retrieve detailed information about a given {@link Series} specified by the given slug
+     *
+     * @param slug The slug of the {@link Series}
+     * @return {@link Response} of {@link Series}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     * @see #getSeries(Integer)
+     *
+     */
+    private Response<Series> getSeries(@NotNull String slug) throws APIMapperException, APIResponseException {
         return APIWrapper.getSeries(slug);
     }
 
+    /**
+     * Retrieve detailed information about a given {@link Series} specified by the given id
+     *
+     * @param id The id of the {@link Series}
+     * @return {@link Response} of {@link Series}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     * @see #getSeries(String)
+     *
+     */
     public Response<Series> getSeries(@NotNull Integer id) throws APIMapperException, APIResponseException {
         return APIWrapper.getSeries(String.valueOf(id));
     }
 
+    /**
+     * Retrieve paginated information about a Series
+     *
+     * @param pageNum The page number of the gallery
+     * @return {@link Response} of {@link PaginationData} with {@link FilteredSeries}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<PaginationData<FilteredSeries>> getSeriesByPage(@NotNull Integer pageNum) throws APIMapperException, APIResponseException {
         return APIWrapper.getSeriesByPage(String.valueOf(pageNum));
     }
 
+    /**
+     * Retrieve the List of Anime that Aired in a given Season and Year
+     *
+     * @param season The specified season from {@link Season}
+     * @param year The specified year
+     * @return {@link Response} of {@link List} with {@link FilteredSeries}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<List<FilteredSeries>> getAllSeries(@NotNull Season season, @NotNull Integer year) throws APIResponseException, APIMapperException {
         return APIWrapper.getAllSeries(season, year);
     }
 
+    /**
+     * Retrieve a set of Waifus for a given {@link Series} specified by the given slug
+     *
+     * @param slug The slug of the {@link Series}
+     * @return {@link Response} of {@link List} with {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     * @see #getSeriesWaifus(Integer)
+     *
+     */
     public Response<List<FilteredWaifu>> getSeriesWaifus(@NotNull String slug) throws APIMapperException, APIResponseException {
         return APIWrapper.getSeriesWaifus(slug);
     }
 
+    /**
+     * Retrieve a set of Waifus for a given {@link Series} specified by the given id
+     *
+     * @param id The id of the {@link Series}
+     * @return {@link Response} of {@link List} with {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     * @see #getSeriesWaifus(String)
+     *
+     */
     public Response<List<FilteredWaifu>> getSeriesWaifus(@NotNull Integer id) throws APIMapperException, APIResponseException {
         return APIWrapper.getSeriesWaifus(String.valueOf(id));
     }
 
+    /**
+     * Retrieve information about the {@link User}
+     *
+     * @param id The id of the {@link User}
+     * @return {@link Response} of {@link User}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<User> getUserProfile(@NotNull Integer id) throws APIMapperException, APIResponseException {
         return APIWrapper.getUserProfile(String.valueOf(id));
     }
 
+    /**
+     * Retrieve the Waifus Created, Liked, or Trashed for the given {@link User} id
+     *
+     * @param id The id of the {@link User}
+     * @param waifuListType The specified action E.g {@link WaifuListType#LIKED}
+     * @param pageNum The page number of the gallery
+     * @return {@link Response} of {@link PaginationData} with {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<PaginationData<FilteredWaifu>> getUserWaifus(@NotNull Integer id, @NotNull WaifuListType waifuListType, @NotNull Integer pageNum) throws APIMapperException, APIResponseException {
         return APIWrapper.getUserWaifus(String.valueOf(id), waifuListType.getListType(), String.valueOf(pageNum));
     }
+
+    /**
+     * Retrieve a List of all {@link UserList}'s shown
+     *
+     * @param id The id of the {@link User}
+     * @return {@link Response} of {@link List} with {@link UserList}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<List<UserList>> getUserLists(@NotNull Integer id) throws APIMapperException, APIResponseException {
         return APIWrapper.getUserLists(String.valueOf(id));
     }
 
+    /**
+     * Retrieve the Specific {@link UserList}, with {@link Waifu}'s
+     *
+     * @param userId The id of the {@link User}
+     * @param listId The id of the {@link UserList}
+     * @return {@link Response} of {@link UserList}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<UserList> getUserList(@NotNull Integer userId, @NotNull Integer listId) throws APIMapperException, APIResponseException {
         return APIWrapper.getUserList(String.valueOf(userId), String.valueOf(listId));
     }
