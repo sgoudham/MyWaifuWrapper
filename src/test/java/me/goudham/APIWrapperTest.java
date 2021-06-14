@@ -36,37 +36,53 @@ class APIWrapperTest {
 
     @Test
     void successfullyReturn400WhenApiTokenInvalid() throws APIResponseException, IOException, InterruptedException {
-        sut.setApiKey("InvalidAPIKey");
-        HttpRequest expectedHttpRequest = buildHttpRequest(sut);
-        HttpResponse<String> expectedHttpResponse = build400HttpResponse();
+        HttpRequest expectedHttpRequest = buildHttpRequest("InvalidAPIKey");
+        int expectedStatusCode = 400;
+        String expectedBody = "{\"message\":\"Access denied - please check your token\",\"code\":400}";
+        HttpResponse<String> expectedHttpResponse = buildHttpResponse(expectedStatusCode, expectedBody);
 
         doReturn(expectedHttpResponse).when(httpClient).send(expectedHttpRequest, HttpResponse.BodyHandlers.ofString());
-        doReturn(HttpClient.Version.HTTP_2).when(httpClient).version();
 
-        Result actualResult = sut.sendRequest("waifu/1");
+        sut.setApiKey("InvalidAPIKey");
+        Result actualResult = sut.sendGetRequest("waifu/1");
 
-        assertThat(actualResult.getStatusCode(), is(400));
-        assertThat(actualResult.getBody(), is("{\"message\":\"Access denied - please check your token\",\"code\":400}"));
+        assertThat(actualResult.getStatusCode(), is(expectedStatusCode));
+        assertThat(actualResult.getBody(), is(expectedBody));
         verify(httpClient, times(1)).send(expectedHttpRequest, HttpResponse.BodyHandlers.ofString());
-        verify(httpClient, times(1)).version();
         verifyNoMoreInteractions(httpClient);
     }
 
-    private HttpRequest buildHttpRequest(APIWrapper sut) {
+    @Test
+    void successfullyReturn200WhenApiTokenValid() throws APIResponseException, IOException, InterruptedException {
+        HttpRequest expectedHttpRequest = buildHttpRequest("ValidAPIKey");
+        int expectedStatusCode = 200;
+        String expectedBody = "{\"message\":\"Token Valid\",\"code\":200}";
+        HttpResponse<String> expectedHttpResponse = buildHttpResponse(expectedStatusCode, expectedBody);
+
+        doReturn(expectedHttpResponse).when(httpClient).send(expectedHttpRequest, HttpResponse.BodyHandlers.ofString());
+
+        Result actualResult = sut.sendGetRequest("waifu/1");
+
+        assertThat(actualResult.getStatusCode(), is(expectedStatusCode));
+        assertThat(actualResult.getBody(), is(expectedBody));
+        verify(httpClient, times(1)).send(expectedHttpRequest, HttpResponse.BodyHandlers.ofString());
+        verifyNoMoreInteractions(httpClient);
+    }
+
+    private HttpRequest buildHttpRequest(String apiKey) {
         return HttpRequest.newBuilder()
                 .uri(URI.create("https://mywaifulist.moe/api/v1/waifu/1"))
-                .version(HttpClient.Version.HTTP_2)
                 .timeout(Duration.ofSeconds(20))
-                .headers("Content-Type", "application/json", "apikey", sut.getApiKey())
+                .headers("Content-Type", "application/json", "apikey", apiKey)
                 .GET()
                 .build();
     }
 
-    private HttpResponse<String> build400HttpResponse() {
+    private HttpResponse<String> buildHttpResponse(int statusCode, String body) {
         return new HttpResponse<>() {
             @Override
             public int statusCode() {
-                return 400;
+                return statusCode;
             }
 
             @Override
@@ -86,7 +102,7 @@ class APIWrapperTest {
 
             @Override
             public String body() {
-                return "{\"message\":\"Access denied - please check your token\",\"code\":400}";
+                return body;
             }
 
             @Override
