@@ -20,6 +20,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -57,28 +58,39 @@ public class APIWrapper {
         apiMapper = new APIMapper();
     }
 
+    private HttpRequest.Builder getBaseRequest(String param) {
+        return HttpRequest.newBuilder()
+                .uri(URI.create(host + param))
+                .timeout(Duration.ofSeconds(20))
+                .headers("Content-Type", "application/json", "apikey", apiKey);
+    }
+
+    Result sendGetRequest(String param) throws APIResponseException {
+        HttpRequest request = getBaseRequest(param).GET().build();
+        return sendRequest(request);
+    }
+
+    private Result sendPostRequest(String param, Map<String, String> headers) throws APIResponseException, APIMapperException {
+        HttpRequest request = getBaseRequest(param)
+                .POST(HttpRequest.BodyPublishers.ofString(apiMapper.getValueAsString(headers)))
+                .build();
+        return sendRequest(request);
+    }
+
     /**
      * Handles sending a request to the API asynchronously using {@link HttpRequest}
      * and the underlying {@link HttpClient}
      *
-     * @param param The end of the endpoint appended onto the host
+     * @param httpRequest The {@link HttpRequest} to be sent by the {@link HttpClient}
      * @return {@link Result}
      * @throws APIResponseException If the {@link CompletableFuture Response}
      * cannot be decoded or the thread was interrupted while waiting to receive the data
      *
      */
-    Result sendRequest(String param) throws APIResponseException {
+    private Result sendRequest(HttpRequest httpRequest) throws APIResponseException {
         CompletableFuture<Result> futureResult = CompletableFuture.supplyAsync(() -> {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(host + param))
-                    .version(httpClient.version())
-                    .timeout(Duration.ofSeconds(20))
-                    .headers("Content-Type", "application/json", "apikey", apiKey)
-                    .GET()
-                    .build();
-
             try {
-                return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+                return httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             } catch (IOException | InterruptedException exp) {
                 exp.printStackTrace();
             }
@@ -102,7 +114,7 @@ public class APIWrapper {
      *
      */
     Response<Waifu> getWaifu(String waifuId) throws APIResponseException, APIMapperException {
-        Result waifuResult = sendRequest("waifu/" + waifuId);
+        Result waifuResult = sendGetRequest("waifu/" + waifuId);
         return apiMapper.deserialize(waifuResult, Waifu.class);
     }
 
@@ -117,7 +129,7 @@ public class APIWrapper {
      *
      */
     Response<PaginationData<WaifuImage>> getWaifuImages(String waifuId, String pageNum) throws APIResponseException, APIMapperException {
-        Result waifuImagesResult = sendRequest("waifu/" + waifuId + "/images?page=" + pageNum);
+        Result waifuImagesResult = sendGetRequest("waifu/" + waifuId + "/images?page=" + pageNum);
         return apiMapper.deserializeToPaginationData(waifuImagesResult, paginationData(WaifuImage.class));
     }
 
@@ -131,7 +143,7 @@ public class APIWrapper {
      *
      */
     Response<PaginationData<FilteredWaifu>> getWaifusByPage(String pageNum) throws APIResponseException, APIMapperException {
-        Result waifusByPageResult = sendRequest("waifu?page=" + pageNum);
+        Result waifusByPageResult = sendGetRequest("waifu?page=" + pageNum);
         return apiMapper.deserializeToPaginationData(waifusByPageResult, paginationData(FilteredWaifu.class));
     }
 
@@ -144,7 +156,7 @@ public class APIWrapper {
      *
      */
     Response<FilteredWaifu> getDailyWaifu() throws APIResponseException, APIMapperException {
-        Result dailyWaifuResult = sendRequest("meta/daily");
+        Result dailyWaifuResult = sendGetRequest("meta/daily");
         return apiMapper.deserialize(dailyWaifuResult, FilteredWaifu.class);
     }
 
@@ -157,7 +169,7 @@ public class APIWrapper {
      *
      */
     Response<FilteredWaifu> getRandomWaifu() throws APIResponseException, APIMapperException {
-        Result randomWaifuResult = sendRequest("meta/random");
+        Result randomWaifuResult = sendGetRequest("meta/random");
         return apiMapper.deserialize(randomWaifuResult, FilteredWaifu.class);
     }
 
@@ -170,7 +182,7 @@ public class APIWrapper {
      *
      */
     Response<List<FilteredSeries>> getSeasonalAnime() throws APIResponseException, APIMapperException {
-        Result seasonalAnimeResult = sendRequest("airing");
+        Result seasonalAnimeResult = sendGetRequest("airing");
         return apiMapper.deserializeToList(seasonalAnimeResult, listOf(FilteredSeries.class));
     }
 
@@ -183,7 +195,7 @@ public class APIWrapper {
      *
      */
     Response<List<FilteredWaifu>> getBestWaifus() throws APIResponseException, APIMapperException {
-        Result waifuResults = sendRequest("airing/best");
+        Result waifuResults = sendGetRequest("airing/best");
         return apiMapper.deserializeToList(waifuResults, listOf(FilteredWaifu.class));
     }
 
@@ -197,7 +209,7 @@ public class APIWrapper {
      *
      */
     Response<List<FilteredWaifu>> getPopularWaifus() throws APIResponseException, APIMapperException {
-        Result waifuResults = sendRequest("airing/popular");
+        Result waifuResults = sendGetRequest("airing/popular");
         return apiMapper.deserializeToList(waifuResults, listOf(FilteredWaifu.class));
     }
 
@@ -210,7 +222,7 @@ public class APIWrapper {
      *
      */
     Response<List<FilteredWaifu>> getTrashWaifus() throws APIResponseException, APIMapperException {
-        Result waifuResults = sendRequest("airing/trash");
+        Result waifuResults = sendGetRequest("airing/trash");
         return apiMapper.deserializeToList(waifuResults, listOf(FilteredWaifu.class));
     }
 
@@ -224,7 +236,7 @@ public class APIWrapper {
      *
      */
     Response<Series> getSeries(String seriesId) throws APIResponseException, APIMapperException {
-        Result seriesResult = sendRequest("series/" + seriesId);
+        Result seriesResult = sendGetRequest("series/" + seriesId);
         return apiMapper.deserialize(seriesResult, Series.class);
     }
 
@@ -238,7 +250,7 @@ public class APIWrapper {
      *
      */
     Response<PaginationData<FilteredSeries>> getSeriesByPage(String pageNum) throws APIResponseException, APIMapperException {
-        Result seriesPageResult = sendRequest("series?page=" + pageNum);
+        Result seriesPageResult = sendGetRequest("series?page=" + pageNum);
         return apiMapper.deserializeToPaginationData(seriesPageResult, paginationData(FilteredSeries.class));
     }
 
@@ -253,7 +265,7 @@ public class APIWrapper {
      *
      */
     Response<List<FilteredSeries>> getAllSeries(Season season, Integer year) throws APIResponseException, APIMapperException {
-        Result allSeriesResult = sendRequest("airing/" + season.getSeason() + "/" + year);
+        Result allSeriesResult = sendGetRequest("airing/" + season.getSeason() + "/" + year);
         return apiMapper.deserializeToList(allSeriesResult, listOf(FilteredSeries.class));
     }
 
@@ -267,7 +279,7 @@ public class APIWrapper {
      *
      */
     Response<List<FilteredWaifu>> getSeriesWaifus(String seriesId) throws APIResponseException, APIMapperException {
-        Result allWaifusFromSeriesResults = sendRequest("series/" + seriesId + "/waifus");
+        Result allWaifusFromSeriesResults = sendGetRequest("series/" + seriesId + "/waifus");
         return apiMapper.deserializeToList(allWaifusFromSeriesResults, listOf(FilteredWaifu.class));
     }
 
@@ -281,7 +293,7 @@ public class APIWrapper {
      *
      */
     Response<User> getUserProfile(String userId) throws APIResponseException, APIMapperException {
-        Result userProfileResult = sendRequest("user/" + userId);
+        Result userProfileResult = sendGetRequest("user/" + userId);
         return apiMapper.deserialize(userProfileResult, User.class);
     }
 
@@ -297,7 +309,7 @@ public class APIWrapper {
      *
      */
     Response<PaginationData<FilteredWaifu>> getUserWaifus(String userId, String listType, String pageNum) throws APIResponseException, APIMapperException {
-        Result userWaifusResult = sendRequest("user/" + userId + "/" + listType + "?page=" + pageNum);
+        Result userWaifusResult = sendGetRequest("user/" + userId + "/" + listType + "?page=" + pageNum);
         return apiMapper.deserializeToPaginationData(userWaifusResult, paginationData(FilteredWaifu.class));
     }
 
@@ -311,7 +323,7 @@ public class APIWrapper {
      *
      */
     Response<List<UserList>> getUserLists(String userId) throws APIResponseException, APIMapperException {
-        Result userProfileResult = sendRequest("user/" + userId + "/lists");
+        Result userProfileResult = sendGetRequest("user/" + userId + "/lists");
         return apiMapper.deserializeToList(userProfileResult, listOf(UserList.class));
     }
 
@@ -326,8 +338,13 @@ public class APIWrapper {
      *
      */
     Response<UserList> getUserList(String userId, String listId) throws APIResponseException, APIMapperException {
-        Result userProfileResult = sendRequest("user/" + userId + "/lists/" + listId);
+        Result userProfileResult = sendGetRequest("user/" + userId + "/lists/" + listId);
         return apiMapper.deserialize(userProfileResult, UserList.class);
+    }
+
+    Response<List<FilteredWaifu>> searchWaifus(String waifuName) throws APIMapperException, APIResponseException {
+        Result searchWaifusResult = sendPostRequest("search/waifus", Map.of("term", waifuName));
+        return apiMapper.deserializeToList(searchWaifusResult, listOf(FilteredWaifu.class));
     }
 
     void setApiKey(String apiKey) {

@@ -328,6 +328,10 @@ public class MyWaifuClient {
         return APIWrapper.getUserList(String.valueOf(userId), String.valueOf(listId));
     }
 
+    public Response<List<FilteredWaifu>> searchWaifus(@NotNull String name) throws APIMapperException, APIResponseException {
+        return APIWrapper.searchWaifus(name);
+    }
+
     /**
      * Builder for {@link MyWaifuClient}
      *
