@@ -61,10 +61,11 @@ import java.time.Duration;
 
 public class Main {
     private static void main(String[] args) {
-        // Bare Minimum (Would recommend using createDefault())
+        // Bare Minimum Config 
+        // (Would recommend using createDefault())
         MyWaifuClient myWaifuClient = new MyWaifuClient.Builder("apiKey").build();
         
-        // Creating MyWaifuClient through Builder
+        // Creation Through Builder
         MyWaifuClient myWaifuClient = new MyWaifuClient.Builder("apiKey")
                 .withVersion(HttpClient.Version.HTTP_2)
                 .withConnectTimeout(Duration.ofMinutes(10))
@@ -77,7 +78,7 @@ public class Main {
 
 TODO
 
-# Download
+# Installation
 
 Latest Stable Version: ![maven-central]
 <p>Be sure to replace the **VERSION** key below with the one of the versions shown above!</p>
