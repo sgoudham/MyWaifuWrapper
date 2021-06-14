@@ -22,6 +22,14 @@ class APIMapper {
         objectMapper = new ObjectMapper();
     }
 
+    String getValueAsString(Object obj) throws APIMapperException {
+        try {
+            return objectMapper.writeValueAsString(obj);
+        } catch (JsonProcessingException jpe) {
+            throw new APIMapperException(jpe.getMessage(), jpe);
+        }
+    }
+
     /**
      * Using the given {@code model}, {@link ObjectMapper} deserializes the given Json
      * into a Java POJO
