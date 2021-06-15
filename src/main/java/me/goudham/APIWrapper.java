@@ -367,9 +367,32 @@ public class APIWrapper {
         return apiMapper.deserialize(userProfileResult, UserList.class);
     }
 
+    /**
+     * Retrieve a List of {@link FilteredWaifu}'s given a query, by sending POST request to API
+     *
+     * @param waifuName The name of the Waifu
+     * @return {@link Response} of {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     Response<List<FilteredWaifu>> searchWaifus(String waifuName) throws APIMapperException, APIResponseException {
         Result searchWaifusResult = sendPostRequest("search/waifus", Map.of("term", waifuName));
         return apiMapper.deserializeToList(searchWaifusResult, listOf(FilteredWaifu.class));
+    }
+
+    /**
+     * Retrieve a List of {@link FilteredSeries}'s given a query, by sending POST request to API
+     *
+     * @param seriesName The name of the Series
+     * @return {@link Response} of {@link FilteredSeries}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
+    Response<List<FilteredSeries>> searchSeries(String seriesName) throws APIMapperException, APIResponseException {
+        Result searchSeriesResult = sendPostRequest("search/series", Map.of("term", seriesName));
+        return apiMapper.deserializeToList(searchSeriesResult, listOf(FilteredSeries.class));
     }
 
     void setApiKey(String apiKey) {

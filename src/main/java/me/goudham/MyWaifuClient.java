@@ -328,8 +328,30 @@ public class MyWaifuClient {
         return APIWrapper.getUserList(String.valueOf(userId), String.valueOf(listId));
     }
 
+    /**
+     * Searches only Waifu's using a given query. The higher the relevance, the better the match
+     *
+     * @param name The name of the Waifu
+     * @return {@link Response} of {@link FilteredWaifu}
+     * @throws APIMapperException If {@link APIWrapper} could not return information properly
+     * @throws APIResponseException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
     public Response<List<FilteredWaifu>> searchWaifus(@NotNull String name) throws APIMapperException, APIResponseException {
         return APIWrapper.searchWaifus(name);
+    }
+
+    /**
+     * Searches only Series' using a given query. The higher the relevance, the better the match
+     *
+     * @param name The name of the Series
+     * @return {@link Response} of {@link FilteredSeries}
+     * @throws APIMapperException If {@link APIWrapper} could not return information properly
+     * @throws APIResponseException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
+    public Response<List<FilteredSeries>> searchSeries(@NotNull String name) throws APIMapperException, APIResponseException {
+        return APIWrapper.searchSeries(name);
     }
 
     /**
