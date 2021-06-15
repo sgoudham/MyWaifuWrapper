@@ -58,6 +58,13 @@ public class APIWrapper {
         apiMapper = new APIMapper();
     }
 
+    /**
+     * Create base {@link HttpRequest.Builder} with custom url, default headers and timeout
+     *
+     * @param param The end of the endpoint appended onto the host
+     * @return {@link HttpRequest.Builder}
+     *
+     */
     private HttpRequest.Builder getBaseRequest(String param) {
         return HttpRequest.newBuilder()
                 .uri(URI.create(host + param))
@@ -65,14 +72,32 @@ public class APIWrapper {
                 .headers("Content-Type", "application/json", "apikey", apiKey);
     }
 
+    /**
+     * Separate method for sending GET requests
+     *
+     * @param param The end of the endpoint appended onto the host
+     * @return {@link Result}
+     * @throws APIResponseException If {@link #sendRequest(HttpRequest)} cannot retrieve the proper data from the API
+     *
+     */
     Result sendGetRequest(String param) throws APIResponseException {
         HttpRequest request = getBaseRequest(param).GET().build();
         return sendRequest(request);
     }
 
+    /**
+     * Separate method for sending POST requests
+     *
+     * @param param The end of the endpoint appended onto the host
+     * @param headers Headers as Key/Value pairs for POST requests
+     * @return {@link Result}
+     * @throws APIResponseException If {@link #sendRequest(HttpRequest)} cannot retrieve the proper data from the API
+     * @throws APIMapperException If {@link APIMapper#getObjectAsString(Object)} cannot properly serialize object
+     *
+     */
     private Result sendPostRequest(String param, Map<String, String> headers) throws APIResponseException, APIMapperException {
         HttpRequest request = getBaseRequest(param)
-                .POST(HttpRequest.BodyPublishers.ofString(apiMapper.getValueAsString(headers)))
+                .POST(HttpRequest.BodyPublishers.ofString(apiMapper.getObjectAsString(headers)))
                 .build();
         return sendRequest(request);
     }

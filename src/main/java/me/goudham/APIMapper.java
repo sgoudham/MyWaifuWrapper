@@ -22,7 +22,15 @@ class APIMapper {
         objectMapper = new ObjectMapper();
     }
 
-    String getValueAsString(Object obj) throws APIMapperException {
+    /**
+     * Convert any object passed and return as a {@link String}
+     *
+     * @param obj {@link Object} to write as {@link String}
+     * @return {@link String}
+     * @throws APIMapperException If {@link ObjectMapper} is not able to serialize object into {@link String}
+     *
+     */
+    String getObjectAsString(Object obj) throws APIMapperException {
         try {
             return objectMapper.writeValueAsString(obj);
         } catch (JsonProcessingException jpe) {
@@ -67,6 +75,7 @@ class APIMapper {
      * @param <T> The type of model to be returned. E.g {@link Waifu} or {@link Series}
      * @return {@link Response}
      * @throws APIMapperException If {@link ObjectMapper} is not able to deserialize JSON to Java POJO properly
+     *
      */
     <T> Response<List<T>> deserializeToList(Result result, JavaType model) throws APIMapperException {
         Integer statusCode = result.getStatusCode();
@@ -94,6 +103,7 @@ class APIMapper {
      * @param <T> The type of model to be returned. E.g {@link Waifu} or {@link Series}
      * @return {@link Response}
      * @throws APIMapperException If {@link ObjectMapper} is not able to deserialize JSON to Java POJO properly
+     *
      */
     <T> Response<PaginationData<T>> deserializeToPaginationData(Result result, JavaType model) throws APIMapperException {
         Integer statusCode = result.getStatusCode();
@@ -119,6 +129,7 @@ class APIMapper {
      * @return {@link String} — The proper json data to deserialize
      * @throws JsonProcessingException If {@link ObjectMapper} is not able to
      * read the given {@code jsonBody}
+     *
      */
     private String getData(String jsonBody) throws JsonProcessingException {
         JsonNode parent = objectMapper.readTree(jsonBody);
@@ -132,6 +143,7 @@ class APIMapper {
      *
      * @param throwable Type of throwable to throw
      * @throws APIMapperException Purpose of the method
+     *
      */
     private void throwAPIMapperException(Throwable throwable) throws APIMapperException {
         String customExceptionMessage = "If you are seeing this message, " +
