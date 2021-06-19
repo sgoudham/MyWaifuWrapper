@@ -50,8 +50,8 @@ class APIMapper {
      *
      */
     <T> Response<T> deserialize(Result result, Class<T> model) throws APIMapperException {
-        Integer statusCode = result.getStatusCode();
-        String body = result.getBody();
+        Integer statusCode = result.statusCode();
+        String body = result.body();
         T newModel = null;
 
         if (statusCode == 200) {
@@ -78,8 +78,8 @@ class APIMapper {
      *
      */
     <T> Response<List<T>> deserializeToList(Result result, JavaType model) throws APIMapperException {
-        Integer statusCode = result.getStatusCode();
-        String body = result.getBody();
+        Integer statusCode = result.statusCode();
+        String body = result.body();
         List<T> listOfModels = null;
 
         if (statusCode == 200) {
@@ -106,8 +106,8 @@ class APIMapper {
      *
      */
     <T> Response<PaginationData<T>> deserializeToPaginationData(Result result, JavaType model) throws APIMapperException {
-        Integer statusCode = result.getStatusCode();
-        String body = result.getBody();
+        Integer statusCode = result.statusCode();
+        String body = result.body();
         PaginationData<T> newModel = null;
 
         if (statusCode == 200) {

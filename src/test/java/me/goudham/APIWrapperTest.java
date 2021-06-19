@@ -46,8 +46,8 @@ class APIWrapperTest {
         sut.setApiKey("InvalidAPIKey");
         Result actualResult = sut.sendGetRequest("waifu/1");
 
-        assertThat(actualResult.getStatusCode(), is(expectedStatusCode));
-        assertThat(actualResult.getBody(), is(expectedBody));
+        assertThat(actualResult.statusCode(), is(expectedStatusCode));
+        assertThat(actualResult.body(), is(expectedBody));
         verify(httpClient, times(1)).send(expectedHttpRequest, HttpResponse.BodyHandlers.ofString());
         verifyNoMoreInteractions(httpClient);
     }
@@ -63,8 +63,8 @@ class APIWrapperTest {
 
         Result actualResult = sut.sendGetRequest("waifu/1");
 
-        assertThat(actualResult.getStatusCode(), is(expectedStatusCode));
-        assertThat(actualResult.getBody(), is(expectedBody));
+        assertThat(actualResult.statusCode(), is(expectedStatusCode));
+        assertThat(actualResult.body(), is(expectedBody));
         verify(httpClient, times(1)).send(expectedHttpRequest, HttpResponse.BodyHandlers.ofString());
         verifyNoMoreInteractions(httpClient);
     }
