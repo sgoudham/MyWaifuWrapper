@@ -28,13 +28,11 @@ the data returned **may not be** fully complete and at its best quality
 
 # Configuration
 
-## Creating The MyWaifuClient
-
-There are 2 ways to create the [MyWaifuClient](https://github.com/sgoudham/MyWaifuWrapper/blob/main/src/main/java/me/goudham/MyWaifuClient.java)
+There are 2 ways to create and configure the [MyWaifuClient](https://github.com/sgoudham/MyWaifuWrapper/blob/main/src/main/java/me/goudham/MyWaifuClient.java)
 + `createDefault(apiKey)`
 + `build()`
 
-### createDefault()
+## createDefault()
 
 `createDefault(apiKey)` will provide a default implementation and return a MyWaifuClient ready to be used. Only 
 the `apiKey` is required to instantiate MyWaifuClient.
@@ -47,10 +45,10 @@ public class Main {
 }
 ```
 
-### build()
+## build()
 
 `build()` is used to build the object from the ground up, allowing for the fine-tuning of properties within the
-MyWaifuClient. Not all the additional properties need to specified within the builder but the bare minimum would be 
+MyWaifuClient. Not all the additional properties need to specified within the builder. However, the bare minimum would be 
 the `apiKey` within the Builder constructor and then `.build()`
 
 ```java
@@ -76,7 +74,49 @@ public class Main {
 
 # Usage 
 
-TODO
+Once **MyWaifuClient** has been configured properly, many methods are available for you to get the data that you wish.
+Each method links up to an endpoint that is listed within the [MyWaifuList API Docs](https://mywaifulist.docs.stoplight.io/api-reference)
+
+With every method executed from the **MyWaifuClient**, a [Response]() object will be returned. The object will house
+the type of entity, response status code, and the response body. This allows for extreme flexibility as the raw response 
+and marshalled entity are available to the user.
+
+The documentation for each method provides clear and detailed information on what arguments to pass in, please
+do also refer to that. 
+
+Shown below are some examples of how you can retrieve data: 
+
+```java
+public class Main {
+    public static void main(String[] args) throws APIMapperException, APIResponseException {
+        // ... myWaifuClient has been instantiated
+        
+        // getWaifu(Integer id) 
+        Response<Waifu> waifuResponse = myWaifuClient.getWaifu(7);
+        Integer waifuResponseCode = waifuResponse.getStatusCode();
+        String waifuResponseBody = waifuResponse.getBody();
+        Waifu waifu = waifuResponse.getModel();
+        
+        // getRandomWaifu()
+        Response<FilteredWaifu> randomWaifuResponse = myWaifuClient.getRandomWaifu();
+        Integer randomWaifuResponseCode = randomWaifuResponse.getStatusCode();
+        String randomWaifuResponseBody = randomWaifuResponse.getBody();
+        FilteredWaifu randomWaifu = randomWaifuResponse.model();
+        
+        // getSeasonalAnime()
+        Response<List<FilteredSeries>> seasonalAnimeResponse = myWaifuClient.getSeasonalAnime();
+        Integer seasonalAnimeResponseStatusCode = seasonalAnimeResponse.getStatusCode();
+        String seasonalAnimeResponseBody = seasonalAnimeResponse.getBody();
+        List<FilteredSeries> seasonalAnime = seasonalAnimeResponse.getModel();
+    
+        // getUserWaifus(Integer id, WaifuListType waifuListType, Integer pageNum)
+        Response<PaginationData<FilteredWaifu>> userWaifusLikedResponse = myWaifuClient.getUserWaifus(1, WaifuListType.LIKED, 1);
+        Integer userWaifusLikedResponseStatusCode = userWaifusLikedResponse.getStatusCode();
+        String userWaifusLikedResponseBody = userWaifusLikedResponse.getBody();
+        PaginationData<FilteredWaifu> userWaifusLiked = userWaifusLikedResponse.getModel();
+    }
+}
+```
 
 # Installation
 
