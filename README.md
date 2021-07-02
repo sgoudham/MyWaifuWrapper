@@ -19,7 +19,7 @@
 
 # Summary
 
-This is an Asynchronous API Wrapper for [MyWaifuList](https://mywaifulist.moe/dash) 
+This is an Unofficial Asynchronous API Wrapper for [MyWaifuList](https://mywaifulist.moe/dash) 
 
 # Disclaimer
 
