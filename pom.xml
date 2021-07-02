@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>MyWaifuWrapper</name>
-    <description>An Asynchronous Java API Wrapper for MyWaifuList.</description>
+    <description>An Unofficial Asynchronous Java API Wrapper for MyWaifuList.</description>
     <url>https://github.com/sgoudham/MyWaifuWrapper</url>
 
     <properties>
