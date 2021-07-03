@@ -368,10 +368,24 @@ public class APIWrapper {
     }
 
     /**
+     * Retrieve a {@link List} of {@link FilteredWaifu} with a search term by sending a POST request to the API
+     *
+     * @param searchString {@link String} that should be searched for
+     * @return {@link Response} of {@link List} with {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
+    Response<List<FilteredWaifu>> betaSearch(String searchString) throws APIMapperException, APIResponseException {
+        Result betaSearchResult = sendPostRequest("search/beta", Map.of("term", searchString));
+        return apiMapper.deserializeToList(betaSearchResult, listOf(FilteredWaifu.class));
+    }
+
+    /**
      * Retrieve a List of {@link FilteredWaifu}'s given a query, by sending POST request to API
      *
      * @param waifuName The name of the Waifu
-     * @return {@link Response} of {@link FilteredWaifu}
+     * @return {@link Response} of {@link List} with {@link FilteredWaifu}
      * @throws APIResponseException If {@link APIWrapper} could not return information properly
      * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
      *
@@ -385,7 +399,7 @@ public class APIWrapper {
      * Retrieve a List of {@link FilteredSeries}'s given a query, by sending POST request to API
      *
      * @param seriesName The name of the Series
-     * @return {@link Response} of {@link FilteredSeries}
+     * @return {@link Response} of {@link List} with {@link FilteredSeries}
      * @throws APIResponseException If {@link APIWrapper} could not return information properly
      * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
      *

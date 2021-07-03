@@ -329,6 +329,19 @@ public class MyWaifuClient {
     }
 
     /**
+     * Allows searching for a {@link Waifu}
+     * This search is more aggressive when it comes to name matching, resulting in better accuracy in most cases
+     *
+     * @param searchString {@link String} that should be searched for
+     * @return {@link Response} of {@link List} with {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     */
+    public Response<List<FilteredWaifu>> betaSearch(@NotNull String searchString) throws APIResponseException, APIMapperException {
+        return APIWrapper.betaSearch(searchString);
+    }
+
+    /**
      * Searches only Waifu's using a given query. The higher the relevance, the better the match
      *
      * @param name The name of the Waifu
