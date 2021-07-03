@@ -101,7 +101,7 @@ public class Main {
         Response<FilteredWaifu> randomWaifuResponse = myWaifuClient.getRandomWaifu();
         Integer randomWaifuResponseCode = randomWaifuResponse.getStatusCode();
         String randomWaifuResponseBody = randomWaifuResponse.getBody();
-        FilteredWaifu randomWaifu = randomWaifuResponse.model();
+        FilteredWaifu randomWaifu = randomWaifuResponse.getModel();
         
         // getSeasonalAnime()
         Response<List<FilteredSeries>> seasonalAnimeResponse = myWaifuClient.getSeasonalAnime();
