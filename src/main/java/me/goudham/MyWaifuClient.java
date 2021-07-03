@@ -32,7 +32,7 @@ import java.util.concurrent.Executor;
  *
  */
 public class MyWaifuClient {
-    private final APIWrapper APIWrapper;
+    private APIWrapper APIWrapper;
 
     /**
      * Creates an instance of {@link MyWaifuClient}
@@ -42,7 +42,7 @@ public class MyWaifuClient {
      * @param httpClient The underlying {@link HttpClient} to use for HttpRequests
      *
      */
-    MyWaifuClient(@NotNull String apiKey, @NotNull HttpClient httpClient) {
+    private MyWaifuClient(@NotNull String apiKey, @NotNull HttpClient httpClient) {
         APIWrapper = new APIWrapper(apiKey, httpClient);
     }
 
@@ -365,6 +365,10 @@ public class MyWaifuClient {
      */
     public Response<List<FilteredSeries>> searchSeries(@NotNull String name) throws APIMapperException, APIResponseException {
         return APIWrapper.searchSeries(name);
+    }
+
+    void setAPIWrapper(me.goudham.APIWrapper APIWrapper) {
+        this.APIWrapper = APIWrapper;
     }
 
     /**
