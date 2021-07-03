@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.*;
 import me.goudham.domain.series.Series;
 import me.goudham.domain.user.Creator;
 
-import javax.annotation.processing.Generated;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -659,7 +658,6 @@ public class Waifu {
      * <p>Common in Japanese culture as a potential representation of personality types</p>
      *
      */
-    @Generated("jsonschema2pojo")
     public enum BloodType {
 
         A("A"),
@@ -668,7 +666,7 @@ public class Waifu {
         AB("AB");
 
         private final String value;
-        private final static Map<String, Waifu.BloodType> CONSTANTS = new HashMap<String, Waifu.BloodType>();
+        private final static Map<String, Waifu.BloodType> CONSTANTS = new HashMap<>();
 
         static {
             for (Waifu.BloodType bloodType: values()) {
