@@ -23,8 +23,7 @@ import static org.mockito.Mockito.*;
 class APIWrapperTest {
 
     @Mock
-    private
-    HttpClient httpClient;
+    private HttpClient httpClient;
 
     private APIWrapper sut;
 
