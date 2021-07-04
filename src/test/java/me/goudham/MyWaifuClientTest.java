@@ -1,7 +1,9 @@
 package me.goudham;
 
+import me.goudham.domain.pagination.PaginationData;
 import me.goudham.domain.waifu.FilteredWaifu;
 import me.goudham.domain.waifu.Waifu;
+import me.goudham.domain.waifu.WaifuImage;
 import me.goudham.exception.APIMapperException;
 import me.goudham.exception.APIResponseException;
 import me.goudham.util.TestEntity;
@@ -36,8 +38,6 @@ class MyWaifuClientTest {
     @Mock
     private HttpClient httpClient;
 
-    private APIWrapper apiWrapper;
-
     private final String apiKey = "ValidAPIKey";
 
     private MyWaifuClient sut;
@@ -47,7 +47,7 @@ class MyWaifuClientTest {
         MockitoAnnotations.openMocks(this);
 
         sut = MyWaifuClient.createDefault(apiKey);
-        apiWrapper = new APIWrapper(apiKey, httpClient);
+        APIWrapper apiWrapper = new APIWrapper(apiKey, httpClient);
         sut.setAPIWrapper(apiWrapper);
     }
 
@@ -80,11 +80,30 @@ class MyWaifuClientTest {
 
         doReturn(expectedHttpResponse).when(httpClient).send(expectedHttpRequest, HttpResponse.BodyHandlers.ofString());
 
-        Response<List<FilteredWaifu>> actualWaifuResponse = sut.getBestWaifus();
+        Response<List<FilteredWaifu>> actualBestWaifusResponse = sut.getBestWaifus();
 
-        assertThat(actualWaifuResponse.getStatusCode(), is(expectedStatusCode));
-        assertThat(actualWaifuResponse.getBody(), is(expectedBody));
-        assertThat(actualWaifuResponse.getModel(), is(expectedBestWaifus));
+        assertThat(actualBestWaifusResponse.getStatusCode(), is(expectedStatusCode));
+        assertThat(actualBestWaifusResponse.getBody(), is(expectedBody));
+        assertThat(actualBestWaifusResponse.getModel(), is(expectedBestWaifus));
+        verify(httpClient, times(1)).send(expectedHttpRequest, HttpResponse.BodyHandlers.ofString());
+        verifyNoMoreInteractions(httpClient);
+    }
+
+    @Test
+    void successfullyGetWaifuImages() throws IOException, InterruptedException, APIMapperException, APIResponseException {
+        HttpRequest expectedHttpRequest = buildHttpGetRequest(apiKey, "waifu/1/images?page=1");
+        int expectedStatusCode = 200;
+        String expectedBody = getJsonAsString("getWaifuImages.json");
+        PaginationData<WaifuImage> expectedWaifuImages = TestEntity.getWaifuImages();
+        HttpResponse<String> expectedHttpResponse = buildHttpResponse(expectedStatusCode, expectedBody);
+
+        doReturn(expectedHttpResponse).when(httpClient).send(expectedHttpRequest, HttpResponse.BodyHandlers.ofString());
+
+        Response<PaginationData<WaifuImage>> actualWaifuImagesResponse = sut.getWaifuImages(1, 1);
+
+        assertThat(actualWaifuImagesResponse.getStatusCode(), is(expectedStatusCode));
+        assertThat(actualWaifuImagesResponse.getBody(), is(expectedBody));
+        assertThat(actualWaifuImagesResponse.getModel(), is(expectedWaifuImages));
         verify(httpClient, times(1)).send(expectedHttpRequest, HttpResponse.BodyHandlers.ofString());
         verifyNoMoreInteractions(httpClient);
     }

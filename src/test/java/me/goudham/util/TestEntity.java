@@ -1,10 +1,14 @@
 package me.goudham.util;
 
+import me.goudham.domain.pagination.Links;
+import me.goudham.domain.pagination.Meta;
+import me.goudham.domain.pagination.PaginationData;
 import me.goudham.domain.series.FilteredSeries;
 import me.goudham.domain.series.Series;
 import me.goudham.domain.user.Creator;
 import me.goudham.domain.waifu.FilteredWaifu;
 import me.goudham.domain.waifu.Waifu;
+import me.goudham.domain.waifu.WaifuImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -305,6 +309,105 @@ public class TestEntity {
 		);
 
 		return bestWaifus;
+	}
+
+	public static PaginationData<WaifuImage> getWaifuImages() {
+		PaginationData<WaifuImage> waifuImagesPaginationData = new PaginationData<>();
+
+		Meta meta = new Meta();
+		meta.setCurrentPage(1);
+		meta.setFrom(1);
+		meta.setLastPage(13);
+		meta.setPath("https://mywaifulist.moe/api/v1/waifu/1/images");
+		meta.setTo(10);
+		meta.setPerPage(10);
+		meta.setTotal(123);
+
+		waifuImagesPaginationData.setMeta(meta);
+
+		Links links = new Links();
+		links.setFirst("https://mywaifulist.moe/api/v1/waifu/1/images?page=1");
+		links.setLast("https://mywaifulist.moe/api/v1/waifu/1/images?page=13");
+		links.setNext("https://mywaifulist.moe/api/v1/waifu/1/images?page=2");
+		links.setPrev(null);
+
+		waifuImagesPaginationData.setLinks(links);
+
+		List<WaifuImage> waifuImages = new ArrayList<>();
+
+		waifuImages.add(createWaifuImage(
+				188451,
+				"https://thicc.mywaifulist.moe/waifus/1/5c1be30a7b7834faef76e4b4dd8a512030a0cd3437f6a5bcc75de1ac33908092.jpeg",
+				"false",
+				"https://thicc.mywaifulist.moe/waifus/1/5c1be30a7b7834faef76e4b4dd8a512030a0cd3437f6a5bcc75de1ac33908092_thumb.jpeg"
+		));
+		waifuImages.add(createWaifuImage(
+				178162,
+				"https://thicc.mywaifulist.moe/waifus/1/99568b61823e34d6935926d5a589181926cb83f4c4682f5b22f299f940da7503.jpeg",
+				"false",
+				"https://thicc.mywaifulist.moe/waifus/1/99568b61823e34d6935926d5a589181926cb83f4c4682f5b22f299f940da7503_thumb.jpeg"
+		));
+		waifuImages.add(createWaifuImage(
+				164424,
+				"https://thicc.mywaifulist.moe/waifus/1/c6d56e30ef20371df87f8967a10192140c71f03b39238c252fe6f0d49a03c1ca.jpeg",
+				"false",
+				"https://thicc.mywaifulist.moe/waifus/1/c6d56e30ef20371df87f8967a10192140c71f03b39238c252fe6f0d49a03c1ca_thumb.jpeg"
+		));
+		waifuImages.add(createWaifuImage(
+				164423,
+				"https://thicc.mywaifulist.moe/waifus/1/613ea8485d61fe89e52ea4a1865dff7bcf59f9d5b0d4640b78fce7778d25b9ae.jpeg",
+				"false",
+				"https://thicc.mywaifulist.moe/waifus/1/613ea8485d61fe89e52ea4a1865dff7bcf59f9d5b0d4640b78fce7778d25b9ae_thumb.jpeg"
+		));
+		waifuImages.add(createWaifuImage(
+				164421,
+				"https://thicc.mywaifulist.moe/waifus/1/53675eb34be747c6ff4a1004da5bedc8a8d0baf435df7966404f5c29b8bf92ae.jpeg",
+				"false",
+				"https://thicc.mywaifulist.moe/waifus/1/53675eb34be747c6ff4a1004da5bedc8a8d0baf435df7966404f5c29b8bf92ae_thumb.jpeg"
+		));
+		waifuImages.add(createWaifuImage(
+				164422,
+				"https://thicc.mywaifulist.moe/waifus/1/18f67d18effe733f394c643fbf9735efbfe955497d5bcddb984ba78f66718f5c.jpeg",
+				"false",
+				"https://thicc.mywaifulist.moe/waifus/1/18f67d18effe733f394c643fbf9735efbfe955497d5bcddb984ba78f66718f5c_thumb.jpeg"
+		));
+		waifuImages.add(createWaifuImage(
+				164419,
+				"https://thicc.mywaifulist.moe/waifus/1/de2eca1b6ffaa99134427eef444edf84e5274dc1812b014a70871e39eb380ef8.jpeg",
+				"false",
+				"https://thicc.mywaifulist.moe/waifus/1/de2eca1b6ffaa99134427eef444edf84e5274dc1812b014a70871e39eb380ef8_thumb.jpeg"
+		));
+		waifuImages.add(createWaifuImage(
+				164420,
+				"https://thicc.mywaifulist.moe/waifus/1/e52536c04ebf17ac73bfa45526be95b2271e23802740591c0455e1d99f1b0f09.png",
+				"false",
+				"https://thicc.mywaifulist.moe/waifus/1/e52536c04ebf17ac73bfa45526be95b2271e23802740591c0455e1d99f1b0f09_thumb.png"
+		));
+		waifuImages.add(createWaifuImage(
+				164418,
+				"https://thicc.mywaifulist.moe/waifus/1/9662ce327814ceb88fd77dbfa1456dfce2b6addcf2d7bb0f9b335a35136f1d33.jpeg",
+				"false",
+				"https://thicc.mywaifulist.moe/waifus/1/9662ce327814ceb88fd77dbfa1456dfce2b6addcf2d7bb0f9b335a35136f1d33_thumb.jpeg"
+		));
+		waifuImages.add(createWaifuImage(
+				113519,
+				"https://thicc.mywaifulist.moe/waifus/1/2543fd22eafb15ec6e8810c11ce25161f058bbb9315e05845f593bbb4f26f859.jpeg",
+				"false",
+				"https://thicc.mywaifulist.moe/waifus/1/2543fd22eafb15ec6e8810c11ce25161f058bbb9315e05845f593bbb4f26f859_thumb.jpeg"
+		));
+
+		waifuImagesPaginationData.setData(waifuImages);
+
+		return waifuImagesPaginationData;
+	}
+
+	private static WaifuImage createWaifuImage(Integer id, String image, String nsfw, String thumbnail) {
+		WaifuImage waifuImage = new WaifuImage();
+		waifuImage.setId(id);
+		waifuImage.setImage(image);
+		waifuImage.setNsfw(nsfw);
+		waifuImage.setThumbnail(thumbnail);
+		return waifuImage;
 	}
 
 	private static FilteredWaifu createFilteredWaifu(List<FilteredSeries> appearances, String description, String displayPicture,
