@@ -39,7 +39,7 @@ public class APIWrapper {
     private static final String host = "https://mywaifulist.moe/api/v1/";
     private String apiKey;
 
-    private final APIMapper apiMapper;
+    private APIMapper apiMapper;
     private final HttpClient httpClient;
     private final Executor executor = Executors.newFixedThreadPool(10);
 
@@ -413,7 +413,7 @@ public class APIWrapper {
         this.apiKey = apiKey;
     }
 
-    String getApiKey() {
-        return apiKey;
+    void setApiMapper(APIMapper apiMapper) {
+        this.apiMapper = apiMapper;
     }
 }

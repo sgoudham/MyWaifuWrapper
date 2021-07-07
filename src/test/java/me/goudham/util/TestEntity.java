@@ -101,7 +101,8 @@ public class TestEntity {
 				"rika-furude-when-they-cry",
 				42,
 				"Waifu",
-				"https://www.mywaifulist.moe/waifu/rika-furude-when-they-cry"
+				"https://www.mywaifulist.moe/waifu/rika-furude-when-they-cry",
+				1
 				)
 		);
 
@@ -125,7 +126,8 @@ public class TestEntity {
 				"shion-that-time-i-got-reincarnated-as-a-slime",
 				70,
 				"Waifu",
-				"https://www.mywaifulist.moe/waifu/shion-that-time-i-got-reincarnated-as-a-slime"
+				"https://www.mywaifulist.moe/waifu/shion-that-time-i-got-reincarnated-as-a-slime",
+				1
 				)
 		);
 
@@ -149,7 +151,8 @@ public class TestEntity {
 				"milim-nava-that-time-i-got-reincarnated-as-a-slime",
 				85,
 				"Waifu",
-				"https://www.mywaifulist.moe/waifu/milim-nava-that-time-i-got-reincarnated-as-a-slime"
+				"https://www.mywaifulist.moe/waifu/milim-nava-that-time-i-got-reincarnated-as-a-slime",
+				1
 				)
 		);
 
@@ -173,7 +176,8 @@ public class TestEntity {
 				"shuna-that-time-i-got-reincarnated-as-a-slime",
 				78,
 				"Waifu",
-				"https://www.mywaifulist.moe/waifu/shuna-that-time-i-got-reincarnated-as-a-slime"
+				"https://www.mywaifulist.moe/waifu/shuna-that-time-i-got-reincarnated-as-a-slime",
+				1
 				)
 		);
 
@@ -197,7 +201,8 @@ public class TestEntity {
 				"rimuru-tempest-that-time-i-got-reincarnated-as-a-slime",
 				55,
 				"Husbando",
-				"https://www.mywaifulist.moe/waifu/rimuru-tempest-that-time-i-got-reincarnated-as-a-slime"
+				"https://www.mywaifulist.moe/waifu/rimuru-tempest-that-time-i-got-reincarnated-as-a-slime",
+				1
 				)
 		);
 
@@ -220,7 +225,8 @@ public class TestEntity {
 				"shizue-izawa-that-time-i-got-reincarnated-as-a-slime",
 				81,
 				"Waifu",
-				"https://www.mywaifulist.moe/waifu/shizue-izawa-that-time-i-got-reincarnated-as-a-slime"
+				"https://www.mywaifulist.moe/waifu/shizue-izawa-that-time-i-got-reincarnated-as-a-slime",
+				1
 				)
 		);
 
@@ -241,7 +247,8 @@ public class TestEntity {
 				"alina-gray",
 				1,
 				"Waifu",
-				"https://www.mywaifulist.moe/waifu/alina-gray"
+				"https://www.mywaifulist.moe/waifu/alina-gray",
+				1
 				)
 		);
 
@@ -261,7 +268,8 @@ public class TestEntity {
 				"jahy",
 				4,
 				"Waifu",
-				"https://www.mywaifulist.moe/waifu/jahy"
+				"https://www.mywaifulist.moe/waifu/jahy",
+				1
 				)
 		);
 
@@ -284,7 +292,8 @@ public class TestEntity {
 				"treyni-that-time-i-got-reincarnated-as-a-slime",
 				16,
 				"Waifu",
-				"https://www.mywaifulist.moe/waifu/treyni-that-time-i-got-reincarnated-as-a-slime"
+				"https://www.mywaifulist.moe/waifu/treyni-that-time-i-got-reincarnated-as-a-slime",
+				1
 				)
 		);
 
@@ -304,7 +313,8 @@ public class TestEntity {
 				"satan-2",
 				0,
 				"Husbando",
-				"https://www.mywaifulist.moe/waifu/satan-2"
+				"https://www.mywaifulist.moe/waifu/satan-2",
+				1
 				)
 		);
 
@@ -401,6 +411,59 @@ public class TestEntity {
 		return waifuImagesPaginationData;
 	}
 
+	public static List<FilteredWaifu> getBetaSearch() {
+		List<FilteredWaifu> betaSearchResults = new ArrayList<>();
+
+		List<FilteredSeries> appearances = new ArrayList<>();
+		appearances.add(createFullFilteredSeries(
+				"Unlike many schools, attending Hyakkaou Private Academy prepares students f...",
+				"https://thicc.mywaifulist.moe/series/1680/13c030778b8e7e44ddccb8ca999e18d6ea2b3d547eacc1f63bf5849ade858bb0.jpeg",
+				1680,
+				"Kakegurui: Compulsive Gambler",
+				"Kakegurui",
+				1,
+				null,
+				"kakegurui-compulsive-gambler",
+				"TV",
+				"https://www.mywaifulist.moe/series/kakegurui-compulsive-gambler"
+		));
+
+		betaSearchResults.add(createFilteredWaifu(
+				appearances,
+				"Yumeko Jabami is the main protagonist of Kakegurui. She's a transfer studen...",
+				"https://thicc.mywaifulist.moe/waifus/6167/7bf292a1552161de90ff7d0c1eab2c890b2aa374903773d38d39c6c6e8d6f3d2_thumb.jpeg",
+				6167.0,
+				1889,
+				"Yumeko Jabami",
+				"蛇喰夢子",
+				"Jabami Yumeko",
+				"Jabami Yumeko",
+				"yumeko-jabami-kakegurui-compulsive-gambler",
+				172,
+				"Waifu",
+				"https://www.mywaifulist.moe/waifu/yumeko-jabami-kakegurui-compulsive-gambler",
+				2
+				)
+		);
+
+		return betaSearchResults;
+	}
+
+	private static FilteredSeries createFullFilteredSeries(String description, String displayPicture, int id, String name, String originalName, int relevance, String romajiName, String slug, String type, String url) {
+		FilteredSeries filteredSeries = new FilteredSeries();
+		filteredSeries.setDescription(description);
+		filteredSeries.setDisplayPicture(displayPicture);
+		filteredSeries.setId(id);
+		filteredSeries.setName(name);
+		filteredSeries.setOriginalName(originalName);
+		filteredSeries.setRelevance(relevance);
+		filteredSeries.setRomajiName(romajiName);
+		filteredSeries.setSlug(slug);
+		filteredSeries.setType(type);
+		filteredSeries.setUrl(url);
+		return filteredSeries;
+	}
+
 	private static WaifuImage createWaifuImage(Integer id, String image, String nsfw, String thumbnail) {
 		WaifuImage waifuImage = new WaifuImage();
 		waifuImage.setId(id);
@@ -411,8 +474,8 @@ public class TestEntity {
 	}
 
 	private static FilteredWaifu createFilteredWaifu(List<FilteredSeries> appearances, String description, String displayPicture,
-											  Double id, Integer likes, String name, String originalName, String romaji,
-											  String romaji_name, String slug, Integer trash, String type, String url) {
+													 Double id, Integer likes, String name, String originalName, String romaji,
+													 String romaji_name, String slug, Integer trash, String type, String url, Integer relevance) {
 		FilteredWaifu filteredWaifu = new FilteredWaifu();
 		filteredWaifu.setAppearances(appearances);
 		filteredWaifu.setDescription(description);
@@ -427,7 +490,7 @@ public class TestEntity {
 		filteredWaifu.setTrash(trash);
 		filteredWaifu.setType(type);
 		filteredWaifu.setUrl(url);
-		filteredWaifu.setRelevance(1);
+		filteredWaifu.setRelevance(relevance);
 		return filteredWaifu;
 	}
 

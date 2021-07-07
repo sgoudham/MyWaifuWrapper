@@ -16,13 +16,13 @@ import java.util.List;
  *
  */
 class APIMapper {
-    private final ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     APIMapper() {
         objectMapper = new ObjectMapper();
     }
 
-    /**
+    /*\
      * Convert any object passed and return as a {@link String}
      *
      * @param obj {@link Object} to write as {@link String}
@@ -152,5 +152,9 @@ class APIMapper {
         String exceptionMessage = "\n\n" + customExceptionMessage + "\n\n" + throwable.getMessage();
 
         throw new APIMapperException(exceptionMessage, throwable);
+    }
+
+    void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
     }
 }
