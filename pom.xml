@@ -6,7 +6,7 @@
 
     <groupId>me.goudham</groupId>
     <artifactId>MyWaifuWrapper</artifactId>
-    <version>0.2.0</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>MyWaifuWrapper</name>
@@ -156,7 +156,7 @@
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
                 </configuration>
             </plugin>
             <plugin>
