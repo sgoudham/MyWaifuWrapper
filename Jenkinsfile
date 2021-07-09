@@ -20,6 +20,9 @@ pipeline {
 
     stages {
         stage("Import GPG Keys") {
+            when {
+                branch 'release'
+            }
             steps {
                 sh 'gpg --batch --import $GPG_SECRET_KEY'
                 sh 'gpg --import-ownertrust $GPG_OWNER_TRUST'
