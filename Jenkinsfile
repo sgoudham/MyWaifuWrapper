@@ -6,12 +6,6 @@ pipeline {
     }
 
     environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "https"
-        NEXUS_REPOSITORY = "maven-goudham"
-        NEXUS_URL = credentials('fe3e0c7e-bcb1-4d55-9591-f55f71f42356')
-        NEXUS_CREDENTIAL_ID = 'e5582b32-3507-4e88-ab7c-d16d701c46e9'
-
         CODECOV_TOKEN = credentials('44a3c021-5cbb-4a6f-bea2-ae6c51d43038')
 
         GPG_SECRET_KEY = credentials('4dbfd4ed-bba4-44e0-8410-fbce1a9bba73')
@@ -51,7 +45,7 @@ pipeline {
                 }
             }
         }
-        stage("Deploy") {
+        stage("Deploy To OSSRH") {
             when {
                 branch 'release'
             }
