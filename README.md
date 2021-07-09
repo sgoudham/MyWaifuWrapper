@@ -15,7 +15,7 @@
 ![pull-requests]
 
 <h1 align="center">MyWaifuWrapper</h1>
-<h2 align="center">An Asynchronous Java API Wrapper for MyWaifuList</h2>
+<h2 align="center">An Unofficial Asynchronous Java API Wrapper for MyWaifuList</h2>
 
 # Summary
 
