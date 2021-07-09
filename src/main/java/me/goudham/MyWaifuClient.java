@@ -32,7 +32,7 @@ import java.util.concurrent.Executor;
  *
  */
 public class MyWaifuClient {
-    private final APIWrapper APIWrapper;
+    private APIWrapper APIWrapper;
 
     /**
      * Creates an instance of {@link MyWaifuClient}
@@ -42,7 +42,7 @@ public class MyWaifuClient {
      * @param httpClient The underlying {@link HttpClient} to use for HttpRequests
      *
      */
-    MyWaifuClient(@NotNull String apiKey, @NotNull HttpClient httpClient) {
+    private MyWaifuClient(@NotNull String apiKey, @NotNull HttpClient httpClient) {
         APIWrapper = new APIWrapper(apiKey, httpClient);
     }
 
@@ -326,6 +326,49 @@ public class MyWaifuClient {
      */
     public Response<UserList> getUserList(@NotNull Integer userId, @NotNull Integer listId) throws APIMapperException, APIResponseException {
         return APIWrapper.getUserList(String.valueOf(userId), String.valueOf(listId));
+    }
+
+    /**
+     * Allows searching for a {@link Waifu}
+     * This search is more aggressive when it comes to name matching, resulting in better accuracy in most cases
+     *
+     * @param searchString {@link String} that should be searched for
+     * @return {@link Response} of {@link List} with {@link FilteredWaifu}
+     * @throws APIResponseException If {@link APIWrapper} could not return information properly
+     * @throws APIMapperException If {@link APIMapper} could not correctly {@code deserialize} model
+     */
+    public Response<List<FilteredWaifu>> betaSearch(@NotNull String searchString) throws APIResponseException, APIMapperException {
+        return APIWrapper.betaSearch(searchString);
+    }
+
+    /**
+     * Searches only Waifu's using a given query. The higher the relevance, the better the match
+     *
+     * @param name The name of the Waifu
+     * @return {@link Response} of {@link FilteredWaifu}
+     * @throws APIMapperException If {@link APIWrapper} could not return information properly
+     * @throws APIResponseException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
+    public Response<List<FilteredWaifu>> searchWaifus(@NotNull String name) throws APIMapperException, APIResponseException {
+        return APIWrapper.searchWaifus(name);
+    }
+
+    /**
+     * Searches only Series' using a given query. The higher the relevance, the better the match
+     *
+     * @param name The name of the Series
+     * @return {@link Response} of {@link FilteredSeries}
+     * @throws APIMapperException If {@link APIWrapper} could not return information properly
+     * @throws APIResponseException If {@link APIMapper} could not correctly {@code deserialize} model
+     *
+     */
+    public Response<List<FilteredSeries>> searchSeries(@NotNull String name) throws APIMapperException, APIResponseException {
+        return APIWrapper.searchSeries(name);
+    }
+
+    void setAPIWrapper(me.goudham.APIWrapper APIWrapper) {
+        this.APIWrapper = APIWrapper;
     }
 
     /**

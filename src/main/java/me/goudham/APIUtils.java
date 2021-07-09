@@ -28,6 +28,7 @@ class APIUtils {
      * @param model The actual class of the given model. E.g {@link Waifu#getClass()}
      * @param <T> The type of model to be returned. E.g {@link Waifu} or {@link Series}
      * @return {@link JavaType} of {@link PaginationData}
+     *
      */
     static <T> JavaType paginationData(Class<T> model) {
         return TypeFactory.defaultInstance().constructParametricType(PaginationData.class, model);

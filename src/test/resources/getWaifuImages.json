@@ -1,0 +1,79 @@
+{
+  "data": [
+    {
+      "id": 188451,
+      "image": "https://thicc.mywaifulist.moe/waifus/1/5c1be30a7b7834faef76e4b4dd8a512030a0cd3437f6a5bcc75de1ac33908092.jpeg",
+      "nsfw": false,
+      "thumbnail": "https://thicc.mywaifulist.moe/waifus/1/5c1be30a7b7834faef76e4b4dd8a512030a0cd3437f6a5bcc75de1ac33908092_thumb.jpeg"
+    },
+    {
+      "id": 178162,
+      "image": "https://thicc.mywaifulist.moe/waifus/1/99568b61823e34d6935926d5a589181926cb83f4c4682f5b22f299f940da7503.jpeg",
+      "nsfw": false,
+      "thumbnail": "https://thicc.mywaifulist.moe/waifus/1/99568b61823e34d6935926d5a589181926cb83f4c4682f5b22f299f940da7503_thumb.jpeg"
+    },
+    {
+      "id": 164424,
+      "image": "https://thicc.mywaifulist.moe/waifus/1/c6d56e30ef20371df87f8967a10192140c71f03b39238c252fe6f0d49a03c1ca.jpeg",
+      "nsfw": false,
+      "thumbnail": "https://thicc.mywaifulist.moe/waifus/1/c6d56e30ef20371df87f8967a10192140c71f03b39238c252fe6f0d49a03c1ca_thumb.jpeg"
+    },
+    {
+      "id": 164423,
+      "image": "https://thicc.mywaifulist.moe/waifus/1/613ea8485d61fe89e52ea4a1865dff7bcf59f9d5b0d4640b78fce7778d25b9ae.jpeg",
+      "nsfw": false,
+      "thumbnail": "https://thicc.mywaifulist.moe/waifus/1/613ea8485d61fe89e52ea4a1865dff7bcf59f9d5b0d4640b78fce7778d25b9ae_thumb.jpeg"
+    },
+    {
+      "id": 164421,
+      "image": "https://thicc.mywaifulist.moe/waifus/1/53675eb34be747c6ff4a1004da5bedc8a8d0baf435df7966404f5c29b8bf92ae.jpeg",
+      "nsfw": false,
+      "thumbnail": "https://thicc.mywaifulist.moe/waifus/1/53675eb34be747c6ff4a1004da5bedc8a8d0baf435df7966404f5c29b8bf92ae_thumb.jpeg"
+    },
+    {
+      "id": 164422,
+      "image": "https://thicc.mywaifulist.moe/waifus/1/18f67d18effe733f394c643fbf9735efbfe955497d5bcddb984ba78f66718f5c.jpeg",
+      "nsfw": false,
+      "thumbnail": "https://thicc.mywaifulist.moe/waifus/1/18f67d18effe733f394c643fbf9735efbfe955497d5bcddb984ba78f66718f5c_thumb.jpeg"
+    },
+    {
+      "id": 164419,
+      "image": "https://thicc.mywaifulist.moe/waifus/1/de2eca1b6ffaa99134427eef444edf84e5274dc1812b014a70871e39eb380ef8.jpeg",
+      "nsfw": false,
+      "thumbnail": "https://thicc.mywaifulist.moe/waifus/1/de2eca1b6ffaa99134427eef444edf84e5274dc1812b014a70871e39eb380ef8_thumb.jpeg"
+    },
+    {
+      "id": 164420,
+      "image": "https://thicc.mywaifulist.moe/waifus/1/e52536c04ebf17ac73bfa45526be95b2271e23802740591c0455e1d99f1b0f09.png",
+      "nsfw": false,
+      "thumbnail": "https://thicc.mywaifulist.moe/waifus/1/e52536c04ebf17ac73bfa45526be95b2271e23802740591c0455e1d99f1b0f09_thumb.png"
+    },
+    {
+      "id": 164418,
+      "image": "https://thicc.mywaifulist.moe/waifus/1/9662ce327814ceb88fd77dbfa1456dfce2b6addcf2d7bb0f9b335a35136f1d33.jpeg",
+      "nsfw": false,
+      "thumbnail": "https://thicc.mywaifulist.moe/waifus/1/9662ce327814ceb88fd77dbfa1456dfce2b6addcf2d7bb0f9b335a35136f1d33_thumb.jpeg"
+    },
+    {
+      "id": 113519,
+      "image": "https://thicc.mywaifulist.moe/waifus/1/2543fd22eafb15ec6e8810c11ce25161f058bbb9315e05845f593bbb4f26f859.jpeg",
+      "nsfw": false,
+      "thumbnail": "https://thicc.mywaifulist.moe/waifus/1/2543fd22eafb15ec6e8810c11ce25161f058bbb9315e05845f593bbb4f26f859_thumb.jpeg"
+    }
+  ],
+  "links": {
+    "first": "https://mywaifulist.moe/api/v1/waifu/1/images?page=1",
+    "last": "https://mywaifulist.moe/api/v1/waifu/1/images?page=13",
+    "next": "https://mywaifulist.moe/api/v1/waifu/1/images?page=2",
+    "prev": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 13,
+    "path": "https://mywaifulist.moe/api/v1/waifu/1/images",
+    "per_page": 10,
+    "to": 10,
+    "total": 123
+  }
+}
