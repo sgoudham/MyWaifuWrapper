@@ -113,7 +113,7 @@ public class Main {
 # Installation
 
 Latest Stable Version: ![maven-central]
-<p>Be sure to replace the **VERSION** key below with the one of the versions shown above!</p>
+<p>Be sure to replace the <b>VERSION</b> key below with the one of the versions shown above!</p>
 
 **Maven**
 ```xml
