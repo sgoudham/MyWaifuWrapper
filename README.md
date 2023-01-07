@@ -1,18 +1,10 @@
-[license]: https://img.shields.io/github/license/sgoudham/MyWaifuWrapper
 [maven-central]: https://img.shields.io/maven-central/v/me.goudham/MyWaifuWrapper
-[build-status]: https://goudham.me/jenkins/job/sgoudham/job/MyWaifuWrapper/job/release/badge/icon
+[build-status]: https://img.shields.io/github/checks-status/sgoudham/MyWaifuWrapper/main
 [codecov]: https://codecov.io/gh/sgoudham/MyWaifuWrapper/branch/main/graph/badge.svg?token=RxUDnCWnF0
-[issues]: https://img.shields.io/github/issues/sgoudham/MyWaifuWrapper?label=issues
-[pull-requests]: https://img.shields.io/github/issues-pr/sgoudham/MyWaifuWrapper
-[fossa]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsgoudham%2FMyWaifuWrapper.svg?type=shield
 
-![fossa]
-![license]
 ![maven-central]
 ![build-status]
 ![codecov]
-![issues]
-![pull-requests]
 
 <h1 align="center">MyWaifuWrapper</h1>
 <h2 align="center">An Unofficial Asynchronous Java API Wrapper for MyWaifuList</h2>
